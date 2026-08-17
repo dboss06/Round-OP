@@ -14,6 +14,4 @@ WORKDIR /app
 
 COPY --from=build /app/publish .
 
-ENV ASPNETCORE_URLS=http://+:${PORT}
-
 ENTRYPOINT ["dotnet", "Round-OP.dll"]
