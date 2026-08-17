@@ -1,0 +1,13 @@
+.git
+.github
+.vs
+bin
+obj
+node_modules
+
+Dockerfile*
+docker-compose*
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
