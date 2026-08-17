@@ -24,7 +24,7 @@ public class InvestigationReportViewModel
     [Required]
     [DataType(DataType.Date)]
     [Display(Name = "Date of Report")]
-    public DateTime? DateOfReport { get; set; }
+    public DateTime DateOfReport { get; set; }
 
 
     // =========================================================

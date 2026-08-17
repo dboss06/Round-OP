@@ -115,7 +115,7 @@ public class AdminController : Controller
             InvestigatorName = report.InvestigatorName,
             BadgeIdNumber = report.BadgeIdNumber,
             PoliceStationUnit = report.PoliceStationUnit,
-            DateOfReport = report.DateOfReport,
+            DateOfReport = report.DateOfReport.Value,
             // Case
             CaseNumber = report.CaseNumber,
             ReportNumber = report.ReportNumber,

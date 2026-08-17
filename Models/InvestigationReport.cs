@@ -14,7 +14,7 @@ public class InvestigationReport
     public string InvestigatorName { get; set; } = string.Empty;
     public string BadgeIdNumber { get; set; } = string.Empty;
     public string PoliceStationUnit { get; set; } = string.Empty;
-    public DateTime DateOfReport { get; set; }
+    public DateTime? DateOfReport { get; set; }
 
     // Case Information
     public string? CaseNumber { get; set; }

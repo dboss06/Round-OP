@@ -11,3 +11,6 @@ docker-compose*
 *.suo
 *.userosscache
 *.sln.docstates
+
+# Preserve DataProtection keys across deployments
+!DataProtection/

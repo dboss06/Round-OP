@@ -31,6 +31,7 @@ public class ReportsController : Controller
         ".xlsx",
         ".txt"
     };
+
     [HttpGet]
     public IActionResult Create()
     {
@@ -78,7 +79,7 @@ public class ReportsController : Controller
             InvestigatorName = model.InvestigatorName,
             BadgeIdNumber = model.BadgeIdNumber,
             PoliceStationUnit = model.PoliceStationUnit,
-            DateOfReport = DateTime.SpecifyKind(model.DateOfReport!.Value, DateTimeKind.Utc),
+            DateOfReport = model.DateOfReport,
 
             CaseNumber = model.CaseNumber,
             ReportNumber = model.ReportNumber,
@@ -133,44 +134,82 @@ public class ReportsController : Controller
 
             SubmittedAt = DateTime.UtcNow
         };
-        _context.InvestigationReports.Add(report);
+
         var uploadDirectory = Path.Combine(
-        _environment.ContentRootPath,
-        "Uploads",
-        "Reports",
-        report.ReportId);
+            _environment.ContentRootPath,
+            "Uploads",
+            "Reports",
+            report.ReportId);
 
         try
         {
             await using var transaction =
                 await _context.Database.BeginTransactionAsync();
 
-            _context.InvestigationReports.Add(report);
+            try
+            {
+                _context.InvestigationReports.Add(report);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            await SaveAttachmentsAsync(
-                report,
-                model.Attachments);
+                await SaveAttachmentsAsync(
+                    report,
+                    model.Attachments);
 
-            await transaction.CommitAsync();
+                await transaction.CommitAsync();
 
-            return RedirectToAction(
-                nameof(Success),
-                new { reportId = report.ReportId });
+                return RedirectToAction(
+                    nameof(Success),
+                    new { reportId = report.ReportId });
+            }
+            catch
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
-        catch
+        catch (Exception ex)
         {
+            // Clean up upload directory if it was created
             if (Directory.Exists(uploadDirectory))
             {
-                Directory.Delete(
-                    uploadDirectory,
-                    recursive: true);
+                try
+                {
+                    Directory.Delete(
+                        uploadDirectory,
+                        recursive: true);
+                }
+                catch
+                {
+                    // Ignore cleanup errors
+                }
             }
 
             ViewData["ToastType"] = "error";
-            ViewData["ToastMessage"] =
-                "The report could not be submitted. Please try again.";
+
+            // Provide more specific error messages based on the exception
+            if (ex.Message.Contains("timestamp with time zone", StringComparison.OrdinalIgnoreCase) ||
+                ex.Message.Contains("DateTime", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewData["ToastMessage"] = "Invalid date format. Please check the date fields.";
+            }
+            else if (ex.Message.Contains("duplicate", StringComparison.OrdinalIgnoreCase) ||
+                     ex.Message.Contains("unique", StringComparison.OrdinalIgnoreCase))
+            {
+                ViewData["ToastMessage"] = "A report with this reference already exists. Please try again.";
+            }
+            else if (ex.Message.Contains("23505", StringComparison.OrdinalIgnoreCase)) // PostgreSQL unique violation
+            {
+                ViewData["ToastMessage"] = "A report with this reference already exists. Please try again.";
+            }
+            else if (ex is InvalidOperationException)
+            {
+                ViewData["ToastMessage"] = ex.Message;
+            }
+            else
+            {
+                ViewData["ToastMessage"] = "The report could not be submitted. Please try again.";
+            }
 
             return View(model);
         }
@@ -202,11 +241,19 @@ public class ReportsController : Controller
     private async Task<string> GenerateReportIdAsync()
     {
         string reportId;
+        int attempts = 0;
+        const int maxAttempts = 10;
 
         do
         {
+            if (attempts >= maxAttempts)
+            {
+                throw new InvalidOperationException("Failed to generate unique ReportId after multiple attempts");
+            }
+
             reportId =
                 $"RPT-{DateTime.UtcNow:yyyyMMdd}-{Random.Shared.Next(100000, 999999)}";
+            attempts++;
 
         } while (await _context.InvestigationReports
             .AnyAsync(r => r.ReportId == reportId));
@@ -217,7 +264,7 @@ public class ReportsController : Controller
     private async Task SaveAttachmentsAsync(InvestigationReport report, IEnumerable<IFormFile> files)
     {
         var validFiles = files.Where(file => file != null && file.Length > 0).ToList();
-        
+
         if (!validFiles.Any())
         {
             return;
@@ -225,7 +272,11 @@ public class ReportsController : Controller
 
         var uploadDirectory = Path.Combine(_environment.ContentRootPath, "Uploads", "Reports", report.ReportId);
 
-        Directory.CreateDirectory(uploadDirectory);
+        // Ensure directory exists
+        if (!Directory.Exists(uploadDirectory))
+        {
+            Directory.CreateDirectory(uploadDirectory);
+        }
 
         foreach (var file in validFiles)
         {
@@ -237,20 +288,33 @@ public class ReportsController : Controller
                 uploadDirectory,
                 storedFileName);
             var originalFileName = Path.GetFileName(file.FileName);
-            await using var stream =
-                new FileStream(filePath, FileMode.CreateNew);
 
-            await file.CopyToAsync(stream);
-
-            report.Attachments.Add(new ReportAttachment
+            try
             {
-                OriginalFileName = Path.GetFileName(file.FileName),
-                StoredFileName = storedFileName,
-                FilePath = filePath,
-                ContentType = file.ContentType ?? "application/octet-stream",
-                FileSize = file.Length,
-                UploadedAt = DateTime.UtcNow
-            });
+                await using var stream =
+                    new FileStream(filePath, FileMode.CreateNew);
+
+                await file.CopyToAsync(stream);
+
+                report.Attachments.Add(new ReportAttachment
+                {
+                    OriginalFileName = Path.GetFileName(file.FileName),
+                    StoredFileName = storedFileName,
+                    FilePath = filePath,
+                    ContentType = file.ContentType ?? "application/octet-stream",
+                    FileSize = file.Length,
+                    UploadedAt = DateTime.UtcNow
+                });
+            }
+            catch (Exception ex)
+            {
+                // Clean up the file if upload failed
+                if (System.IO.File.Exists(filePath))
+                {
+                    System.IO.File.Delete(filePath);
+                }
+                throw new InvalidOperationException($"Failed to save file {originalFileName}: {ex.Message}", ex);
+            }
         }
 
         await _context.SaveChangesAsync();
