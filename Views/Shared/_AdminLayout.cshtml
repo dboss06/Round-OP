@@ -1,0 +1,442 @@
+﻿@{
+    var currentController =
+        ViewContext.RouteData.Values["controller"]?.ToString();
+
+    var currentAction =
+        ViewContext.RouteData.Values["action"]?.ToString();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Round-OP Admin</title>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="icon" href="~/images/logo.png" asp-append-version="true" />
+</head>
+
+<body class="min-h-screen bg-slate-50 text-slate-950">
+
+    
+    <partial name="_Toast" />
+    <!-- ===================================================== -->
+    <!-- DESKTOP SIDEBAR                                      -->
+    <!-- ===================================================== -->
+
+    <aside class="fixed inset-y-0 left-0 z-40 hidden w-64 border-r border-amber-200 bg-amber-100 lg:block">
+
+        <div class="flex h-full flex-col">
+
+            <!-- Brand -->
+            <div class="flex h-16 shrink-0 items-center border-b border-amber-200 px-5">
+                <a asp-controller="Admin"
+                   asp-action="Index"
+                   class="flex items-center gap-3">
+
+                    <img src="~/images/logo.png"
+                         alt="Round-OP"
+                         class="h-9 w-9 object-contain" />
+
+                    <div>
+                        <p class="font-bold text-amber-950">
+                            Round-OP Alpha
+                        </p>
+
+                        <p class="text-xs text-amber-900/60">
+                            Admin Portal
+                        </p>
+                    </div>
+
+                </a>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="flex-1 space-y-1 overflow-y-auto px-3 py-5">
+
+                <a asp-controller="Admin"
+                   asp-action="Index"
+                   class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-amber-950 transition hover:bg-amber-200 @(currentAction == "Index" ? "bg-amber-900 text-gray-50 shadow-sm" : "text-amber-950 hover:bg-amber-200")">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5 shrink-0"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M3 10.5 12 3l9 7.5" />
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M5 9.5V21h14V9.5" />
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M9 21v-6h6v6" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+
+                <a asp-controller="Admin"
+                   asp-action="Reports"
+                   class="flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium text-amber-950 transition hover:bg-amber-200
+                    @(currentAction == "Reports" ? "bg-amber-900 text-gray-50 shadow-sm" : "text-amber-950 hover:bg-amber-200")">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5 shrink-0"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M7 3h7l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M14 3v5h5M9 13h6M9 17h6" />
+                    </svg>
+
+                    <span>Investigation Reports</span>
+                </a>
+
+            </nav>
+
+            <!-- Sign Out -->
+            <div class="shrink-0 border-t border-amber-200 p-4">
+
+                <form asp-controller="Account"
+                      asp-action="Logout"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit"
+                            class="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-medium text-amber-950 transition hover:bg-amber-200">
+                        Sign Out
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ===================================================== -->
+    <!-- MOBILE DRAWER OVERLAY                                -->
+    <!-- ===================================================== -->
+
+    <div id="mobileMenuOverlay"
+         class="fixed inset-0 z-40 hidden bg-slate-950/40 backdrop-blur-sm lg:hidden">
+    </div>
+
+
+    <!-- ===================================================== -->
+    <!-- MOBILE DRAWER                                        -->
+    <!-- ===================================================== -->
+
+    <aside id="mobileMenu"
+           class="fixed inset-y-0 left-0 z-50 w-72 -translate-x-full border-r border-amber-200 bg-amber-100 shadow-2xl transition-transform duration-300 ease-in-out lg:hidden">
+
+        <div class="flex h-full flex-col">
+
+            <!-- Drawer Header -->
+            <div class="flex h-16 shrink-0 items-center justify-between border-b border-amber-200 px-5">
+
+                <a asp-controller="Admin"
+                   asp-action="Index"
+                   class="flex items-center gap-3">
+
+                    <img src="~/images/logo.png"
+                         alt="Round-OP"
+                         class="h-9 w-9 object-contain" />
+
+                    <div>
+                        <p class="font-bold text-amber-950">
+                            Round-OP
+                        </p>
+
+                        <p class="text-xs text-amber-900/60">
+                            Admin Portal
+                        </p>
+                    </div>
+
+                </a>
+
+                <button id="closeMobileMenu"
+                        type="button"
+                        aria-label="Close navigation"
+                        class="flex h-9 w-9 items-center justify-center rounded-lg text-amber-900 transition hover:bg-amber-200">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M6 18 18 6M6 6l12 12" />
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <!-- Drawer Navigation -->
+            <nav class="flex-1 space-y-1 overflow-y-auto px-3 py-5">
+
+                <a asp-controller="Admin"
+                   asp-action="Index"
+                   class="mobile-nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition
+                    @(currentAction == "Index"
+                         ? "bg-amber-900 text-amber-50 shadow-sm"
+                         : "text-amber-950 hover:bg-amber-200")">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5 shrink-0"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M3 10.5 12 3l9 7.5" />
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M5 9.5V21h14V9.5" />
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M9 21v-6h6v6" />
+                    </svg>
+                    <span>Dashboard</span>
+                </a>
+
+                <a asp-controller="Admin"
+                   asp-action="Reports"
+                   class="mobile-nav-link flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition
+                    @(currentAction == "Reports" || currentAction == "ReportDetails"
+                         ? "bg-amber-900 text-amber-50 shadow-sm"
+                         : "text-amber-950 hover:bg-amber-200")">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5 shrink-0"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M7 3h7l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M14 3v5h5M9 13h6M9 17h6" />
+                    </svg>
+                    <span>Investigation Reports</span>
+                </a>
+
+            </nav>
+
+
+            <!-- Drawer Sign Out -->
+            <div class="shrink-0 border-t border-amber-200 p-4">
+
+                <form asp-controller="Account"
+                      asp-action="Logout"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit"
+                            class="flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left text-sm font-medium text-amber-950 transition hover:bg-amber-200">
+                        Sign Out
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ===================================================== -->
+    <!-- MAIN APPLICATION AREA                               -->
+    <!-- ===================================================== -->
+
+    <div class="min-h-screen lg:pl-64">
+
+        <!-- Fixed Top Navbar -->
+        <header class="fixed inset-x-0 top-0 z-30 h-16 border-b border-slate-200 bg-white/95 backdrop-blur lg:left-64">
+
+            <div class="flex h-full items-center justify-between px-4 sm:px-5 lg:px-8">
+
+                <div class="flex items-center gap-3">
+
+                    <!-- Mobile Menu Button -->
+                    <button id="openMobileMenu"
+                            type="button"
+                            aria-label="Open navigation"
+                            class="flex h-10 w-10 items-center justify-center rounded-lg text-slate-700 transition hover:bg-slate-100 lg:hidden">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="h-6 w-6"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor"
+                             stroke-width="2">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+
+                    </button>
+
+                    <h1 class="text-lg font-semibold text-slate-900">
+                        @ViewData["Title"]
+                    </h1>
+
+                </div>
+
+
+                <!-- User -->
+                <div class="flex items-center gap-3">
+
+                    <div class="hidden text-right sm:block">
+                        <p class="text-sm font-semibold text-slate-800">
+                            @User.Identity?.Name
+                        </p>
+
+                        <p class="text-xs text-slate-500">
+                            Administrator
+                        </p>
+                    </div>
+
+                    <div class="flex h-9 w-9 items-center justify-center rounded-full bg-amber-900 text-sm font-bold text-amber-50">
+                        @(
+                            User.Identity?.Name?
+                                .Substring(0, 1)
+                                .ToUpper()
+                            ?? "A"
+                        )
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================================================= -->
+        <!-- PAGE CONTENT                                     -->
+        <!-- ================================================= -->
+
+        <main class="min-h-screen pt-16">
+
+            <div class="p-4 sm:p-5 lg:p-8">
+                @RenderBody()
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- ===================================================== -->
+    <!-- MOBILE MENU SCRIPT                                  -->
+    <!-- ===================================================== -->
+
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                const mobileMenu =
+                    document.getElementById("mobileMenu");
+
+                const overlay =
+                    document.getElementById("mobileMenuOverlay");
+
+                const openButton =
+                    document.getElementById("openMobileMenu");
+
+                const closeButton =
+                    document.getElementById("closeMobileMenu");
+
+                const mobileLinks =
+                    document.querySelectorAll(".mobile-nav-link");
+
+
+                function openMenu() {
+
+                    mobileMenu.classList.remove(
+                        "-translate-x-full"
+                    );
+
+                    overlay.classList.remove("hidden");
+
+                    document.body.classList.add("overflow-hidden");
+                }
+
+
+                function closeMenu() {
+
+                    mobileMenu.classList.add(
+                        "-translate-x-full"
+                    );
+
+                    overlay.classList.add("hidden");
+
+                    document.body.classList.remove(
+                        "overflow-hidden"
+                    );
+                }
+
+
+                openButton?.addEventListener(
+                    "click",
+                    openMenu
+                );
+
+
+                closeButton?.addEventListener(
+                    "click",
+                    closeMenu
+                );
+
+
+                overlay?.addEventListener(
+                    "click",
+                    closeMenu
+                );
+
+
+                mobileLinks.forEach(link => {
+
+                    link.addEventListener(
+                        "click",
+                        closeMenu
+                    );
+
+                });
+
+
+                document.addEventListener(
+                    "keydown",
+                    function (event) {
+
+                        if (event.key === "Escape") {
+                            closeMenu();
+                        }
+
+                    }
+                );
+
+            });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+
+# ASP.NET / .NET
+*.dll
+*.pdb
+
+# Local database files
+*.mdf
+*.ldf
+
+# User uploads
+Uploads/
+
+# Local configuration / secrets
+appsettings.Development.json
+appsettings.*.json
+!appsettings.json
+
+# Rider / ReSharper
+.idea/
+_ReSharper*/
+*.DotSettings.user
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Publish output
+publish/

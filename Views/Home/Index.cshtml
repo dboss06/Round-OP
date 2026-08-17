@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+<section class="relative min-h-[calc(100vh-80px)] bg-cover bg-center"
+            style="background-image: url('images/report.jpg');">
+    <div class="absolute inset-0 bg-amber-950/70"></div>
+    <div class="relative z-10 mx-auto flex min-h-[calc(100vh-80px)] max-w-7xl items-center px-6 py-24 lg:px-8">
+        <div class="max-w-3xl">
+            <p class="mb-5 text-sm font-semibold uppercase tracking-[0.2em] text-amber-200">
+                Round-OP Mayor Office
+            </p>
+            <h1 class="text-5xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                Submit
+                an <span class="text-amber-300">Investigative Report.</span>
+            </h1>
+            <p class="mt-7 max-w-2xl text-lg leading-8 text-white/80 sm:text-xl">
+                Provide detailed information
+                regarding an incident, activity,
+                or matter requiring investigation.
+            </p>
+            <div class="mt-10">
+                <a href="/report"
+                    class="inline-flex items-center rounded-lg bg-amber-500 px-7 py-3.5 text-sm font-semibold text-amber-950 shadow-lg transition hover:bg-amber-400">
+                    Submit
+                    Investigative Report
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

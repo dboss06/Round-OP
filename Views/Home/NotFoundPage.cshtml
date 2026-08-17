@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Page Not Found";
+    Layout = "_Layout";
+}
+
+<div class="flex min-h-[calc(100vh-80px)] items-center justify-center bg-amber-100 px-6 py-16">
+    <div class="w-full max-w-xl text-center">
+
+        <p class="text-7xl font-black tracking-tight text-amber-900 sm:text-8xl">
+            404
+        </p>
+
+        <h1 class="mt-4 text-3xl font-bold tracking-tight text-amber-950">
+            Page not found
+        </h1>
+
+        <p class="mx-auto mt-4 max-w-lg text-sm leading-7 text-amber-950/65 sm:text-base">
+            The page you're looking for doesn't exist, may have been moved,
+            or is no longer available.
+        </p>
+
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="mt-8 inline-flex rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
+            Return Home
+        </a>
+
+    </div>
+</div>

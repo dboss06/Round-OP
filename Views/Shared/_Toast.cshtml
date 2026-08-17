@@ -1,0 +1,105 @@
+﻿@{
+    var toastMessage = TempData["ToastMessage"]?.ToString();
+    var toastType = TempData["ToastType"]?.ToString() ?? "error";
+}
+
+@if (!string.IsNullOrWhiteSpace(toastMessage))
+{
+    var isSuccess = toastType == "success";
+
+    <div id="toast"
+         class="fixed right-6 top-6 z-[100] w-full max-w-sm translate-y-[-10px] opacity-0 transition-all duration-300">
+
+        <div class="flex items-start gap-3 rounded-xl border @(isSuccess ? "border-green-200 bg-green-50" : "border-red-200 bg-red-50") p-4 shadow-xl">
+
+            <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full @(isSuccess ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700")">
+                @if (isSuccess)
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-4 w-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="m5 12 4 4L19 6" />
+                    </svg>
+                }
+                else
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-4 w-4"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+                    </svg>
+                }
+            </div>
+
+            <div class="min-w-0 flex-1">
+                <p class="text-sm font-semibold @(isSuccess ? "text-green-900" : "text-red-900")">
+                    @(isSuccess ? "Success" : "Error")
+                </p>
+
+                <p class="mt-1 text-sm leading-5 @(isSuccess ? "text-green-700" : "text-red-700")">
+                    @toastMessage
+                </p>
+            </div>
+
+            <button type="button"
+                    onclick="hideToast()"
+                    class="@(isSuccess ? "text-green-400 hover:text-green-700" : "text-red-400 hover:text-red-700") transition">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-5 w-5"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     stroke-width="2">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M6 18 18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+        </div>
+    </div>
+
+    <script>
+        let toastTimeout;
+
+        function showToast() {
+            const toast = document.getElementById("toast");
+
+            if (!toast) return;
+
+            requestAnimationFrame(() => {
+                toast.classList.remove("translate-y-[-10px]", "opacity-0");
+                toast.classList.add("translate-y-0", "opacity-100");
+            });
+
+            toastTimeout = setTimeout(hideToast, 5000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById("toast");
+
+            if (!toast) return;
+
+            clearTimeout(toastTimeout);
+
+            toast.classList.remove("translate-y-0", "opacity-100");
+            toast.classList.add("translate-y-[-10px]", "opacity-0");
+
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }
+
+        document.addEventListener("DOMContentLoaded", showToast);
+    </script>
+}

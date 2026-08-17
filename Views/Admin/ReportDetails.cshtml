@@ -1,0 +1,718 @@
+﻿@model Round_OP.ViewModels.ReportDetailsViewModel
+
+@{
+    ViewData["Title"] = "Report Details";
+    Layout = "_AdminLayout";
+}
+
+<div class="space-y-6">
+
+    <!-- Header -->
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+
+        <div>
+            <div class="flex flex-wrap items-center gap-3">
+                <a asp-controller="Admin"
+                   asp-action="Reports"
+                   class="text-sm font-medium text-slate-500 transition hover:text-amber-800">
+                    ← Investigation Reports
+                </a>
+
+                <span class="text-slate-300">/</span>
+
+                <span class="text-sm text-slate-500">
+                    @Model.ReportId
+                </span>
+            </div>
+
+            <h1 class="mt-4 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
+                Investigation Report
+            </h1>
+
+            <p class="mt-2 text-sm text-slate-500">
+                Submitted @Model.SubmittedAt.ToLocalTime().ToString("dd MMMM yyyy, HH:mm")
+            </p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+
+            <span class="inline-flex items-center rounded-full bg-amber-100 px-4 py-2 text-sm font-semibold text-amber-900">
+                @Model.CaseStatus.GetDisplayName()
+            </span>
+
+            <span class="inline-flex items-center rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-700">
+                @Model.InvestigationPriority.GetDisplayName()
+            </span>
+            @if (Model.UpdatedAt.HasValue)
+            {
+                <p class="mt-1 text-xs text-slate-400">
+                    Last updated
+                    @Model.UpdatedAt.Value.ToLocalTime().ToString("dd MMM yyyy, HH:mm")
+                </p>
+            }
+        </div>
+    </div>
+
+
+    <!-- Report Reference -->
+    <section class="rounded-2xl border border-amber-200 bg-amber-50 p-5 shadow-sm">
+        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+                    Report Reference
+                </p>
+
+                <p class="mt-2 font-mono text-xl font-bold tracking-wide text-amber-950">
+                    @Model.ReportId
+                </p>
+            </div>
+
+            <div class="text-sm text-amber-950/60">
+                Case:
+                <span class="font-semibold text-amber-950">
+                    @(string.IsNullOrWhiteSpace(Model.CaseNumber)
+                        ? "Not provided"
+                        : Model.CaseNumber)
+                </span>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+
+        <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+                    Administrative Status
+                </p>
+
+                <p class="mt-2 text-sm leading-6 text-slate-500">
+                    Changing the status does not modify the original investigation information submitted with this report.
+                </p>
+            </div>
+
+            <form asp-controller="Admin"
+                  asp-action="UpdateReportStatus"
+                  method="post"
+                  class="flex flex-col gap-3 sm:flex-row sm:items-end">
+
+                @Html.AntiForgeryToken()
+
+                <input type="hidden"
+                       name="ReportId"
+                       value="@Model.Id" />
+
+                <input type="hidden"
+                       name="ReportReference"
+                       value="@Model.ReportId" />
+
+                <div>
+                    <label for="status"
+                           class="mb-2 block text-sm font-semibold text-slate-800">
+                        Case Status
+                    </label>
+
+                    <select id="status"
+                            name="Status"
+                            class="min-w-52 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-amber-700 focus:bg-white focus:ring-4 focus:ring-amber-500/10">
+
+                        @foreach (var status in Enum.GetValues<Round_OP.Models.Enums.CaseStatus>())
+                        {
+                            <option value="@status"
+                                    selected="@(Model.CaseStatus == status)">
+                                @status.GetDisplayName()
+                            </option>
+                        }
+
+                    </select>
+                </div>
+
+                <button type="submit"
+                        class="rounded-lg bg-amber-900 px-5 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
+                    Update Status
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+    <!-- Investigator Information -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <h2 class="text-lg font-semibold text-slate-900">
+                Investigator Information
+            </h2>
+        </div>
+
+        <div class="grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Investigator
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-900">
+                    @Model.InvestigatorName
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Badge / ID
+                </p>
+                <p class="mt-2 text-sm text-slate-700">
+                    @Model.BadgeIdNumber
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Police Station / Unit
+                </p>
+                <p class="mt-2 text-sm text-slate-700">
+                    @Model.PoliceStationUnit
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Date of Report
+                </p>
+                <p class="mt-2 text-sm text-slate-700">
+                    @Model.DateOfReport.ToString("dd MMM yyyy")
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Case Information -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <h2 class="text-lg font-semibold text-slate-900">
+                Case Information
+            </h2>
+        </div>
+
+        <div class="grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-4">
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Case Number
+                </p>
+                <p class="mt-2 text-sm text-slate-700">
+                    @(Model.CaseNumber ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Report Number
+                </p>
+                <p class="mt-2 text-sm text-slate-700">
+                    @(Model.ReportNumber ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Case Status
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-900">
+                    @Model.CaseStatus.GetDisplayName()
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Complaint Type
+                </p>
+                <p class="mt-2 text-sm text-slate-700">
+                    @Model.ComplaintType.GetDisplayName()
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Investigation Actions -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <h2 class="text-lg font-semibold text-slate-900">
+                Investigation Actions
+            </h2>
+        </div>
+
+        <div class="grid gap-4 p-6 sm:grid-cols-2 lg:grid-cols-3">
+
+            @{
+                var investigationChecks = new[]
+                {
+                    ("Initial Complaint Received", Model.InitialComplaintReceived.ToString()),
+                    ("Evidence Received", Model.EvidenceReceived.ToString()),
+                    ("Evidence Verified", Model.EvidenceVerified.ToString()),
+                    ("Blockchain Analysis Requested", Model.BlockchainAnalysisRequested.ToString()),
+                    ("Blockchain Analysis Approved", Model.BlockchainAnalysisApproved.ToString()),
+                    ("Transaction History Obtained", Model.TransactionHistoryObtained.ToString()),
+                    ("Wallet Tracing Completed", Model.WalletTracingCompleted.ToString()),
+                    ("Exchange Information Requested", Model.ExchangeInformationRequested.ToString()),
+                    ("Chain of Custody Updated", Model.ChainOfCustodyUpdated.ToString())
+                };
+            }
+
+            @foreach (var item in investigationChecks)
+            {
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                    <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                        @item.Item1
+                    </p>
+
+                    <p class="mt-2 text-sm font-semibold text-slate-800">
+                        @item.Item2
+                    </p>
+                </div>
+            }
+
+            <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Witness Interview
+                </p>
+
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.WitnessInterviewDate?.ToString("dd MMM yyyy") ?? "Not provided")
+                </p>
+            </div>
+
+            <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Submitted to Headquarters
+                </p>
+
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @Model.ReportSubmittedToHeadquarters
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Blockchain Investigation -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <h2 class="text-lg font-semibold text-slate-900">
+                Blockchain Investigation
+            </h2>
+        </div>
+
+        <div class="grid gap-6 p-6 sm:grid-cols-2">
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Blockchain Platform
+                </p>
+
+                <p class="mt-2 text-sm font-semibold text-slate-900">
+                    @Model.BlockchainPlatform.GetDisplayName()
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Linked Exchange
+                </p>
+
+                <p class="mt-2 text-sm text-slate-700">
+                    @(string.IsNullOrWhiteSpace(Model.LinkedExchange)
+                        ? "Not provided"
+                        : Model.LinkedExchange)
+                </p>
+            </div>
+
+            <div class="sm:col-span-2">
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Wallet Address
+                </p>
+
+                @if (string.IsNullOrWhiteSpace(Model.WalletAddress))
+                {
+                    <p class="mt-2 text-sm text-slate-500">
+                        Not provided
+                    </p>
+                }
+                else
+                {
+                    <div class="mt-2 overflow-x-auto rounded-xl bg-slate-900 p-4">
+                        <code class="font-mono text-sm text-amber-100">
+                            @Model.WalletAddress
+                        </code>
+                    </div>
+                }
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Incoming Transactions
+                </p>
+
+                <p class="mt-2 text-sm text-slate-700">
+                    @(Model.IncomingTransactions ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Outgoing Transactions
+                </p>
+
+                <p class="mt-2 text-sm text-slate-700">
+                    @(Model.OutgoingTransactions ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Related Wallets
+                </p>
+
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.RelatedWalletsIdentified?.GetDisplayName() ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Fund Freeze
+                </p>
+
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.FundFreezeStatus?.GetDisplayName() ?? "Not provided")
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Findings -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <h2 class="text-lg font-semibold text-slate-900">
+                Evidence & Findings
+            </h2>
+        </div>
+
+        <div class="space-y-6 p-6">
+
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-400">
+                        Evidence Matches Statement
+                    </p>
+                    <p class="mt-2 text-sm font-semibold text-slate-800">
+                        @Model.EvidenceMatchesVictimStatement
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-400">
+                        Evidence Match
+                    </p>
+                    <p class="mt-2 text-sm font-semibold text-slate-800">
+                        @Model.EvidenceMatchLevel
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-400">
+                        Fraud Confirmed
+                    </p>
+                    <p class="mt-2 text-sm font-semibold text-slate-800">
+                        @Model.FraudConfirmed
+                    </p>
+                </div>
+
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
+                    <p class="text-xs uppercase tracking-wide text-slate-400">
+                        Investigation Continuing
+                    </p>
+                    <p class="mt-2 text-sm font-semibold text-slate-800">
+                        @Model.InvestigationContinuing
+                    </p>
+                </div>
+
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Further Evidence Requested
+                </p>
+
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @Model.FurtherEvidenceRequested
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                    Complaints Statement
+                </p>
+
+                @if (string.IsNullOrWhiteSpace(Model.ComplaintsStatement))
+                {
+                    <div class="mt-3 rounded-xl border border-dashed border-slate-200 bg-slate-50 p-5 text-sm text-slate-500">
+                        No statement was provided.
+                    </div>
+                }
+                else
+                {
+                    <div class="mt-3 whitespace-pre-wrap rounded-xl bg-slate-50 p-5 text-sm leading-7 text-slate-700">
+                        @Model.ComplaintsStatement
+                    </div>
+                }
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Recommendations -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <h2 class="text-lg font-semibold text-slate-900">
+                Recommendations & Final Submission
+            </h2>
+        </div>
+
+        <div class="grid gap-6 p-6 sm:grid-cols-2 lg:grid-cols-3">
+
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-400">
+                    Prosecution Referral
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.ProsecutionReferralRating?.ToString() ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-400">
+                    Contact Cryptocurrency Exchange
+                </p>
+                <p class="mt-2 text-sm text-slate-700">
+                    @(Model.ContactCryptocurrencyExchange ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-400">
+                    Submit to Headquarters
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.SubmitToHeadquarters ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-400">
+                    Close Case
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.CloseCase ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-400">
+                    Report Reviewed
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.ReportReviewed?.GetDisplayName() ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-400">
+                    Supervisor Approval
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.SupervisorApproval?.GetDisplayName() ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-400">
+                    Headquarters Submission
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.HeadquartersSubmission ?? "Not provided")
+                </p>
+            </div>
+
+            <div>
+                <p class="text-xs uppercase tracking-wide text-slate-400">
+                    Case Closed
+                </p>
+                <p class="mt-2 text-sm font-semibold text-slate-800">
+                    @(Model.CaseClosedDate?.ToString("dd MMM yyyy") ?? "Not provided")
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Attachments -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <div class="flex items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-semibold text-slate-900">
+                        Attachments
+                    </h2>
+
+                    <p class="mt-1 text-sm text-slate-500">
+                        Files submitted with this investigation report.
+                    </p>
+                </div>
+
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                    @Model.Attachments.Count
+                </span>
+            </div>
+        </div>
+
+        @if (Model.Attachments.Any())
+        {
+            <div class="divide-y divide-slate-100">
+
+                @foreach (var attachment in Model.Attachments)
+                {
+                    <div class="flex flex-col gap-4 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+
+                        <div class="flex min-w-0 items-center gap-4">
+
+                            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-800">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="h-5 w-5"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor"
+                                     stroke-width="1.8">
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          d="M7 3h7l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z" />
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          d="M14 3v5h5" />
+                                </svg>
+                            </div>
+
+                            <div class="min-w-0">
+                                <p class="truncate text-sm font-semibold text-slate-900">
+                                    @attachment.OriginalFileName
+                                </p>
+
+                                <p class="mt-1 text-xs text-slate-500">
+                                    @attachment.ContentType
+                                    ·
+                                    @FormatFileSize(attachment.FileSize)
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <a asp-controller="Admin"
+                           asp-action="DownloadAttachment"
+                           asp-route-id="@attachment.Id"
+                           class="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-50">
+
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="h-4 w-4"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor"
+                                 stroke-width="2">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      d="M12 3v12m0 0 4-4m-4 4-4-4M5 21h14" />
+                            </svg>
+
+                            Download
+                        </a>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="px-6 py-12 text-center">
+
+                <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-400">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-6 w-6"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.7">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M7 3h7l4 4v14H7a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2Z" />
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M14 3v5h5" />
+                    </svg>
+                </div>
+
+                <p class="mt-4 text-sm font-semibold text-slate-800">
+                    No attachments
+                </p>
+
+                <p class="mx-auto mt-1 max-w-sm text-sm leading-6 text-slate-500">
+                    No supporting files were submitted with this investigation report.
+                </p>
+
+            </div>
+        }
+
+    </section>
+
+</div>
+
+
+@functions {
+    private static string FormatFileSize(long bytes)
+    {
+        if (bytes < 1024)
+        {
+            return $"{bytes} B";
+        }
+
+        if (bytes < 1024 * 1024)
+        {
+            return $"{bytes / 1024d:N1} KB";
+        }
+
+        if (bytes < 1024 * 1024 * 1024)
+        {
+            return $"{bytes / (1024d * 1024d):N1} MB";
+        }
+
+        return $"{bytes / (1024d * 1024d * 1024d):N1} GB";
+    }
+}
