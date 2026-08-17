@@ -78,7 +78,7 @@ public class ReportsController : Controller
             InvestigatorName = model.InvestigatorName,
             BadgeIdNumber = model.BadgeIdNumber,
             PoliceStationUnit = model.PoliceStationUnit,
-            DateOfReport = model.DateOfReport!.Value,
+            DateOfReport = DateTime.SpecifyKind(model.DateOfReport!.Value, DateTimeKind.Utc),
 
             CaseNumber = model.CaseNumber,
             ReportNumber = model.ReportNumber,
