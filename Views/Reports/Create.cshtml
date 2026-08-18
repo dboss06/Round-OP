@@ -1788,24 +1788,33 @@
                 return true;
             }
 
+            function getRequiredFieldsForSection(section) {
+                return Array.from(
+                    section.querySelectorAll(
+                        "input:not([type='hidden']), select, textarea"
+                    )
+                ).filter(field => {
+                    if (field.disabled) {
+                        return false;
+                    }
+
+                    if (field.type === "radio") {
+                        return field.required;
+                    }
+
+                    return field.required;
+                });
+            }
+
             function validateCurrentSection() {
                 const section = sections[currentStep];
-
-                const fields = Array.from(
-                    section.querySelectorAll(
-                        "input[required], select[required], textarea[required]"
-                    )
-                );
+                const fields = getRequiredFieldsForSection(section);
 
                 let valid = true;
-
                 const processedRadioGroups = new Set();
 
                 fields.forEach(field => {
-
-                    // Handle radio groups once
                     if (field.type === "radio") {
-
                         if (processedRadioGroups.has(field.name)) {
                             return;
                         }
@@ -1814,19 +1823,14 @@
 
                         const group = Array.from(
                             section.querySelectorAll(
-                                `input[type="radio"][name="${field.name}"]`
+                                `input[type="radio"][name="${field.name}"][required]`
                             )
                         );
 
-                        const groupValid = group.some(
-                            radio => radio.checked
-                        );
+                        const groupValid = group.some(radio => radio.checked);
 
                         group.forEach(radio => {
-                            radio.classList.toggle(
-                                "field-error",
-                                !groupValid
-                            );
+                            radio.classList.toggle("field-error", !groupValid);
                         });
 
                         if (!groupValid) {
@@ -1836,7 +1840,6 @@
                         return;
                     }
 
-                    // Normal fields
                     field.classList.remove("field-error");
 
                     if (!isFieldValid(field)) {
@@ -1846,28 +1849,45 @@
                 });
 
                 if (!valid) {
-
                     const firstInvalid = fields.find(field => {
-
                         if (field.type === "radio") {
-                            return !isFieldValid(field);
+                            return !Array.from(
+                                section.querySelectorAll(
+                                    `input[type="radio"][name="${field.name}"][required]`
+                                )
+                            ).some(radio => radio.checked);
                         }
 
                         return !isFieldValid(field);
                     });
 
                     if (firstInvalid) {
-                        firstInvalid.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center"
-                        });
+                        if (firstInvalid.type === "radio") {
+                            const radioGroup = Array.from(
+                                section.querySelectorAll(
+                                    `input[type="radio"][name="${firstInvalid.name}"][required]`
+                                )
+                            );
 
-                        firstInvalid.focus();
+                            radioGroup[0]?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center"
+                            });
+                            radioGroup[0]?.focus();
+                        } else {
+                            firstInvalid.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center"
+                            });
+
+                            firstInvalid.focus();
+                        }
                     }
                 }
 
                 return valid;
             }
+
             function updateNextButton() {
                 const section = sections[currentStep];
                 const nextButton = section.querySelector(".next-button");
@@ -1876,30 +1896,25 @@
                     return;
                 }
 
-                const fields = Array.from(
-                    section.querySelectorAll(
-                        "input[required], select[required], textarea[required]"
-                    )
-                );
-
+                const fields = getRequiredFieldsForSection(section);
                 let valid = true;
                 const processedRadioGroups = new Set();
 
                 fields.forEach(field => {
-
                     if (field.type === "radio") {
-
                         if (processedRadioGroups.has(field.name)) {
                             return;
                         }
 
                         processedRadioGroups.add(field.name);
 
-                        const group = section.querySelectorAll(
-                            `input[type="radio"][name="${field.name}"]`
+                        const group = Array.from(
+                            section.querySelectorAll(
+                                `input[type="radio"][name="${field.name}"][required]`
+                            )
                         );
 
-                        if (!Array.from(group).some(radio => radio.checked)) {
+                        if (!group.some(radio => radio.checked)) {
                             valid = false;
                         }
 
@@ -1912,6 +1927,8 @@
                 });
 
                 nextButton.disabled = !valid;
+                nextButton.classList.toggle("opacity-50", !valid);
+                nextButton.classList.toggle("cursor-not-allowed", !valid);
             }
             // Enable/disable Next button as the user fills the section
             form.querySelectorAll("input, select, textarea").forEach(field => {
@@ -2018,15 +2035,15 @@
                             "flex items-center justify-between rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm";
 
                         item.innerHTML = `
-                                                                            <div class="min-w-0">
-                                                                                <p class="truncate font-medium text-amber-950">
-                                                                                    ${escapeHtml(file.name)}
-                                                                                </p>
-                                                                                <p class="mt-1 text-xs text-amber-950/50">
-                                                                                    ${formatFileSize(file.size)}
-                                                                                </p>
-                                                                            </div>
-                                                                        `;
+                                                                                <div class="min-w-0">
+                                                                                    <p class="truncate font-medium text-amber-950">
+                                                                                        ${escapeHtml(file.name)}
+                                                                                    </p>
+                                                                                    <p class="mt-1 text-xs text-amber-950/50">
+                                                                                        ${formatFileSize(file.size)}
+                                                                                    </p>
+                                                                                </div>
+                                                                            `;
 
                         selectedFiles.appendChild(item);
                     });
