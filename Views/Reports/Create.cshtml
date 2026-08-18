@@ -174,7 +174,7 @@
 
                                 <input asp-for="DateOfReport" type="date"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
-                                       required />
+                                       placeholder="Select date of report" required />
 
                                 <span asp-validation-for="DateOfReport" class="mt-1 block text-xs text-red-600">
                                 </span>
@@ -2079,15 +2079,15 @@
                             "flex items-center justify-between rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm";
 
                         item.innerHTML = `
-                                                                                                                                            <div class="min-w-0">
-                                                                                                                                                <p class="truncate font-medium text-amber-950">
-                                                                                                                                                    ${escapeHtml(file.name)}
-                                                                                                                                                </p>
-                                                                                                                                                <p class="mt-1 text-xs text-amber-950/50">
-                                                                                                                                                    ${formatFileSize(file.size)}
-                                                                                                                                                </p>
-                                                                                                                                            </div>
-                                                                                                                                        `;
+                                                                                                                                                <div class="min-w-0">
+                                                                                                                                                    <p class="truncate font-medium text-amber-950">
+                                                                                                                                                        ${escapeHtml(file.name)}
+                                                                                                                                                    </p>
+                                                                                                                                                    <p class="mt-1 text-xs text-amber-950/50">
+                                                                                                                                                        ${formatFileSize(file.size)}
+                                                                                                                                                    </p>
+                                                                                                                                                </div>
+                                                                                                                                            `;
 
                         selectedFiles.appendChild(item);
                     });
