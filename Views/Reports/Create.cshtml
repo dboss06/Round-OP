@@ -126,7 +126,7 @@
                                     <span class="text-red-600">*</span>
                                 </label>
 
-                                <input asp-for="InvestigatorName" type="text" autocomplete="name"
+                                <input asp-for="InvestigatorName" type="text" autocomplete="name" required
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                        placeholder="Enter investigator name" />
 
@@ -143,7 +143,7 @@
 
                                 <input asp-for="BadgeIdNumber" type="text"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
-                                       placeholder="Enter badge or ID number" />
+                                       placeholder="Enter badge or ID number" required />
 
                                 <span asp-validation-for="BadgeIdNumber" class="mt-1 block text-xs text-red-600">
                                 </span>
@@ -159,7 +159,7 @@
 
                                 <input asp-for="PoliceStationUnit" type="text"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
-                                       placeholder="Enter police station or unit" />
+                                       placeholder="Enter police station or unit" required />
 
                                 <span asp-validation-for="PoliceStationUnit" class="mt-1 block text-xs text-red-600">
                                 </span>
@@ -173,7 +173,8 @@
                                 </label>
 
                                 <input asp-for="DateOfReport" type="date"
-                                       class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10" />
+                                       class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
+                                       required />
 
                                 <span asp-validation-for="DateOfReport" class="mt-1 block text-xs text-red-600">
                                 </span>
@@ -186,8 +187,7 @@
 
                 <div class="mt-6 flex justify-end">
                     <button type="button"
-                            class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-50"
-                            >
+                            class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-50">
                         Next: Case Information
                     </button>
                 </div>
@@ -273,7 +273,7 @@
                                            class="group flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
 
                                         <input id="@id" asp-for="CaseStatus" type="radio" value="@status"
-                                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                         <span class="text-sm font-medium text-amber-950">
                                             @status
@@ -311,7 +311,7 @@
                                            class="group flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
 
                                         <input id="@id" asp-for="InvestigationPriority" type="radio" value="@priority"
-                                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                         <span class="text-sm font-medium text-amber-950">
                                             @priority
@@ -349,7 +349,7 @@
                                            class="group flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
 
                                         <input id="@id" asp-for="ComplaintType" type="radio" value="@complaint"
-                                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                         <span class="text-sm font-medium text-amber-950">
                                             @{
@@ -392,7 +392,7 @@
                         Previous
                     </button>
 
-                    <button type="button" 
+                    <button type="button"
                             class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
                         Next: Investigation
                     </button>
@@ -437,7 +437,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="InitialComplaintReceived" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -447,7 +447,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="InitialComplaintReceived" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -472,7 +472,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="EvidenceReceived" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -482,7 +482,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="EvidenceReceived" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -507,7 +507,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="EvidenceVerified" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -517,7 +517,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="EvidenceVerified" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -556,7 +556,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="BlockchainAnalysisRequested" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -566,7 +566,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="BlockchainAnalysisRequested" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -592,7 +592,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="BlockchainAnalysisApproved" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -602,7 +602,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="BlockchainAnalysisApproved" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -628,7 +628,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="TransactionHistoryObtained" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -638,7 +638,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="TransactionHistoryObtained" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -664,7 +664,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="WalletTracingCompleted" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -674,7 +674,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="WalletTracingCompleted" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -699,7 +699,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ExchangeInformationRequested" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -709,7 +709,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ExchangeInformationRequested" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -735,7 +735,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ChainOfCustodyUpdated" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -745,7 +745,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ChainOfCustodyUpdated" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -770,7 +770,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ReportSubmittedToHeadquarters" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -780,7 +780,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ReportSubmittedToHeadquarters" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -790,7 +790,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ReportSubmittedToHeadquarters" type="radio" value="Pending"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Pending
@@ -858,7 +858,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="BlockchainPlatform" type="radio" value="Bitcoin"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
                                     <span class="text-sm font-medium text-amber-950">
                                         Bitcoin (BTC)
                                     </span>
@@ -867,7 +867,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="BlockchainPlatform" type="radio" value="Ethereum"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
                                     <span class="text-sm font-medium text-amber-950">
                                         Ethereum (ETH)
                                     </span>
@@ -876,7 +876,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="BlockchainPlatform" type="radio" value="Other"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
                                     <span class="text-sm font-medium text-amber-950">
                                         Other
                                     </span>
@@ -958,7 +958,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="RelatedWalletsIdentified" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -968,7 +968,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="RelatedWalletsIdentified" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -1095,7 +1095,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="EvidenceMatchesVictimStatement" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -1105,7 +1105,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="EvidenceMatchesVictimStatement" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -1131,7 +1131,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="EvidenceMatchLevel" type="radio" value="Fully"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Fully
@@ -1141,7 +1141,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="EvidenceMatchLevel" type="radio" value="Partially"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Partially
@@ -1181,7 +1181,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="FurtherEvidenceRequested" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -1191,7 +1191,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="FurtherEvidenceRequested" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -1216,7 +1216,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="FraudConfirmed" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -1226,7 +1226,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="FraudConfirmed" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -1251,7 +1251,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="InvestigationContinuing" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -1261,7 +1261,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="InvestigationContinuing" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -1399,7 +1399,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ReportReviewed" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -1409,7 +1409,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="ReportReviewed" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -1434,7 +1434,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="SupervisorApproval" type="radio" value="Yes"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         Yes
@@ -1444,7 +1444,7 @@
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
                                     <input asp-for="SupervisorApproval" type="radio" value="No"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
 
                                     <span class="text-sm font-medium text-amber-950">
                                         No
@@ -1914,25 +1914,46 @@
             }
 
             function updateNextButton() {
-    const section = sections[currentStep];
-    const nextButton = section.querySelector(".next-button");
+                const section = sections[currentStep];
+                const nextButton = section.querySelector(".next-button");
 
-    if (!nextButton) return;
+                if (!nextButton) return;
 
-    const fields = section.querySelectorAll(
-        "input[required], select[required], textarea[required]"
-    );
+                const fields = Array.from(
+                    section.querySelectorAll(
+                        "input[required], select[required], textarea[required]"
+                    )
+                );
 
-    let valid = true;
+                let valid = true;
+                const processedRadioGroups = new Set();
 
-    fields.forEach(field => {
-        if (!isFieldValid(field)) {
-            valid = false;
-        }
-    });
+                fields.forEach(field => {
+                    if (field.type === "radio") {
+                        if (processedRadioGroups.has(field.name)) {
+                            return;
+                        }
 
-    nextButton.disabled = !valid;
-}
+                        processedRadioGroups.add(field.name);
+
+                        const group = section.querySelectorAll(
+                            `input[type="radio"][name="${field.name}"]`
+                        );
+
+                        if (!Array.from(group).some(radio => radio.checked)) {
+                            valid = false;
+                        }
+
+                        return;
+                    }
+
+                    if (!isFieldValid(field)) {
+                        valid = false;
+                    }
+                });
+
+                nextButton.disabled = !valid;
+            }
 
             form.querySelectorAll("input, select, textarea").forEach(field => {
                 field.addEventListener("input", updateNextButton);
@@ -2039,15 +2060,15 @@
                             "flex items-center justify-between rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm";
 
                         item.innerHTML = `
-                                                                                                    <div class="min-w-0">
-                                                                                                        <p class="truncate font-medium text-amber-950">
-                                                                                                            ${escapeHtml(file.name)}
-                                                                                                        </p>
-                                                                                                        <p class="mt-1 text-xs text-amber-950/50">
-                                                                                                            ${formatFileSize(file.size)}
-                                                                                                        </p>
-                                                                                                    </div>
-                                                                                                `;
+                                                                                                                            <div class="min-w-0">
+                                                                                                                                <p class="truncate font-medium text-amber-950">
+                                                                                                                                    ${escapeHtml(file.name)}
+                                                                                                                                </p>
+                                                                                                                                <p class="mt-1 text-xs text-amber-950/50">
+                                                                                                                                    ${formatFileSize(file.size)}
+                                                                                                                                </p>
+                                                                                                                            </div>
+                                                                                                                        `;
 
                         selectedFiles.appendChild(item);
                     });
