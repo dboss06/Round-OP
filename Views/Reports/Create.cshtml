@@ -1607,7 +1607,10 @@
                 </div>
 
             </section>
-
+            <div id="formToast"
+                 class="pointer-events-none fixed right-5 top-5 z-[9999] hidden max-w-sm rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-sm font-medium text-red-800 shadow-lg transition-all duration-300">
+                <span id="formToastMessage"></span>
+            </div>
         </form>
 
     </div>
@@ -1709,7 +1712,22 @@
                 progressBar.style.width =
                     `${progress}%`;
             }
+            function showFormToast(message) {
+                const toast = document.getElementById("formToast");
+                const messageElement = document.getElementById("formToastMessage");
 
+                if (!toast || !messageElement) {
+                    return;
+                }
+
+                messageElement.textContent = message;
+
+                toast.classList.remove("hidden");
+
+                setTimeout(() => {
+                    toast.classList.add("hidden");
+                }, 3000);
+            }
             function showSectionMessage(message) {
                 let banner = document.getElementById("sectionValidationMessage");
 
@@ -1961,11 +1979,12 @@
             });
             // Next buttons
             document.querySelectorAll(".next-button").forEach(button => {
-
                 button.addEventListener("click", function () {
 
                     if (!validateCurrentSection()) {
-                        showSectionMessage("Please complete all required fields in this section before continuing.");
+                        showFormToast(
+                            "Please complete all required fields before continuing."
+                        );
                         return;
                     }
 
@@ -2060,15 +2079,15 @@
                             "flex items-center justify-between rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm";
 
                         item.innerHTML = `
-                                                                                                                            <div class="min-w-0">
-                                                                                                                                <p class="truncate font-medium text-amber-950">
-                                                                                                                                    ${escapeHtml(file.name)}
-                                                                                                                                </p>
-                                                                                                                                <p class="mt-1 text-xs text-amber-950/50">
-                                                                                                                                    ${formatFileSize(file.size)}
-                                                                                                                                </p>
-                                                                                                                            </div>
-                                                                                                                        `;
+                                                                                                                                            <div class="min-w-0">
+                                                                                                                                                <p class="truncate font-medium text-amber-950">
+                                                                                                                                                    ${escapeHtml(file.name)}
+                                                                                                                                                </p>
+                                                                                                                                                <p class="mt-1 text-xs text-amber-950/50">
+                                                                                                                                                    ${formatFileSize(file.size)}
+                                                                                                                                                </p>
+                                                                                                                                            </div>
+                                                                                                                                        `;
 
                         selectedFiles.appendChild(item);
                     });
