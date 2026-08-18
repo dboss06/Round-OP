@@ -1709,6 +1709,28 @@
                     `${progress}%`;
             }
 
+            function showSectionMessage(message) {
+                let banner = document.getElementById("sectionValidationMessage");
+
+                if (!banner) {
+                    banner = document.createElement("div");
+                    banner.id = "sectionValidationMessage";
+                    banner.className = "mb-4 hidden rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm font-medium text-amber-900";
+                    const formBody = form.querySelector(".form-section") || form;
+                    formBody.parentNode.insertBefore(banner, formBody);
+                }
+
+                banner.textContent = message;
+                banner.classList.remove("hidden");
+            }
+
+            function hideSectionMessage() {
+                const banner = document.getElementById("sectionValidationMessage");
+                if (banner) {
+                    banner.classList.add("hidden");
+                }
+            }
+
             function showStep(step) {
                 if (
                     step < 0 ||
@@ -1717,6 +1739,8 @@
                 ) {
                     return;
                 }
+
+                hideSectionMessage();
 
                 sections.forEach((section, index) => {
                     section.classList.toggle(
@@ -1929,8 +1953,12 @@
                 nextButton.disabled = !valid;
                 nextButton.classList.toggle("opacity-50", !valid);
                 nextButton.classList.toggle("cursor-not-allowed", !valid);
+                nextButton.classList.toggle("bg-amber-700", !valid);
+                nextButton.classList.toggle("hover:bg-amber-700", !valid);
+                nextButton.classList.toggle("bg-amber-900", valid);
+                nextButton.classList.toggle("hover:bg-amber-800", valid);
             }
-            // Enable/disable Next button as the user fills the section
+
             form.querySelectorAll("input, select, textarea").forEach(field => {
                 field.addEventListener("input", updateNextButton);
                 field.addEventListener("change", updateNextButton);
@@ -1941,6 +1969,7 @@
                 button.addEventListener("click", function () {
 
                     if (!validateCurrentSection()) {
+                        showSectionMessage("Please complete all required fields in this section before continuing.");
                         return;
                     }
 
