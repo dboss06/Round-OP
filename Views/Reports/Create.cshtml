@@ -28,66 +28,53 @@
         <div class="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-4 shadow-sm">
             <div class="flex items-center justify-between">
                 <div>
-                    <p id="stepNumber"
-                       class="text-sm font-semibold text-amber-900">
+                    <p id="stepNumber" class="text-sm font-semibold text-amber-900">
                         Step 1 of 5
                     </p>
 
-                    <p id="stepTitle"
-                       class="mt-1 text-sm text-amber-900/60">
+                    <p id="stepTitle" class="mt-1 text-sm text-amber-900/60">
                         Investigator Information
                     </p>
                 </div>
 
-                <span id="progressPercent"
-                      class="text-sm font-semibold text-amber-700">
+                <span id="progressPercent" class="text-sm font-semibold text-amber-700">
                     20%
                 </span>
             </div>
 
             <div class="mt-4 h-2 overflow-hidden rounded-full bg-amber-200">
-                <div id="progressBar"
-                     class="h-full rounded-full bg-amber-800 transition-all duration-300"
+                <div id="progressBar" class="h-full rounded-full bg-amber-800 transition-all duration-300"
                      style="width: 20%">
                 </div>
             </div>
         </div>
 
         <!-- Section Navigation -->
-        <div class="sticky top-0 z-30 mb-6 overflow-x-auto rounded-2xl border border-amber-200 bg-amber-50/95 p-2 shadow-sm backdrop-blur">
+        <div
+            class="sticky top-0 z-30 mb-6 overflow-x-auto rounded-2xl border border-amber-200 bg-amber-50/95 p-2 shadow-sm backdrop-blur">
             <nav class="flex min-w-max gap-2" id="sectionNavigation">
 
-                <button type="button"
-                        data-step="0"
-                        class="section-nav active">
+                <button type="button" data-step="0" class="section-nav active">
                     <span class="step-indicator">1</span>
                     <span>Investigator</span>
                 </button>
 
-                <button type="button"
-                        data-step="1"
-                        class="section-nav locked">
+                <button type="button" data-step="1" class="section-nav locked">
                     <span class="step-indicator">2</span>
                     <span>Case</span>
                 </button>
 
-                <button type="button"
-                        data-step="2"
-                        class="section-nav locked">
+                <button type="button" data-step="2" class="section-nav locked">
                     <span class="step-indicator">3</span>
                     <span>Investigation</span>
                 </button>
 
-                <button type="button"
-                        data-step="3"
-                        class="section-nav locked">
+                <button type="button" data-step="3" class="section-nav locked">
                     <span class="step-indicator">4</span>
                     <span>Blockchain</span>
                 </button>
 
-                <button type="button"
-                        data-step="4"
-                        class="section-nav locked">
+                <button type="button" data-step="4" class="section-nav locked">
                     <span class="step-indicator">5</span>
                     <span>Findings</span>
                 </button>
@@ -96,10 +83,7 @@
         </div>
 
         <!-- Report Form -->
-        <form asp-controller="Reports"
-              asp-action="Create"
-              method="post"
-              enctype="multipart/form-data"
+        <form asp-controller="Reports" asp-action="Create" method="post" enctype="multipart/form-data"
               id="investigationForm">
 
             @Html.AntiForgeryToken()
@@ -112,8 +96,7 @@
             <!-- SECTION 1 -->
             <!-- ================================================= -->
 
-            <section class="form-section"
-                     data-section="0" id="investigator-section">
+            <section class="form-section" data-section="0" id="investigator-section">
 
                 <div class="rounded-2xl border border-amber-200 bg-amber-50 shadow-sm">
 
@@ -143,32 +126,26 @@
                                     <span class="text-red-600">*</span>
                                 </label>
 
-                                <input asp-for="InvestigatorName"
-                                       type="text"
-                                       autocomplete="name"
+                                <input asp-for="InvestigatorName" type="text" autocomplete="name"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                        placeholder="Enter investigator name" />
 
-                                <span asp-validation-for="InvestigatorName"
-                                      class="mt-1 block text-xs text-red-600">
+                                <span asp-validation-for="InvestigatorName" class="mt-1 block text-xs text-red-600">
                                 </span>
                             </div>
 
                             <!-- Badge / ID -->
                             <div>
-                                <label asp-for="BadgeIdNumber"
-                                       class="mb-2 block text-sm font-semibold text-amber-950">
+                                <label asp-for="BadgeIdNumber" class="mb-2 block text-sm font-semibold text-amber-950">
                                     Badge / ID Number
                                     <span class="text-red-600">*</span>
                                 </label>
 
-                                <input asp-for="BadgeIdNumber"
-                                       type="text"
+                                <input asp-for="BadgeIdNumber" type="text"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                        placeholder="Enter badge or ID number" />
 
-                                <span asp-validation-for="BadgeIdNumber"
-                                      class="mt-1 block text-xs text-red-600">
+                                <span asp-validation-for="BadgeIdNumber" class="mt-1 block text-xs text-red-600">
                                 </span>
                             </div>
 
@@ -180,30 +157,25 @@
                                     <span class="text-red-600">*</span>
                                 </label>
 
-                                <input asp-for="PoliceStationUnit"
-                                       type="text"
+                                <input asp-for="PoliceStationUnit" type="text"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                        placeholder="Enter police station or unit" />
 
-                                <span asp-validation-for="PoliceStationUnit"
-                                      class="mt-1 block text-xs text-red-600">
+                                <span asp-validation-for="PoliceStationUnit" class="mt-1 block text-xs text-red-600">
                                 </span>
                             </div>
 
                             <!-- Date -->
                             <div>
-                                <label asp-for="DateOfReport"
-                                       class="mb-2 block text-sm font-semibold text-amber-950">
+                                <label asp-for="DateOfReport" class="mb-2 block text-sm font-semibold text-amber-950">
                                     Date of Report
                                     <span class="text-red-600">*</span>
                                 </label>
 
-                                <input asp-for="DateOfReport"
-                                       type="date"
+                                <input asp-for="DateOfReport" type="date"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10" />
 
-                                <span asp-validation-for="DateOfReport"
-                                      class="mt-1 block text-xs text-red-600">
+                                <span asp-validation-for="DateOfReport" class="mt-1 block text-xs text-red-600">
                                 </span>
                             </div>
 
@@ -226,8 +198,7 @@
             <!-- SECTION 2 -->
             <!-- ================================================= -->
 
-            <section class="form-section hidden"
-                     data-section="1" id="case-section">
+            <section class="form-section hidden" data-section="1" id="case-section">
 
                 <div class="rounded-2xl border border-amber-200 bg-amber-50 shadow-sm">
 
@@ -251,34 +222,28 @@
                         <div class="grid gap-6 md:grid-cols-2">
 
                             <div>
-                                <label asp-for="CaseNumber"
-                                       class="mb-2 block text-sm font-semibold text-amber-950">
+                                <label asp-for="CaseNumber" class="mb-2 block text-sm font-semibold text-amber-950">
                                     Case Number
                                 </label>
 
-                                <input asp-for="CaseNumber"
-                                       type="text"
+                                <input asp-for="CaseNumber" type="text"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                        placeholder="Enter case number" />
 
-                                <span asp-validation-for="CaseNumber"
-                                      class="mt-1 block text-xs text-red-600">
+                                <span asp-validation-for="CaseNumber" class="mt-1 block text-xs text-red-600">
                                 </span>
                             </div>
 
                             <div>
-                                <label asp-for="ReportNumber"
-                                       class="mb-2 block text-sm font-semibold text-amber-950">
+                                <label asp-for="ReportNumber" class="mb-2 block text-sm font-semibold text-amber-950">
                                     Report Number
                                 </label>
 
-                                <input asp-for="ReportNumber"
-                                       type="text"
+                                <input asp-for="ReportNumber" type="text"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                        placeholder="Enter report number" />
 
-                                <span asp-validation-for="ReportNumber"
-                                      class="mt-1 block text-xs text-red-600">
+                                <span asp-validation-for="ReportNumber" class="mt-1 block text-xs text-red-600">
                                 </span>
                             </div>
 
@@ -306,10 +271,7 @@
                                     <label for="@id"
                                            class="group flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
 
-                                        <input id="@id"
-                                               asp-for="CaseStatus"
-                                               type="radio"
-                                               value="@status"
+                                        <input id="@id" asp-for="CaseStatus" type="radio" value="@status"
                                                class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                         <span class="text-sm font-medium text-amber-950">
@@ -321,8 +283,7 @@
 
                             </div>
 
-                            <span asp-validation-for="CaseStatus"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="CaseStatus" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -348,10 +309,7 @@
                                     <label for="@id"
                                            class="group flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
 
-                                        <input id="@id"
-                                               asp-for="InvestigationPriority"
-                                               type="radio"
-                                               value="@priority"
+                                        <input id="@id" asp-for="InvestigationPriority" type="radio" value="@priority"
                                                class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                         <span class="text-sm font-medium text-amber-950">
@@ -363,8 +321,7 @@
 
                             </div>
 
-                            <span asp-validation-for="InvestigationPriority"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="InvestigationPriority" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -390,10 +347,7 @@
                                     <label for="@id"
                                            class="group flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
 
-                                        <input id="@id"
-                                               asp-for="ComplaintType"
-                                               type="radio"
-                                               value="@complaint"
+                                        <input id="@id" asp-for="ComplaintType" type="radio" value="@complaint"
                                                class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                         <span class="text-sm font-medium text-amber-950">
@@ -424,8 +378,7 @@
 
                             </div>
 
-                            <span asp-validation-for="ComplaintType"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="ComplaintType" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -451,8 +404,7 @@
             <!-- SECTION 3 -->
             <!-- ================================================= -->
 
-            <section class="form-section hidden"
-                     data-section="2" id="investigation-actions-section">
+            <section class="form-section hidden" data-section="2" id="investigation-actions-section">
 
                 <div class="rounded-2xl border border-amber-200 bg-amber-50 shadow-sm">
 
@@ -481,10 +433,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="InitialComplaintReceived"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="InitialComplaintReceived" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -492,10 +443,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="InitialComplaintReceived"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="InitialComplaintReceived" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -505,8 +455,7 @@
 
                             </div>
 
-                            <span asp-validation-for="InitialComplaintReceived"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="InitialComplaintReceived" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -519,10 +468,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="EvidenceReceived"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="EvidenceReceived" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -530,10 +478,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="EvidenceReceived"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="EvidenceReceived" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -543,8 +490,7 @@
 
                             </div>
 
-                            <span asp-validation-for="EvidenceReceived"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="EvidenceReceived" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -557,10 +503,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="EvidenceVerified"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="EvidenceVerified" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -568,10 +513,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="EvidenceVerified"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="EvidenceVerified" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -581,8 +525,7 @@
 
                             </div>
 
-                            <span asp-validation-for="EvidenceVerified"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="EvidenceVerified" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -593,12 +536,10 @@
                                 Witness Interview Date
                             </label>
 
-                            <input asp-for="WitnessInterviewDate"
-                                   type="date"
+                            <input asp-for="WitnessInterviewDate" type="date"
                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10" />
 
-                            <span asp-validation-for="WitnessInterviewDate"
-                                  class="mt-1 block text-xs text-red-600">
+                            <span asp-validation-for="WitnessInterviewDate" class="mt-1 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -611,10 +552,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainAnalysisRequested"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="BlockchainAnalysisRequested" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -622,10 +562,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainAnalysisRequested"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="BlockchainAnalysisRequested" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -649,10 +588,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainAnalysisApproved"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="BlockchainAnalysisApproved" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -660,10 +598,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainAnalysisApproved"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="BlockchainAnalysisApproved" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -687,10 +624,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="TransactionHistoryObtained"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="TransactionHistoryObtained" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -698,10 +634,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="TransactionHistoryObtained"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="TransactionHistoryObtained" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -725,10 +660,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="WalletTracingCompleted"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="WalletTracingCompleted" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -736,10 +670,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="WalletTracingCompleted"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="WalletTracingCompleted" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -749,8 +682,7 @@
 
                             </div>
 
-                            <span asp-validation-for="WalletTracingCompleted"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="WalletTracingCompleted" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -763,10 +695,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="ExchangeInformationRequested"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ExchangeInformationRequested" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -774,10 +705,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="ExchangeInformationRequested"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ExchangeInformationRequested" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -801,10 +731,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="ChainOfCustodyUpdated"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ChainOfCustodyUpdated" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -812,10 +741,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="ChainOfCustodyUpdated"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ChainOfCustodyUpdated" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -825,8 +753,7 @@
 
                             </div>
 
-                            <span asp-validation-for="ChainOfCustodyUpdated"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="ChainOfCustodyUpdated" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -839,10 +766,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-3">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="ReportSubmittedToHeadquarters"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ReportSubmittedToHeadquarters" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -850,10 +776,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="ReportSubmittedToHeadquarters"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ReportSubmittedToHeadquarters" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -861,10 +786,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="ReportSubmittedToHeadquarters"
-                                           type="radio"
-                                           value="Pending"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ReportSubmittedToHeadquarters" type="radio" value="Pending"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -900,8 +824,7 @@
             <!-- SECTION 4 -->
             <!-- ================================================= -->
 
-            <section class="form-section hidden"
-                     data-section="3" id="blockchain-section">
+            <section class="form-section hidden" data-section="3" id="blockchain-section">
 
                 <div class="rounded-2xl border border-amber-200 bg-amber-50 shadow-sm">
 
@@ -915,7 +838,8 @@
                         </h2>
 
                         <p class="mt-2 text-sm text-amber-950/60">
-                            Provide the blockchain, wallet, transaction, and exchange information associated with the investigation.
+                            Provide the blockchain, wallet, transaction, and exchange information associated with the
+                            investigation.
                         </p>
                     </div>
 
@@ -930,30 +854,27 @@
 
                             <div class="grid gap-3 sm:grid-cols-3">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainPlatform"
-                                           type="radio"
-                                           value="Bitcoin"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="BlockchainPlatform" type="radio" value="Bitcoin"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
                                     <span class="text-sm font-medium text-amber-950">
                                         Bitcoin (BTC)
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainPlatform"
-                                           type="radio"
-                                           value="Ethereum"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="BlockchainPlatform" type="radio" value="Ethereum"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
                                     <span class="text-sm font-medium text-amber-950">
                                         Ethereum (ETH)
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainPlatform"
-                                           type="radio"
-                                           value="Other"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="BlockchainPlatform" type="radio" value="Other"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
                                     <span class="text-sm font-medium text-amber-950">
                                         Other
@@ -962,8 +883,7 @@
 
                             </div>
 
-                            <span asp-validation-for="BlockchainPlatform"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="BlockchainPlatform" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -980,14 +900,11 @@
                                 </p>
                             </div>
 
-                            <input asp-for="WalletAddress"
-                                   type="text"
-                                   autocomplete="off"
+                            <input asp-for="WalletAddress" type="text" autocomplete="off"
                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 font-mono text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                    placeholder="Enter wallet address" />
 
-                            <span asp-validation-for="WalletAddress"
-                                  class="mt-1 block text-xs text-red-600">
+                            <span asp-validation-for="WalletAddress" class="mt-1 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -1002,14 +919,11 @@
                                     Incoming Transactions
                                 </label>
 
-                                <input asp-for="IncomingTransactions"
-                                       type="text"
-                                       inputmode="numeric"
+                                <input asp-for="IncomingTransactions" type="text" inputmode="numeric"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                        placeholder="Enter number of incoming transactions" />
 
-                                <span asp-validation-for="IncomingTransactions"
-                                      class="mt-1 block text-xs text-red-600">
+                                <span asp-validation-for="IncomingTransactions" class="mt-1 block text-xs text-red-600">
                                 </span>
                             </div>
 
@@ -1020,14 +934,11 @@
                                     Outgoing Transactions
                                 </label>
 
-                                <input asp-for="OutgoingTransactions"
-                                       type="text"
-                                       inputmode="numeric"
+                                <input asp-for="OutgoingTransactions" type="text" inputmode="numeric"
                                        class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                        placeholder="Enter number of outgoing transactions" />
 
-                                <span asp-validation-for="OutgoingTransactions"
-                                      class="mt-1 block text-xs text-red-600">
+                                <span asp-validation-for="OutgoingTransactions" class="mt-1 block text-xs text-red-600">
                                 </span>
                             </div>
 
@@ -1043,10 +954,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="RelatedWalletsIdentified"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="RelatedWalletsIdentified" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1054,10 +964,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="RelatedWalletsIdentified"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="RelatedWalletsIdentified" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1067,26 +976,22 @@
 
                             </div>
 
-                            <span asp-validation-for="RelatedWalletsIdentified"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="RelatedWalletsIdentified" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
 
                         <!-- Linked Exchange -->
                         <div>
-                            <label asp-for="LinkedExchange"
-                                   class="mb-2 block text-sm font-semibold text-amber-950">
+                            <label asp-for="LinkedExchange" class="mb-2 block text-sm font-semibold text-amber-950">
                                 Linked Exchange
                             </label>
 
-                            <input asp-for="LinkedExchange"
-                                   type="text"
+                            <input asp-for="LinkedExchange" type="text"
                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                    placeholder="Enter linked cryptocurrency exchange" />
 
-                            <span asp-validation-for="LinkedExchange"
-                                  class="mt-1 block text-xs text-red-600">
+                            <span asp-validation-for="LinkedExchange" class="mt-1 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -1099,10 +1004,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-3">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="FundFreezeStatus"
-                                           type="radio"
-                                           value="Requested"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="FundFreezeStatus" type="radio" value="Requested"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1110,10 +1014,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="FundFreezeStatus"
-                                           type="radio"
-                                           value="Denied"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="FundFreezeStatus" type="radio" value="Denied"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1121,10 +1024,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="FundFreezeStatus"
-                                           type="radio"
-                                           value="Approved"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="FundFreezeStatus" type="radio" value="Approved"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1134,8 +1036,7 @@
 
                             </div>
 
-                            <span asp-validation-for="FundFreezeStatus"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="FundFreezeStatus" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -1161,8 +1062,7 @@
             <!-- SECTION 5 -->
             <!-- ================================================= -->
 
-            <section class="form-section hidden"
-                     data-section="4" id="attachments-section">
+            <section class="form-section hidden" data-section="4" id="attachments-section">
 
                 <div class="rounded-2xl border border-amber-200 bg-amber-50 shadow-sm">
 
@@ -1191,10 +1091,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="EvidenceMatchesVictimStatement"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="EvidenceMatchesVictimStatement" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1202,10 +1101,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="EvidenceMatchesVictimStatement"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="EvidenceMatchesVictimStatement" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1229,10 +1127,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="EvidenceMatchLevel"
-                                           type="radio"
-                                           value="Fully"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="EvidenceMatchLevel" type="radio" value="Fully"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1240,10 +1137,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="EvidenceMatchLevel"
-                                           type="radio"
-                                           value="Partially"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="EvidenceMatchLevel" type="radio" value="Partially"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1253,8 +1149,7 @@
 
                             </div>
 
-                            <span asp-validation-for="EvidenceMatchLevel"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="EvidenceMatchLevel" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -1265,13 +1160,11 @@
                                 Complaints Statement
                             </label>
 
-                            <textarea asp-for="ComplaintsStatement"
-                                      rows="6"
+                            <textarea asp-for="ComplaintsStatement" rows="6"
                                       class="w-full resize-y rounded-xl border border-amber-200 bg-white px-4 py-3 text-sm leading-6 text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                       placeholder="Provide the relevant statement or findings..."></textarea>
 
-                            <span asp-validation-for="ComplaintsStatement"
-                                  class="mt-1 block text-xs text-red-600">
+                            <span asp-validation-for="ComplaintsStatement" class="mt-1 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -1284,10 +1177,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="FurtherEvidenceRequested"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="FurtherEvidenceRequested" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1295,10 +1187,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="FurtherEvidenceRequested"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="FurtherEvidenceRequested" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1308,8 +1199,7 @@
 
                             </div>
 
-                            <span asp-validation-for="FurtherEvidenceRequested"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="FurtherEvidenceRequested" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -1322,10 +1212,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="FraudConfirmed"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="FraudConfirmed" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1333,10 +1222,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="FraudConfirmed"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="FraudConfirmed" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1346,8 +1234,7 @@
 
                             </div>
 
-                            <span asp-validation-for="FraudConfirmed"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="FraudConfirmed" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -1360,10 +1247,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="InvestigationContinuing"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="InvestigationContinuing" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1371,10 +1257,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="InvestigationContinuing"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="InvestigationContinuing" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1384,8 +1269,7 @@
 
                             </div>
 
-                            <span asp-validation-for="InvestigationContinuing"
-                                  class="mt-2 block text-xs text-red-600">
+                            <span asp-validation-for="InvestigationContinuing" class="mt-2 block text-xs text-red-600">
                             </span>
                         </div>
 
@@ -1404,11 +1288,10 @@
 
                                 @for (var i = 1; i <= 5; i++)
                                 {
-                                    <label class="flex cursor-pointer flex-col items-center gap-2 rounded-xl border border-amber-200 bg-white p-3 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <label
+                                        class="flex cursor-pointer flex-col items-center gap-2 rounded-xl border border-amber-200 bg-white p-3 transition hover:border-amber-400 hover:bg-amber-50">
 
-                                        <input asp-for="ProsecutionReferralRating"
-                                               type="radio"
-                                               value="@i"
+                                        <input asp-for="ProsecutionReferralRating" type="radio" value="@i"
                                                class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                         <span class="text-sm font-semibold text-amber-950">
@@ -1432,8 +1315,7 @@
                                 Contact Cryptocurrency Exchange
                             </label>
 
-                            <input asp-for="ContactCryptocurrencyExchange"
-                                   type="text"
+                            <input asp-for="ContactCryptocurrencyExchange" type="text"
                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition placeholder:text-amber-950/30 focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10"
                                    placeholder="Enter exchange/contact details" />
 
@@ -1450,10 +1332,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="SubmitToHeadquarters"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="SubmitToHeadquarters" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1461,10 +1342,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="SubmitToHeadquarters"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="SubmitToHeadquarters" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1483,10 +1363,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="CloseCase"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="CloseCase" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1494,10 +1373,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="CloseCase"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="CloseCase" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1510,79 +1388,73 @@
 
                         <!-- Report Reviewed -->
                         <div>
-                <p class="mb-3 text-sm font-semibold text-amber-950">
-                    Report Reviewed
-                    <span class="text-red-600">*</span>
-                </p>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Report Reviewed
+                                <span class="text-red-600">*</span>
+                            </p>
 
-                <div class="grid gap-3 sm:grid-cols-2">
+                            <div class="grid gap-3 sm:grid-cols-2">
 
-                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                        <input asp-for="ReportReviewed"
-                               type="radio"
-                               value="Yes"
-                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ReportReviewed" type="radio" value="Yes"
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
-                        <span class="text-sm font-medium text-amber-950">
-                            Yes
-                        </span>
-                    </label>
+                                    <span class="text-sm font-medium text-amber-950">
+                                        Yes
+                                    </span>
+                                </label>
 
-                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                        <input asp-for="ReportReviewed"
-                               type="radio"
-                               value="No"
-                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="ReportReviewed" type="radio" value="No"
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
-                        <span class="text-sm font-medium text-amber-950">
-                            No
-                        </span>
-                    </label>
+                                    <span class="text-sm font-medium text-amber-950">
+                                        No
+                                    </span>
+                                </label>
 
-                </div>
+                            </div>
 
-                <span asp-validation-for="ReportReviewed"
-                      class="mt-2 block text-xs text-red-600">
-                </span>
-            </div>
+                            <span asp-validation-for="ReportReviewed" class="mt-2 block text-xs text-red-600">
+                            </span>
+                        </div>
 
                         <!-- Supervisor Approval -->
                         <div>
-                <p class="mb-3 text-sm font-semibold text-amber-950">
-                    Supervisor Approval
-                    <span class="text-red-600">*</span>
-                </p>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Supervisor Approval
+                                <span class="text-red-600">*</span>
+                            </p>
 
-                <div class="grid gap-3 sm:grid-cols-2">
+                            <div class="grid gap-3 sm:grid-cols-2">
 
-                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                        <input asp-for="SupervisorApproval"
-                               type="radio"
-                               value="Yes"
-                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="SupervisorApproval" type="radio" value="Yes"
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
-                        <span class="text-sm font-medium text-amber-950">
-                            Yes
-                        </span>
-                    </label>
+                                    <span class="text-sm font-medium text-amber-950">
+                                        Yes
+                                    </span>
+                                </label>
 
-                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                        <input asp-for="SupervisorApproval"
-                               type="radio"
-                               value="No"
-                               class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="SupervisorApproval" type="radio" value="No"
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
-                        <span class="text-sm font-medium text-amber-950">
-                            No
-                        </span>
-                    </label>
+                                    <span class="text-sm font-medium text-amber-950">
+                                        No
+                                    </span>
+                                </label>
 
-                </div>
+                            </div>
 
-                <span asp-validation-for="SupervisorApproval"
-                      class="mt-2 block text-xs text-red-600">
-                </span>
-            </div>
+                            <span asp-validation-for="SupervisorApproval" class="mt-2 block text-xs text-red-600">
+                            </span>
+                        </div>
 
                         <!-- Headquarters Submission -->
                         <div>
@@ -1592,10 +1464,9 @@
 
                             <div class="grid gap-3 sm:grid-cols-2">
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="HeadquartersSubmission"
-                                           type="radio"
-                                           value="Yes"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="HeadquartersSubmission" type="radio" value="Yes"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1603,10 +1474,9 @@
                                     </span>
                                 </label>
 
-                                <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="HeadquartersSubmission"
-                                           type="radio"
-                                           value="No"
+                                <label
+                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
+                                    <input asp-for="HeadquartersSubmission" type="radio" value="No"
                                            class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
                                     <span class="text-sm font-medium text-amber-950">
@@ -1619,25 +1489,21 @@
 
                         <!-- Case Closed Date -->
                         <div class="max-w-md">
-                            <label asp-for="CaseClosedDate"
-                                   class="mb-2 block text-sm font-semibold text-amber-950">
+                            <label asp-for="CaseClosedDate" class="mb-2 block text-sm font-semibold text-amber-950">
                                 Case Closed
                             </label>
 
-                            <input asp-for="CaseClosedDate"
-                                   type="date"
+                            <input asp-for="CaseClosedDate" type="date"
                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm text-amber-950 outline-none transition focus:border-amber-700 focus:ring-4 focus:ring-amber-500/10" />
 
-                            <span asp-validation-for="CaseClosedDate"
-                                  class="mt-1 block text-xs text-red-600">
+                            <span asp-validation-for="CaseClosedDate" class="mt-1 block text-xs text-red-600">
                             </span>
                         </div>
 
                         <!-- Attachments -->
                         <!-- Attachments -->
                         <div>
-                            <label asp-for="Attachments"
-                                   class="mb-2 block text-sm font-semibold text-amber-950">
+                            <label asp-for="Attachments" class="mb-2 block text-sm font-semibold text-amber-950">
                                 Attachments
                             </label>
 
@@ -1647,15 +1513,11 @@
 
                             <!-- Upload Warning -->
                             <div class="mb-4 flex gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4">
-                                <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-800">
-                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                         class="h-5 w-5"
-                                         fill="none"
-                                         viewBox="0 0 24 24"
-                                         stroke="currentColor"
-                                         stroke-width="1.8">
-                                        <path stroke-linecap="round"
-                                              stroke-linejoin="round"
+                                <div
+                                    class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-amber-100 text-amber-800">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
                                               d="M12 9v3m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
                                     </svg>
                                 </div>
@@ -1675,16 +1537,12 @@
                                 </div>
                             </div>
 
-                            <label class="flex min-h-40 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-amber-300 bg-white px-6 py-8 text-center transition hover:border-amber-500 hover:bg-amber-50">
+                            <label
+                                class="flex min-h-40 cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-amber-300 bg-white px-6 py-8 text-center transition hover:border-amber-500 hover:bg-amber-50">
 
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     class="h-9 w-9 text-amber-700"
-                                     fill="none"
-                                     viewBox="0 0 24 24"
-                                     stroke="currentColor"
-                                     stroke-width="1.8">
-                                    <path stroke-linecap="round"
-                                          stroke-linejoin="round"
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-amber-700" fill="none"
+                                     viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
                                           d="M12 16V4m0 0-4 4m4-4 4 4M5 16.5v1.25A2.25 2.25 0 0 0 7.25 20h9.5A2.25 2.25 0 0 0 19 17.75V16.5" />
                                 </svg>
 
@@ -1696,19 +1554,14 @@
                                     Maximum 10 MB per file · Maximum 50 MB total
                                 </span>
 
-                                <input asp-for="Attachments"
-                                       type="file"
-                                       multiple
-                                       class="hidden" />
+                                <input asp-for="Attachments" type="file" multiple class="hidden" />
 
                             </label>
 
-                            <div id="selectedFiles"
-                                 class="mt-3 space-y-2">
+                            <div id="selectedFiles" class="mt-3 space-y-2">
                             </div>
 
-                            <span asp-validation-for="Attachments"
-                                  class="mt-1 block text-xs text-red-600">
+                            <span asp-validation-for="Attachments" class="mt-1 block text-xs text-red-600">
                             </span>
 
                             @if (ViewData.ModelState[nameof(Model.Attachments)]?.Errors.Any() == true)
@@ -1761,50 +1614,50 @@
 
 <style>
     .section-nav {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 0.9rem;
-    border-radius: 0.75rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.65rem 0.9rem;
+        border-radius: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        white-space: nowrap;
 
-    background: rgb(120 53 15);
-    color: rgb(255 251 235);
+        background: rgb(120 53 15);
+        color: rgb(255 251 235);
 
-    cursor: pointer;
-    transition: all 150ms ease;
-}
+        cursor: pointer;
+        transition: all 150ms ease;
+    }
 
-.section-nav:hover:not(.locked) {
-    background: rgb(146 64 14);
-}
+    .section-nav:hover:not(.locked) {
+        background: rgb(146 64 14);
+    }
 
-.section-nav.active {
-    background: rgb(120 53 15);
-    color: rgb(255 251 235);
-    box-shadow: 0 0 0 2px rgb(245 158 11);
-}
+    .section-nav.active {
+        background: rgb(120 53 15);
+        color: rgb(255 251 235);
+        box-shadow: 0 0 0 2px rgb(245 158 11);
+    }
 
-.section-nav.locked {
-    background: rgb(254 243 199);
-    color: rgb(120 53 15);
-    cursor: not-allowed;
-    opacity: 0.45;
-}
+    .section-nav.locked {
+        background: rgb(254 243 199);
+        color: rgb(120 53 15);
+        cursor: not-allowed;
+        opacity: 0.45;
+    }
 
-.step-indicator {
-    display: inline-flex;
-    height: 1.5rem;
-    width: 1.5rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background: rgb(255 251 235);
-    color: rgb(120 53 15);
-    font-size: 0.75rem;
-}
+    .step-indicator {
+        display: inline-flex;
+        height: 1.5rem;
+        width: 1.5rem;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        background: rgb(255 251 235);
+        color: rgb(120 53 15);
+        font-size: 0.75rem;
+    }
 </style>
 
 @section Scripts {
@@ -1894,6 +1747,7 @@
                 currentStep = step;
 
                 updateProgress();
+                updateNextButton();
 
                 window.scrollTo({
                     top: 0,
@@ -1935,119 +1789,166 @@
             }
 
             function validateCurrentSection() {
-    const section = sections[currentStep];
+                const section = sections[currentStep];
 
-    const fields = Array.from(
-        section.querySelectorAll(
-            "input[required], select[required], textarea[required]"
-        )
-    );
-
-    let valid = true;
-
-    const processedRadioGroups = new Set();
-
-    fields.forEach(field => {
-
-        // Handle radio groups once
-        if (field.type === "radio") {
-
-            if (processedRadioGroups.has(field.name)) {
-                return;
-            }
-
-            processedRadioGroups.add(field.name);
-
-            const group = Array.from(
-                section.querySelectorAll(
-                    `input[type="radio"][name="${field.name}"]`
-                )
-            );
-
-            const groupValid = group.some(
-                radio => radio.checked
-            );
-
-            group.forEach(radio => {
-                radio.classList.toggle(
-                    "field-error",
-                    !groupValid
+                const fields = Array.from(
+                    section.querySelectorAll(
+                        "input[required], select[required], textarea[required]"
+                    )
                 );
-            });
 
-            if (!groupValid) {
-                valid = false;
-            }
+                let valid = true;
 
-            return;
-        }
+                const processedRadioGroups = new Set();
 
-        // Normal fields
-        field.classList.remove("field-error");
+                fields.forEach(field => {
 
-        if (!isFieldValid(field)) {
-            field.classList.add("field-error");
-            valid = false;
-        }
-    });
+                    // Handle radio groups once
+                    if (field.type === "radio") {
 
-    if (!valid) {
-
-        const firstInvalid = fields.find(field => {
-
-            if (field.type === "radio") {
-                return !isFieldValid(field);
-            }
-
-            return !isFieldValid(field);
-        });
-
-        if (firstInvalid) {
-            firstInvalid.scrollIntoView({
-                behavior: "smooth",
-                block: "center"
-            });
-
-            firstInvalid.focus();
-        }
-    }
-
-    return valid;
-}
-
-            // Next buttons
-            document.querySelectorAll(".next-button")
-                .forEach(button => {
-
-                    button.addEventListener("click", function () {
-
-                        if (!validateCurrentSection()) {
+                        if (processedRadioGroups.has(field.name)) {
                             return;
                         }
 
-                        if (currentStep < sections.length - 1) {
-                            highestUnlockedStep =
-                                Math.max(
-                                    highestUnlockedStep,
-                                    currentStep + 1
-                                );
+                        processedRadioGroups.add(field.name);
 
-                            showStep(currentStep + 1);
+                        const group = Array.from(
+                            section.querySelectorAll(
+                                `input[type="radio"][name="${field.name}"]`
+                            )
+                        );
+
+                        const groupValid = group.some(
+                            radio => radio.checked
+                        );
+
+                        group.forEach(radio => {
+                            radio.classList.toggle(
+                                "field-error",
+                                !groupValid
+                            );
+                        });
+
+                        if (!groupValid) {
+                            valid = false;
                         }
-                    });
+
+                        return;
+                    }
+
+                    // Normal fields
+                    field.classList.remove("field-error");
+
+                    if (!isFieldValid(field)) {
+                        field.classList.add("field-error");
+                        valid = false;
+                    }
                 });
+
+                if (!valid) {
+
+                    const firstInvalid = fields.find(field => {
+
+                        if (field.type === "radio") {
+                            return !isFieldValid(field);
+                        }
+
+                        return !isFieldValid(field);
+                    });
+
+                    if (firstInvalid) {
+                        firstInvalid.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                        firstInvalid.focus();
+                    }
+                }
+
+                return valid;
+            }
+            function updateNextButton() {
+                const section = sections[currentStep];
+                const nextButton = section.querySelector(".next-button");
+
+                if (!nextButton) {
+                    return;
+                }
+
+                const fields = Array.from(
+                    section.querySelectorAll(
+                        "input[required], select[required], textarea[required]"
+                    )
+                );
+
+                let valid = true;
+                const processedRadioGroups = new Set();
+
+                fields.forEach(field => {
+
+                    if (field.type === "radio") {
+
+                        if (processedRadioGroups.has(field.name)) {
+                            return;
+                        }
+
+                        processedRadioGroups.add(field.name);
+
+                        const group = section.querySelectorAll(
+                            `input[type="radio"][name="${field.name}"]`
+                        );
+
+                        if (!Array.from(group).some(radio => radio.checked)) {
+                            valid = false;
+                        }
+
+                        return;
+                    }
+
+                    if (!isFieldValid(field)) {
+                        valid = false;
+                    }
+                });
+
+                nextButton.disabled = !valid;
+            }
+            // Enable/disable Next button as the user fills the section
+            form.querySelectorAll("input, select, textarea").forEach(field => {
+                field.addEventListener("input", updateNextButton);
+                field.addEventListener("change", updateNextButton);
+            });
+            // Next buttons
+            document.querySelectorAll(".next-button").forEach(button => {
+
+                button.addEventListener("click", function () {
+
+                    if (!validateCurrentSection()) {
+                        return;
+                    }
+
+                    if (currentStep < sections.length - 1) {
+                        highestUnlockedStep =
+                            Math.max(
+                                highestUnlockedStep,
+                                currentStep + 1
+                            );
+
+                        showStep(currentStep + 1);
+                    }
+                });
+            });
 
             // Previous buttons
-            document.querySelectorAll(".previous-button")
-                .forEach(button => {
+            document.querySelectorAll(".previous-button").forEach(button => {
 
-                    button.addEventListener("click", function () {
+                button.addEventListener("click", function () {
 
-                        if (currentStep > 0) {
-                            showStep(currentStep - 1);
-                        }
-                    });
+                    if (currentStep > 0) {
+                        showStep(currentStep - 1);
+                    }
                 });
+            });
 
             // Section navigation
             navItems.forEach((item, index) => {
@@ -2102,99 +2003,97 @@
 
             updateProgress();
             showStep(0);
-            const attachmentInput =
-    document.querySelector('input[name="Attachments"]');
+            const attachmentInput = document.querySelector('input[name="Attachments"]');
 
-const selectedFiles =
-    document.getElementById("selectedFiles");
+            const selectedFiles = document.getElementById("selectedFiles");
 
-if (attachmentInput && selectedFiles) {
-    attachmentInput.addEventListener("change", function () {
-        selectedFiles.innerHTML = "";
+            if (attachmentInput && selectedFiles) {
+                attachmentInput.addEventListener("change", function () {
+                    selectedFiles.innerHTML = "";
 
-        Array.from(this.files).forEach(file => {
-            const item = document.createElement("div");
+                    Array.from(this.files).forEach(file => {
+                        const item = document.createElement("div");
 
-            item.className =
-                "flex items-center justify-between rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm";
+                        item.className =
+                            "flex items-center justify-between rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm";
 
-            item.innerHTML = `
-                <div class="min-w-0">
-                    <p class="truncate font-medium text-amber-950">
-                        ${escapeHtml(file.name)}
-                    </p>
-                    <p class="mt-1 text-xs text-amber-950/50">
-                        ${formatFileSize(file.size)}
-                    </p>
-                </div>
-            `;
+                        item.innerHTML = `
+                                                                            <div class="min-w-0">
+                                                                                <p class="truncate font-medium text-amber-950">
+                                                                                    ${escapeHtml(file.name)}
+                                                                                </p>
+                                                                                <p class="mt-1 text-xs text-amber-950/50">
+                                                                                    ${formatFileSize(file.size)}
+                                                                                </p>
+                                                                            </div>
+                                                                        `;
 
-            selectedFiles.appendChild(item);
-        });
-    });
-}
+                        selectedFiles.appendChild(item);
+                    });
+                });
+            }
 
-function formatFileSize(bytes) {
-    if (bytes < 1024) {
-        return `${bytes} B`;
-    }
-
-    if (bytes < 1024 * 1024) {
-        return `${(bytes / 1024).toFixed(1)} KB`;
-    }
-
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
-
-function escapeHtml(value) {
-    const div = document.createElement("div");
-    div.textContent = value;
-    return div.innerHTML;
-}
-        });
-                 document.addEventListener("DOMContentLoaded", function () {
-
-                const invalidFieldName = '@ViewData["ScrollTo"]';
-
-                if (!invalidFieldName) {
-                    return;
+            function formatFileSize(bytes) {
+                if (bytes < 1024) {
+                    return `${bytes} B`;
                 }
 
-                const field = document.querySelector(
-                    `[name="${invalidFieldName}"]`
+                if (bytes < 1024 * 1024) {
+                    return `${(bytes / 1024).toFixed(1)} KB`;
+                }
+
+                return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+            }
+
+            function escapeHtml(value) {
+                const div = document.createElement("div");
+                div.textContent = value;
+                return div.innerHTML;
+            }
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const invalidFieldName = '@ViewData["ScrollTo"]';
+
+            if (!invalidFieldName) {
+                return;
+            }
+
+            const field = document.querySelector(
+                `[name="${invalidFieldName}"]`
+            );
+
+            if (!field) {
+                return;
+            }
+
+            const section = field.closest(".form-section");
+
+            if (!section) {
+                field.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+                return;
+            }
+
+            setTimeout(() => {
+                section.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+                const focusable = section.querySelector(
+                    "input, select, textarea"
                 );
 
-                if (!field) {
-                    return;
+                if (focusable) {
+                    setTimeout(() => {
+                        focusable.focus({ preventScroll: true });
+                    }, 400);
                 }
-
-                const section = field.closest(".form-section");
-
-                if (!section) {
-                    field.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center"
-                    });
-
-                    return;
-                }
-
-                setTimeout(() => {
-                    section.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-
-                    const focusable = section.querySelector(
-                        "input, select, textarea"
-                    );
-
-                    if (focusable) {
-                        setTimeout(() => {
-                            focusable.focus({ preventScroll: true });
-                        }, 400);
-                    }
-                }, 100);
-            });
+            }, 100);
+        });
     </script>
 }
