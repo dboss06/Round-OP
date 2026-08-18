@@ -186,8 +186,8 @@
 
                 <div class="mt-6 flex justify-end">
                     <button type="button"
-                            class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800"
-                            disabled>
+                            class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800 disabled:cursor-not-allowed disabled:opacity-50"
+                            >
                         Next: Case Information
                     </button>
                 </div>
@@ -392,7 +392,7 @@
                         Previous
                     </button>
 
-                    <button type="button" disabled
+                    <button type="button" 
                             class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
                         Next: Investigation
                     </button>
@@ -1914,48 +1914,25 @@
             }
 
             function updateNextButton() {
-                const section = sections[currentStep];
-                const nextButton = section.querySelector(".next-button");
+    const section = sections[currentStep];
+    const nextButton = section.querySelector(".next-button");
 
-                if (!nextButton) {
-                    return;
-                }
+    if (!nextButton) return;
 
-                const fields = Array.from(
-                    section.querySelectorAll(
-                        "input[required], select[required], textarea[required]"
-                    )
-                );
+    const fields = section.querySelectorAll(
+        "input[required], select[required], textarea[required]"
+    );
 
-                let valid = true;
-                const processedRadioGroups = new Set();
+    let valid = true;
 
-                fields.forEach(field => {
-                    if (field.type === "radio") {
-                        if (processedRadioGroups.has(field.name)) {
-                            return;
-                        }
+    fields.forEach(field => {
+        if (!isFieldValid(field)) {
+            valid = false;
+        }
+    });
 
-                        processedRadioGroups.add(field.name);
-
-                        const group = section.querySelectorAll(
-                            `input[type="radio"][name="${field.name}"]`
-                        );
-
-                        if (!Array.from(group).some(radio => radio.checked)) {
-                            valid = false;
-                        }
-
-                        return;
-                    }
-
-                    if (!isFieldValid(field)) {
-                        valid = false;
-                    }
-                });
-
-                nextButton.disabled = !valid;
-            }
+    nextButton.disabled = !valid;
+}
 
             form.querySelectorAll("input, select, textarea").forEach(field => {
                 field.addEventListener("input", updateNextButton);
