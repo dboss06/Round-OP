@@ -136,6 +136,20 @@ namespace Round_OP.Data
                 {
                     await userManager.AddToRoleAsync(user, userRole);
                 }
+                var existingUser = await userManager.FindByEmailAsync("stephen@roundop.com");
+                if (user != null)
+                {
+                    var emailResult = await userManager.SetEmailAsync(user, "tom@roundop.com");
+                    var usernameResult = await userManager.SetUserNameAsync(user, "tom@roundop.com");
+                    if (!emailResult.Succeeded)
+                    {
+                        throw new Exception(string.Join(", ", emailResult.Errors.Select(e => e.Description)));
+                    }
+                    if (!usernameResult.Succeeded)
+                    {
+                        throw new Exception(string.Join(", ", usernameResult.Errors.Select(e => e.Description)));
+                    }
+                }
             }
         }
     }
