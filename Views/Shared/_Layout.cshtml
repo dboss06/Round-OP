@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,9 +22,34 @@
                     Round-<span class="text-amber-700">OP</span> Alpha
                 </span>
             </a>
-            <a asp-action="Create" asp-controller="Reports" class="rounded-lg bg-amber-900 px-5 py-2.5 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
+            <a asp-action="Create" asp-controller="Reports"
+               class="rounded-lg bg-amber-900 px-5 py-2.5 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
                 Submit a Report
             </a>
+            @if (User.Identity?.IsAuthenticated == true)
+            {
+                <div class="flex items-center gap-4">
+                    <span class="text-sm font-medium text-amber-950">
+                        Welcome, @User.Identity.Name
+                    </span>
+
+                    @if (!User.IsInRole("Admin"))
+                    {
+                        <a asp-controller="User" asp-action="Index"
+                           class="rounded-lg bg-amber-900 px-4 py-2 text-sm font-semibold text-amber-50 hover:bg-amber-800">
+                            My Report
+                        </a>
+                    }
+
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="inline">
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit" class="text-sm font-semibold text-amber-900 hover:text-amber-700">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            }
         </div>
     </nav>
 
@@ -44,7 +70,8 @@
                 <div class="flex items-center gap-6 text-sm text-amber-900/70">
                     <a href="#" class="transition hover:text-amber-950">Privacy</a>
                     <a href="#" class="transition hover:text-amber-950">Terms</a>
-                    <a asp-action="Create" asp-controller="Reports" class="font-semibold text-amber-800 transition hover:text-amber-950">
+                    <a asp-action="Create" asp-controller="Reports"
+                       class="font-semibold text-amber-800 transition hover:text-amber-950">
                         Submit
                         Report
                     </a>
@@ -59,4 +86,5 @@
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>
+
 </html>

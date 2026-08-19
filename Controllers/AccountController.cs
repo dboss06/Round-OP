@@ -35,8 +35,18 @@ namespace Round_OP.Controllers
                 return View(model);
             }
 
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                ViewData["ToastType"] = "error";
+                ViewData["ToastMessage"] = "Invalid email or password.";
+
+                return View(model);
+            }
+
             var result = await _signInManager.PasswordSignInAsync(
-                model.Email,
+                user.UserName!,
                 model.Password,
                 model.RememberMe,
                 lockoutOnFailure: true);
@@ -46,7 +56,12 @@ namespace Round_OP.Controllers
                 TempData["ToastType"] = "success";
                 TempData["ToastMessage"] = "Welcome back.";
 
-                return RedirectToAction("Index", "Admin");
+                if (await _userManager.IsInRoleAsync(user, "Admin"))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
+
+                return RedirectToAction("Index", "Home");
             }
 
             if (result.IsLockedOut)
