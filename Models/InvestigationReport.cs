@@ -7,7 +7,9 @@ public class InvestigationReport
 {
     [Key]
     public int Id { get; set; }
+    public string? UserId { get; set; }
 
+    public ApplicationUser? User { get; set; }
     public string ReportId { get; set; } = string.Empty;
 
     // Investigator Information

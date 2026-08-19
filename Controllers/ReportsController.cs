@@ -3,17 +3,20 @@ using Microsoft.EntityFrameworkCore;
 using Round_OP.Data;
 using Round_OP.Models;
 using Round_OP.ViewModels;
+using Microsoft.AspNetCore.Identity;
 
 namespace Round_OP.Controllers;
 public class ReportsController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly IWebHostEnvironment _environment;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public ReportsController(ApplicationDbContext context, IWebHostEnvironment environment)
+    public ReportsController(ApplicationDbContext context, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
     {
         _context = context;
         _environment = environment;
+        _userManager = userManager;
     }
     private const int MaxAttachments = 5;
     private const long MaxFileSize = 60 * 1024 * 1024;
@@ -72,10 +75,11 @@ public class ReportsController : Controller
 
             return View(model);
         }
+        var userId = _userManager.GetUserId(User);
         var report = new InvestigationReport
         {
             ReportId = await GenerateReportIdAsync(),
-
+            UserId = userId,
             InvestigatorName = model.InvestigatorName,
             BadgeIdNumber = model.BadgeIdNumber,
             PoliceStationUnit = model.PoliceStationUnit,
