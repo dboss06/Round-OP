@@ -22,10 +22,6 @@
                     Round-<span class="text-amber-700">OP</span> Alpha
                 </span>
             </a>
-            <a asp-action="Create" asp-controller="Reports"
-               class="rounded-lg bg-amber-900 px-5 py-2.5 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
-                Submit a Report
-            </a>
             @if (User.Identity?.IsAuthenticated == true)
             {
                 <div class="flex items-center gap-4">
