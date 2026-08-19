@@ -39,7 +39,7 @@ public class InvestigationReport
     public string ReportSubmittedToHeadquarters { get; set; } = string.Empty;
 
     // Blockchain Investigation
-    public BlockchainPlatform BlockchainPlatform { get; set; }
+    public YesNo? BlockchainPlatform { get; set; }
     public string? WalletAddress { get; set; }
     public string? IncomingTransactions { get; set; }
     public string? OutgoingTransactions { get; set; }

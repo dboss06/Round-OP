@@ -105,7 +105,7 @@ public class InvestigationReportViewModel
 
     [Required]
     [Display(Name = "Blockchain Platform")]
-    public BlockchainPlatform? BlockchainPlatform { get; set; }
+    public YesNo? BlockchainPlatform { get; set; }
 
     [Display(Name = "Wallet Address")]
     public string? WalletAddress { get; set; }

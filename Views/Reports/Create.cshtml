@@ -83,7 +83,9 @@
         </div>
 
         <!-- Report Form -->
-       <form asp-controller="@(ViewData["IsUserEdit"] is true ? "User" : "Reports")" asp-action="@(ViewData["IsUserEdit"] is true ? "Update" : "Create")" method="post" enctype="multipart/form-data" id="investigationForm">
+        <form asp-controller="@(ViewData["IsUserEdit"] is true ? "User" : "Reports")"
+              asp-action="@(ViewData["IsUserEdit"] is true ? "Update" : "Create")" method="post"
+              enctype="multipart/form-data" id="investigationForm">
 
             @Html.AntiForgeryToken()
 
@@ -852,32 +854,25 @@
                                 <span class="text-red-600">*</span>
                             </p>
 
-                            <div class="grid gap-3 sm:grid-cols-3">
+                            <div class="grid gap-3 sm:grid-cols-2">
 
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainPlatform" type="radio" value="Bitcoin"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
+                                    <input asp-for="BlockchainPlatform" type="radio" value="Yes" required
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
+
                                     <span class="text-sm font-medium text-amber-950">
-                                        Bitcoin (BTC)
+                                        Yes
                                     </span>
                                 </label>
 
                                 <label
                                     class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainPlatform" type="radio" value="Ethereum"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
-                                    <span class="text-sm font-medium text-amber-950">
-                                        Ethereum (ETH)
-                                    </span>
-                                </label>
+                                    <input asp-for="BlockchainPlatform" type="radio" value="No" required
+                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" />
 
-                                <label
-                                    class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4 transition hover:border-amber-400 hover:bg-amber-50">
-                                    <input asp-for="BlockchainPlatform" type="radio" value="Other"
-                                           class="h-4 w-4 border-amber-300 text-amber-800 focus:ring-amber-500" required />
                                     <span class="text-sm font-medium text-amber-950">
-                                        Other
+                                        No
                                     </span>
                                 </label>
 
@@ -2078,15 +2073,15 @@
                             "flex items-center justify-between rounded-lg border border-amber-200 bg-white px-4 py-3 text-sm";
 
                         item.innerHTML = `
-                                                                                                                                                <div class="min-w-0">
-                                                                                                                                                    <p class="truncate font-medium text-amber-950">
-                                                                                                                                                        ${escapeHtml(file.name)}
-                                                                                                                                                    </p>
-                                                                                                                                                    <p class="mt-1 text-xs text-amber-950/50">
-                                                                                                                                                        ${formatFileSize(file.size)}
-                                                                                                                                                    </p>
-                                                                                                                                                </div>
-                                                                                                                                            `;
+                                                                                                                                                        <div class="min-w-0">
+                                                                                                                                                            <p class="truncate font-medium text-amber-950">
+                                                                                                                                                                ${escapeHtml(file.name)}
+                                                                                                                                                            </p>
+                                                                                                                                                            <p class="mt-1 text-xs text-amber-950/50">
+                                                                                                                                                                ${formatFileSize(file.size)}
+                                                                                                                                                            </p>
+                                                                                                                                                        </div>
+                                                                                                                                                    `;
 
                         selectedFiles.appendChild(item);
                     });
