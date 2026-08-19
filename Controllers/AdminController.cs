@@ -60,7 +60,7 @@ public class AdminController : Controller
         if (!string.IsNullOrEmpty(search))
         {
             search = search.Trim();
-            query = query.Where(r => r.ReportId.Contains(search) || (r.CaseNumber != null &&  r.CaseNumber.Contains(search)) || (r.ReportNumber != null && r.ReportNumber.Contains(search)) || r.InvestigatorName.Contains(search));
+            query = query.Where(r => r.ReportId.Contains(search) || (r.CaseNumber != null && r.CaseNumber.Contains(search)) || (r.ReportNumber != null && r.ReportNumber.Contains(search)) || r.InvestigatorName.Contains(search));
         }
 
         if (status.HasValue)
@@ -71,7 +71,7 @@ public class AdminController : Controller
         {
             query = query.Where(r => r.InvestigationPriority == priority.Value);
         }
-        if(complaintType.HasValue)
+        if (complaintType.HasValue)
         {
             query = query.Where(r => r.ComplaintType == complaintType.Value);
         }
@@ -103,7 +103,7 @@ public class AdminController : Controller
     public async Task<IActionResult> ReportDetails(int id)
     {
         var report = await _context.InvestigationReports.AsNoTracking().Include(r => r.Attachments).FirstOrDefaultAsync(r => r.Id == id);
-        if(report == null)
+        if (report == null)
         {
             return NotFound();
         }
@@ -115,7 +115,7 @@ public class AdminController : Controller
             InvestigatorName = report.InvestigatorName,
             BadgeIdNumber = report.BadgeIdNumber,
             PoliceStationUnit = report.PoliceStationUnit,
-            DateOfReport = report.DateOfReport.Value,
+            DateOfReport = report.DateOfReport!.Value,
             // Case
             CaseNumber = report.CaseNumber,
             ReportNumber = report.ReportNumber,
@@ -176,12 +176,12 @@ public class AdminController : Controller
     public async Task<IActionResult> DownloadAttachment(int id)
     {
         var attachment = await _context.ReportAttachments.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
-        if(attachment == null)
+        if (attachment == null)
         {
             return NotFound();
         }
 
-        if(string.IsNullOrWhiteSpace(attachment.FilePath))
+        if (string.IsNullOrWhiteSpace(attachment.FilePath))
         {
             return NotFound();
         }
@@ -195,7 +195,7 @@ public class AdminController : Controller
         {
             return NotFound();
         }
-        
+
         var contentType = string.IsNullOrWhiteSpace(attachment.ContentType) ? "application/octet-stream" : attachment.ContentType;
         var downloadName = Path.GetFileName(attachment.OriginalFileName);
         if (string.IsNullOrWhiteSpace(downloadName))

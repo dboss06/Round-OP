@@ -42,7 +42,7 @@ public class UserController : Controller
             InvestigatorName = report.InvestigatorName,
             BadgeIdNumber = report.BadgeIdNumber,
             PoliceStationUnit = report.PoliceStationUnit,
-            DateOfReport = report.DateOfReport,
+            DateOfReport = report.DateOfReport!.Value,
 
             CaseNumber = report.CaseNumber,
             ReportNumber = report.ReportNumber,
@@ -112,7 +112,7 @@ public class UserController : Controller
             ViewData["IsUserEdit"] = true;
             return View("~/Views/Reports/Create.cshtml", model);
         }
-       
+
 
         report.InvestigatorName = model.InvestigatorName;
         report.BadgeIdNumber = model.BadgeIdNumber;
@@ -124,18 +124,18 @@ public class UserController : Controller
         report.CaseStatus = model.CaseStatus!.Value;
         report.InvestigationPriority = model.InvestigationPriority!.Value;
         report.ComplaintType = model.ComplaintType!.Value;
-        report.InitialComplaintReceived = model.InitialComplaintReceived;
-        report.EvidenceReceived = model.EvidenceReceived;
-        report.EvidenceVerified = model.EvidenceVerified;
+        report.InitialComplaintReceived = model.InitialComplaintReceived!.Value;
+        report.EvidenceReceived = model.EvidenceReceived!.Value;
+        report.EvidenceVerified = model.EvidenceVerified!.Value;
         report.WitnessInterviewDate = model.WitnessInterviewDate;
-        report.BlockchainAnalysisRequested = model.BlockchainAnalysisRequested;
-        report.BlockchainAnalysisApproved = model.BlockchainAnalysisApproved;
-        report.TransactionHistoryObtained = model.TransactionHistoryObtained;
-        report.WalletTracingCompleted = model.WalletTracingCompleted;
-        report.ExchangeInformationRequested = model.ExchangeInformationRequested;
-        report.ChainOfCustodyUpdated = model.ChainOfCustodyUpdated;
+        report.BlockchainAnalysisRequested = model.BlockchainAnalysisRequested!.Value;
+        report.BlockchainAnalysisApproved = model.BlockchainAnalysisApproved!.Value;
+        report.TransactionHistoryObtained = model.TransactionHistoryObtained!.Value;
+        report.WalletTracingCompleted = model.WalletTracingCompleted!.Value;
+        report.ExchangeInformationRequested = model.ExchangeInformationRequested!.Value;
+        report.ChainOfCustodyUpdated = model.ChainOfCustodyUpdated!.Value;
         report.ReportSubmittedToHeadquarters = model.ReportSubmittedToHeadquarters;
-        report.BlockchainPlatformBlockchainPlatform = model.BlockchainPlatformBlockchainPlatform;
+        report.BlockchainPlatform = model.BlockchainPlatform!.Value;
         report.WalletAddress = model.WalletAddress;
         report.IncomingTransactions = model.IncomingTransactions;
         report.OutgoingTransactions = model.OutgoingTransactions;
@@ -143,12 +143,12 @@ public class UserController : Controller
         report.LinkedExchange = model.LinkedExchange;
         report.FundFreezeStatus = model.FundFreezeStatus;
 
-        report.EvidenceMatchesVictimStatement = model.EvidenceMatchesVictimStatement;
-        report.EvidenceMatchLevel = model.EvidenceMatchLevel;
+        report.EvidenceMatchesVictimStatement = model.EvidenceMatchesVictimStatement!.Value;
+        report.EvidenceMatchLevel = model.EvidenceMatchLevel!.Value;
         report.ComplaintsStatement = model.ComplaintsStatement;
-        report.FurtherEvidenceRequested = model.FurtherEvidenceRequested;
-        report.FraudConfirmed = model.FraudConfirmed;
-        report.InvestigationContinuing = model.InvestigationContinuing;
+        report.FurtherEvidenceRequested = model.FurtherEvidenceRequested!.Value;
+        report.FraudConfirmed = model.FraudConfirmed!.Value;
+        report.InvestigationContinuing = model.InvestigationContinuing!.Value;
         report.ProsecutionReferralRating = model.ProsecutionReferralRating;
         report.ContactCryptocurrencyExchange = model.ContactCryptocurrencyExchange;
         report.SubmitToHeadquarters = model.SubmitToHeadquarters;
