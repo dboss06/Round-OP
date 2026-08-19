@@ -83,8 +83,7 @@
         </div>
 
         <!-- Report Form -->
-        <form asp-controller="Reports" asp-action="Create" method="post" enctype="multipart/form-data"
-              id="investigationForm">
+       <form asp-controller="@(ViewData["IsUserEdit"] is true ? "User" : "Reports")" asp-action="@(ViewData["IsUserEdit"] is true ? "Update" : "Create")" method="post" enctype="multipart/form-data" id="investigationForm">
 
             @Html.AntiForgeryToken()
 

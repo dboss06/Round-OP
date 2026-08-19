@@ -79,7 +79,7 @@ public class ReportsController : Controller
         var report = new InvestigationReport
         {
             ReportId = await GenerateReportIdAsync(),
-            UserId = userId,
+            UserId = User.Identity?.IsAuthenticated == true ? userId : null,
             InvestigatorName = model.InvestigatorName,
             BadgeIdNumber = model.BadgeIdNumber,
             PoliceStationUnit = model.PoliceStationUnit,
