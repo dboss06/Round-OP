@@ -53,17 +53,26 @@ namespace Round_OP.Controllers
 
             if (result.Succeeded)
             {
-                TempData["ToastType"] = "success";
-                TempData["ToastMessage"] = "Welcome back.";
+                var roles = await _userManager.GetRolesAsync(user);
 
-                if (await _userManager.IsInRoleAsync(user, "Admin"))
+                Console.WriteLine($"LOGIN USER: {user.Email}");
+                Console.WriteLine($"ROLES: {string.Join(", ", roles)}");
+
+                var isAdmin = roles.Contains("Admin");
+
+                Console.WriteLine($"IS ADMIN: {isAdmin}");
+
+                TempData["ToastType"] = "success";
+
+                if (isAdmin)
                 {
+                    TempData["ToastMessage"] = "Admin login successful.";
                     return RedirectToAction("Index", "Admin");
                 }
 
+                TempData["ToastMessage"] = "User login successful.";
                 return RedirectToAction("Index", "Home");
             }
-
             if (result.IsLockedOut)
             {
                 ViewData["ToastType"] = "error";
