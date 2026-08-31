@@ -18,7 +18,7 @@ public class ReportsController : Controller
         _environment = environment;
         _userManager = userManager;
     }
-    private const int MaxAttachments = 5;
+    private const int MaxAttachments = 10;
     private const long MaxFileSize = 60 * 1024 * 1024;
     private const long MaxTotalUploadSize = 300 * 1024 * 1024;
     private static readonly HashSet<string> AllowedExtensions =
