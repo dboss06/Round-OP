@@ -105,7 +105,15 @@ app.MapControllerRoute(
 
 using (var scope = app.Services.CreateScope())
 {
-    await DbSeeder.SeedAsync(scope.ServiceProvider, app.Configuration);
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<ApplicationDbContext>();
+
+    // Apply all pending migrations to the NEW database
+    await context.Database.MigrateAsync();
+
+    // Seed roles and admin AFTER tables have been created
+    await DbSeeder.SeedAsync(services, builder.Configuration);
 }
 
 app.Run();
