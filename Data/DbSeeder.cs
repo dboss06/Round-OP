@@ -17,12 +17,11 @@ namespace Round_OP.Data
 
             const string roleName = "Admin";
 
-            var adminEmail = "admin@equityharbour.com";
+            var adminEmail = "admin@roundop.com";
 
             var admin = await userManager.FindByEmailAsync(adminEmail);
             
-                
-
+   
             if (!await roleManager.RoleExistsAsync(roleName))
             {
                 var roleResult =
