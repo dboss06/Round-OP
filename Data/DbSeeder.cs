@@ -17,19 +17,11 @@ namespace Round_OP.Data
 
             const string roleName = "Admin";
 
-            var adminEmail =
-                configuration["AdminSeed:Email"];
+            var adminEmail = "admin@equityharbour.com";
 
-            var adminPassword =
-                configuration["AdminSeed:Password"];
-
-            // Do not create an administrator if credentials
-            // have not been explicitly configured.
-            if (string.IsNullOrWhiteSpace(adminEmail) ||
-                string.IsNullOrWhiteSpace(adminPassword))
-            {
-                return;
-            }
+            var admin = await userManager.FindByEmailAsync(adminEmail);
+            
+                
 
             if (!await roleManager.RoleExistsAsync(roleName))
             {
@@ -45,12 +37,9 @@ namespace Round_OP.Data
                 }
             }
 
-            var adminUser =
-                await userManager.FindByEmailAsync(adminEmail);
-
-            if (adminUser == null)
+            if (admin == null)
             {
-                adminUser = new ApplicationUser
+                admin = new ApplicationUser
                 {
                     UserName = adminEmail,
                     Email = adminEmail,
@@ -58,10 +47,7 @@ namespace Round_OP.Data
                     FullName = "System Administrator"
                 };
 
-                var userResult =
-                    await userManager.CreateAsync(
-                        adminUser,
-                        adminPassword);
+                var userResult = await userManager.CreateAsync(admin, "Admin@123");
 
                 if (!userResult.Succeeded)
                 {
@@ -72,12 +58,12 @@ namespace Round_OP.Data
             }
 
             if (!await userManager.IsInRoleAsync(
-                    adminUser,
+                    admin,
                     roleName))
             {
                 var roleResult =
                     await userManager.AddToRoleAsync(
-                        adminUser,
+                        admin,
                         roleName);
 
                 if (!roleResult.Succeeded)
