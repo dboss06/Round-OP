@@ -12,8 +12,8 @@ using Round_OP.Data;
 namespace Round_OP.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260819144519_ChangeBlockchainPlatformToYesNo")]
-    partial class ChangeBlockchainPlatformToYesNo
+    [Migration("20260831212751_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

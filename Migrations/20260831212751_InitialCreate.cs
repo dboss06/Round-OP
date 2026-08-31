@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Round_OP.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialPostgres : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,59 +53,17 @@ namespace Round_OP.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "InvestigationReports",
+                name: "DataProtectionKeys",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ReportId = table.Column<string>(type: "text", nullable: false),
-                    InvestigatorName = table.Column<string>(type: "text", nullable: false),
-                    BadgeIdNumber = table.Column<string>(type: "text", nullable: false),
-                    PoliceStationUnit = table.Column<string>(type: "text", nullable: false),
-                    DateOfReport = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CaseNumber = table.Column<string>(type: "text", nullable: true),
-                    ReportNumber = table.Column<string>(type: "text", nullable: true),
-                    CaseStatus = table.Column<int>(type: "integer", nullable: false),
-                    InvestigationPriority = table.Column<int>(type: "integer", nullable: false),
-                    ComplaintType = table.Column<int>(type: "integer", nullable: false),
-                    InitialComplaintReceived = table.Column<int>(type: "integer", nullable: false),
-                    EvidenceReceived = table.Column<int>(type: "integer", nullable: false),
-                    EvidenceVerified = table.Column<int>(type: "integer", nullable: false),
-                    WitnessInterviewDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    BlockchainAnalysisRequested = table.Column<int>(type: "integer", nullable: false),
-                    BlockchainAnalysisApproved = table.Column<int>(type: "integer", nullable: false),
-                    TransactionHistoryObtained = table.Column<int>(type: "integer", nullable: false),
-                    WalletTracingCompleted = table.Column<int>(type: "integer", nullable: false),
-                    ExchangeInformationRequested = table.Column<int>(type: "integer", nullable: false),
-                    ChainOfCustodyUpdated = table.Column<int>(type: "integer", nullable: false),
-                    ReportSubmittedToHeadquarters = table.Column<string>(type: "text", nullable: false),
-                    BlockchainPlatform = table.Column<int>(type: "integer", nullable: false),
-                    WalletAddress = table.Column<string>(type: "text", nullable: true),
-                    IncomingTransactions = table.Column<string>(type: "text", nullable: true),
-                    OutgoingTransactions = table.Column<string>(type: "text", nullable: true),
-                    RelatedWalletsIdentified = table.Column<int>(type: "integer", nullable: true),
-                    LinkedExchange = table.Column<string>(type: "text", nullable: true),
-                    FundFreezeStatus = table.Column<int>(type: "integer", nullable: true),
-                    EvidenceMatchesVictimStatement = table.Column<int>(type: "integer", nullable: false),
-                    EvidenceMatchLevel = table.Column<int>(type: "integer", nullable: false),
-                    ComplaintsStatement = table.Column<string>(type: "text", nullable: true),
-                    FurtherEvidenceRequested = table.Column<int>(type: "integer", nullable: false),
-                    FraudConfirmed = table.Column<int>(type: "integer", nullable: false),
-                    InvestigationContinuing = table.Column<int>(type: "integer", nullable: false),
-                    ProsecutionReferralRating = table.Column<int>(type: "integer", nullable: true),
-                    ContactCryptocurrencyExchange = table.Column<string>(type: "text", nullable: true),
-                    SubmitToHeadquarters = table.Column<string>(type: "text", nullable: true),
-                    CloseCase = table.Column<string>(type: "text", nullable: true),
-                    ReportReviewed = table.Column<int>(type: "integer", nullable: true),
-                    SupervisorApproval = table.Column<int>(type: "integer", nullable: true),
-                    HeadquartersSubmission = table.Column<string>(type: "text", nullable: true),
-                    CaseClosedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    SubmittedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    FriendlyName = table.Column<string>(type: "text", nullable: true),
+                    Xml = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_InvestigationReports", x => x.Id);
+                    table.PrimaryKey("PK_DataProtectionKeys", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,6 +173,68 @@ namespace Round_OP.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "InvestigationReports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<string>(type: "text", nullable: true),
+                    ReportId = table.Column<string>(type: "text", nullable: false),
+                    InvestigatorName = table.Column<string>(type: "text", nullable: false),
+                    BadgeIdNumber = table.Column<string>(type: "text", nullable: false),
+                    PoliceStationUnit = table.Column<string>(type: "text", nullable: false),
+                    DateOfReport = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    CaseNumber = table.Column<string>(type: "text", nullable: true),
+                    ReportNumber = table.Column<string>(type: "text", nullable: true),
+                    CaseStatus = table.Column<int>(type: "integer", nullable: false),
+                    InvestigationPriority = table.Column<int>(type: "integer", nullable: false),
+                    ComplaintType = table.Column<int>(type: "integer", nullable: false),
+                    InitialComplaintReceived = table.Column<int>(type: "integer", nullable: false),
+                    EvidenceReceived = table.Column<int>(type: "integer", nullable: false),
+                    EvidenceVerified = table.Column<int>(type: "integer", nullable: false),
+                    WitnessInterviewDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    BlockchainAnalysisRequested = table.Column<int>(type: "integer", nullable: false),
+                    BlockchainAnalysisApproved = table.Column<int>(type: "integer", nullable: false),
+                    TransactionHistoryObtained = table.Column<int>(type: "integer", nullable: false),
+                    WalletTracingCompleted = table.Column<int>(type: "integer", nullable: false),
+                    ExchangeInformationRequested = table.Column<int>(type: "integer", nullable: false),
+                    ChainOfCustodyUpdated = table.Column<int>(type: "integer", nullable: false),
+                    ReportSubmittedToHeadquarters = table.Column<string>(type: "text", nullable: false),
+                    BlockchainPlatform = table.Column<int>(type: "integer", nullable: true),
+                    WalletAddress = table.Column<string>(type: "text", nullable: true),
+                    IncomingTransactions = table.Column<string>(type: "text", nullable: true),
+                    OutgoingTransactions = table.Column<string>(type: "text", nullable: true),
+                    RelatedWalletsIdentified = table.Column<int>(type: "integer", nullable: true),
+                    LinkedExchange = table.Column<string>(type: "text", nullable: true),
+                    FundFreezeStatus = table.Column<int>(type: "integer", nullable: true),
+                    EvidenceMatchesVictimStatement = table.Column<int>(type: "integer", nullable: false),
+                    EvidenceMatchLevel = table.Column<int>(type: "integer", nullable: false),
+                    ComplaintsStatement = table.Column<string>(type: "text", nullable: true),
+                    FurtherEvidenceRequested = table.Column<int>(type: "integer", nullable: false),
+                    FraudConfirmed = table.Column<int>(type: "integer", nullable: false),
+                    InvestigationContinuing = table.Column<int>(type: "integer", nullable: false),
+                    ProsecutionReferralRating = table.Column<int>(type: "integer", nullable: true),
+                    ContactCryptocurrencyExchange = table.Column<string>(type: "text", nullable: true),
+                    SubmitToHeadquarters = table.Column<string>(type: "text", nullable: true),
+                    CloseCase = table.Column<string>(type: "text", nullable: true),
+                    ReportReviewed = table.Column<int>(type: "integer", nullable: true),
+                    SupervisorApproval = table.Column<int>(type: "integer", nullable: true),
+                    HeadquartersSubmission = table.Column<string>(type: "text", nullable: true),
+                    CaseClosedDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    SubmittedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InvestigationReports", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_InvestigationReports_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ReportAttachments",
                 columns: table => new
                 {
@@ -283,6 +303,11 @@ namespace Round_OP.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_InvestigationReports_UserId",
+                table: "InvestigationReports",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ReportAttachments_InvestigationReportId",
                 table: "ReportAttachments",
                 column: "InvestigationReportId");
@@ -307,16 +332,19 @@ namespace Round_OP.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "DataProtectionKeys");
+
+            migrationBuilder.DropTable(
                 name: "ReportAttachments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "InvestigationReports");
 
             migrationBuilder.DropTable(
-                name: "InvestigationReports");
+                name: "AspNetUsers");
         }
     }
 }
