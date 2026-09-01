@@ -1505,7 +1505,34 @@
                             <p class="mb-4 text-xs leading-5 text-amber-950/55">
                                 Upload supporting documents, images, or other evidence relevant to the investigation.
                             </p>
+                            @if (Model.ExistingAttachments.Any())
+                            {
+                                <div class="mb-6">
+                                    <p class="mb-3 text-sm font-semibold text-amber-950">
+                                        Previously Uploaded Attachments
+                                    </p>
 
+                                    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                                        @foreach (var attachment in Model.ExistingAttachments)
+                                        {
+                                            var isImage = attachment.ContentType.StartsWith("image/");
+                                            <div class="rounded-xl border border-amber-200 bg-white p-3">
+                                                @if (isImage)
+                                                {
+                                                    <img src="@Url.Action("ViewAttachment", "Reports", new { attachmentId = attachment.Id })"
+                                                         alt="@attachment.OriginalFileName"
+                                                         class="mb-2 h-32 w-full rounded-lg object-cover" />
+                                                }
+                                                <p class="truncate text-xs text-amber-950/70">@attachment.OriginalFileName</p>
+                                                <a href="@Url.Action("ViewAttachment", "Reports", new { attachmentId = attachment.Id })"
+                                                   class="mt-1 inline-block text-xs font-medium text-amber-800 underline">
+                                                    @(isImage ? "View full size" : "Download")
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
                             <!-- Upload Warning -->
                             <div class="mb-4 flex gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4">
                                 <div
@@ -1523,7 +1550,7 @@
                                     </p>
 
                                     <p class="mt-1 text-xs leading-5 text-amber-900/70">
-                                        You can upload up to <span class="font-semibold">5 files</span>.
+                                        You can upload up to <span class="font-semibold">10 files</span>.
                                         Each file must be no larger than
                                         <span class="font-semibold">10 MB</span>,
                                         with a maximum total upload size of

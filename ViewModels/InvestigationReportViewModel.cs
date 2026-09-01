@@ -193,4 +193,7 @@ public class InvestigationReportViewModel
 
     [Display(Name = "Attachments")]
     public List<IFormFile> Attachments { get; set; } = new();
+
+    // Existing attachments already saved to this report (populated when editing)
+    public List<ExistingAttachmentViewModel> ExistingAttachments { get; set; } = new();
 }

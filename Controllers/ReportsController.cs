@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Round_OP.Data;
 using Round_OP.Models;
 using Round_OP.ViewModels;
-using Microsoft.AspNetCore.Identity;
 
 namespace Round_OP.Controllers;
 public class ReportsController : Controller
@@ -372,4 +373,25 @@ public class ReportsController : Controller
             }
         }
     }
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> ViewAttachment(int attachmentId)
+    {
+        var attachment = await _context.ReportAttachments
+            .Include(a => a.InvestigationReport)
+            .FirstOrDefaultAsync(a => a.Id == attachmentId);
+
+        if (attachment == null || !System.IO.File.Exists(attachment.FilePath))
+            return NotFound();
+
+        // Ownership check — only the report's owner (or an admin) can view it
+        var userId = _userManager.GetUserId(User);
+        var isAdmin = User.IsInRole("Admin");
+        if (!isAdmin && attachment.InvestigationReport.UserId != userId)
+            return Forbid();
+
+        var stream = System.IO.File.OpenRead(attachment.FilePath);
+        return File(stream, attachment.ContentType, attachment.OriginalFileName);
+    }
+
 }

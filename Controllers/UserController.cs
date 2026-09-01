@@ -30,6 +30,7 @@ public class UserController : Controller
 
         var report = await _context.InvestigationReports
             .AsNoTracking()
+            .Include(r => r.Attachments)
             .FirstOrDefaultAsync(r => r.UserId == userId);
 
         if (report == null)
@@ -84,7 +85,13 @@ public class UserController : Controller
             ReportReviewed = report.ReportReviewed,
             SupervisorApproval = report.SupervisorApproval,
             HeadquartersSubmission = report.HeadquartersSubmission,
-            CaseClosedDate = report.CaseClosedDate
+            CaseClosedDate = report.CaseClosedDate,
+            ExistingAttachments = report.Attachments.Select(a => new ExistingAttachmentViewModel
+            {
+                Id = a.Id,
+                OriginalFileName = a.OriginalFileName,
+                ContentType = a.ContentType
+            }).ToList()
         };
 
         ViewData["IsUserEdit"] = true;
