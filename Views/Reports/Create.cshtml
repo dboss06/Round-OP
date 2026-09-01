@@ -29,7 +29,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p id="stepNumber" class="text-sm font-semibold text-amber-900">
-                        Step 1 of 5
+                        Step 1 of 8
                     </p>
 
                     <p id="stepTitle" class="mt-1 text-sm text-amber-900/60">
@@ -79,6 +79,20 @@
                     <span>Findings</span>
                 </button>
 
+                <button type="button" data-step="5" class="section-nav locked">
+                    <span class="step-indicator">6</span>
+                    <span>Wallet Registration</span>
+                </button>
+
+                <button type="button" data-step="6" class="section-nav locked">
+                    <span class="step-indicator">7</span>
+                    <span>Financial Flow</span>
+                </button>
+
+                <button type="button" data-step="7" class="section-nav locked">
+                    <span class="step-indicator">8</span>
+                    <span>Wallet Relationships</span>
+                </button>
             </nav>
         </div>
 
@@ -1621,13 +1635,535 @@
                         Previous
                     </button>
 
-                    <button type="submit"
-                            class="rounded-lg bg-amber-900 px-7 py-3 text-sm font-semibold text-amber-50 shadow-sm transition hover:bg-amber-800">
-                        Submit Investigation Report
+                    <button type="button" class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
+                        Next: 
                     </button>
                 </div>
 
             </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION 6 -->
+            <!-- ================================================= -->
+
+            <section class="form-section hidden"
+                     data-section="5"
+                     id="wallet-registration-section">
+
+                <div class="rounded-2xl border border-amber-200 bg-amber-50 shadow-sm">
+
+                    <div class="border-b border-amber-200 px-6 py-6 sm:px-8">
+
+                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+                            Section 6
+                        </p>
+
+                        <h2 class="mt-2 text-2xl font-bold text-amber-950">
+                            Wallet Registration Questions
+                        </h2>
+
+                    </div>
+
+                    <div class="space-y-8 p-6 sm:p-8">
+
+                        <!-- Wallet Type -->
+
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                What type of wallet are you registering?
+                            </p>
+
+                            <div class="grid gap-3 sm:grid-cols-2">
+
+                                @foreach (var option in new[]
+                                {
+                        "Bitcoin (BTC)",
+                        "Ethereum (ETH)",
+                        "USDT",
+                        "Other"
+                    })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+
+                                        <input asp-for="WalletRegistrationType"
+                                               type="radio"
+                                               value="@option"
+                                               class="h-4 w-4" />
+
+                                        <span>@option</span>
+
+                                    </label>
+                                }
+
+                            </div>
+                        </div>
+
+
+                        <!-- Wallet Purpose -->
+
+                        <div>
+                            <label asp-for="WalletPurpose"
+                                   class="mb-2 block text-sm font-semibold text-amber-950">
+
+                                What is the purpose of this wallet?
+
+                            </label>
+
+                            <select asp-for="WalletPurpose"
+                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3">
+
+                                <option value="">Select purpose</option>
+                                <option>Personal use</option>
+                                <option>Business use</option>
+                                <option>Investment</option>
+                                <option>Transaction/payment</option>
+                                <option>Other</option>
+
+                            </select>
+                        </div>
+
+
+                        <!-- Network -->
+
+                        <div>
+
+                            <label asp-for="WalletNetwork"
+                                   class="mb-2 block text-sm font-semibold text-amber-950">
+
+                                Which network will you use?
+
+                            </label>
+
+                            <select asp-for="WalletNetwork"
+                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3">
+
+                                <option value="">Select network</option>
+                                <option>Bitcoin Network</option>
+                                <option>Ethereum (ERC-20)</option>
+                                <option>Tron (TRC-20)</option>
+                                <option>BNB Smart Chain (BEP-20)</option>
+                                <option>Other</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Existing Wallet -->
+
+                        <div>
+
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Do you already have an existing wallet?
+                            </p>
+
+                            <div class="grid gap-3 sm:grid-cols-2">
+
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+
+                                        <input asp-for="HasExistingWallet"
+                                               type="radio"
+                                               value="@option" />
+
+                                        <span>@option</span>
+
+                                    </label>
+                                }
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Preferred Wallet -->
+
+                        <div>
+
+                            <label asp-for="PreferredWalletType"
+                                   class="mb-2 block text-sm font-semibold text-amber-950">
+
+                                What is your preferred wallet type?
+
+                            </label>
+
+                            <select asp-for="PreferredWalletType"
+                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3">
+
+                                <option value="">Select wallet type</option>
+                                <option>Mobile wallet</option>
+                                <option>Desktop wallet</option>
+                                <option>Hardware wallet</option>
+                                <option>Exchange wallet</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Backup -->
+
+                        <div>
+
+                            <label asp-for="WalletRecoveryBackedUp"
+                                   class="mb-2 block text-sm font-semibold text-amber-950">
+
+                                Have you securely backed up your wallet recovery information?
+
+                            </label>
+
+                            <select asp-for="WalletRecoveryBackedUp"
+                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3">
+
+                                <option value="">Select answer</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                                <option>Not applicable</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Transaction Frequency -->
+
+                        <div>
+
+                            <label asp-for="ExpectedTransactionFrequency"
+                                   class="mb-2 block text-sm font-semibold text-amber-950">
+
+                                What is your expected transaction frequency?
+
+                            </label>
+
+                            <select asp-for="ExpectedTransactionFrequency"
+                                    class="w-full rounded-lg border border-amber-200 bg-white px-4 py-3">
+
+                                <option value="">Select frequency</option>
+                                <option>Occasionally</option>
+                                <option>Weekly</option>
+                                <option>Several times a week</option>
+                                <option>Daily</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Security -->
+
+                        <div>
+
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Do you understand that your recovery phrase/private key should never be shared?
+                            </p>
+
+                            <div class="grid gap-3 sm:grid-cols-2">
+
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+
+                                        <input asp-for="UnderstandsRecoveryPhraseSecurity"
+                                               type="radio"
+                                               value="@option" />
+
+                                        <span>@option</span>
+
+                                    </label>
+                                }
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mt-6 flex items-center justify-between">
+
+                    <button type="button"
+                            class="previous-button rounded-lg border border-amber-300 bg-amber-50 px-6 py-3 text-sm font-semibold text-amber-900">
+
+                        Previous
+
+                    </button>
+
+                    <button type="button"
+                            class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50">
+
+                        Next: Financial Flow
+
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION 7 -->
+            <!-- ================================================= -->
+
+            <section class="form-section hidden"
+                     data-section="6"
+                     id="financial-flow-section">
+
+                <div class="rounded-2xl border border-amber-200 bg-amber-50 shadow-sm">
+
+                    <div class="border-b border-amber-200 px-6 py-6 sm:px-8">
+
+                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+                            Section 7
+                        </p>
+
+                        <h2 class="mt-2 text-2xl font-bold text-amber-950">
+                            Financial & Asset Flow Analysis
+                        </h2>
+
+                    </div>
+
+                    <div class="space-y-6 p-6 sm:p-8">
+
+                        <div>
+                            <label asp-for="InitialTransactionAmount">What was the initial amount involved in the reported transaction?</label>
+
+                            <textarea asp-for="InitialTransactionAmount"
+                                      rows="3"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="SubsequentFundMovements">
+                                What subsequent movements of funds were identified?
+                            </label>
+
+                            <textarea asp-for="SubsequentFundMovements"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="FundsDividedOrMultipleAddresses">
+                                Were funds divided into multiple transactions or transferred to multiple addresses?
+                            </label>
+
+                            <textarea asp-for="FundsDividedOrMultipleAddresses"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="FundsConsolidatedIntoAnotherWallet">
+                                Were funds subsequently consolidated into another wallet?
+                            </label>
+
+                            <textarea asp-for="FundsConsolidatedIntoAnotherWallet"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="TransactionFeesOrConversions">
+                                Were there transaction fees, exchange conversions, or other deductions?
+                            </label>
+
+                            <textarea asp-for="TransactionFeesOrConversions"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="FundsCorrespondWithComplainantAccount">
+                                Does the movement of funds correspond with the financial account provided by the complainant?
+                            </label>
+
+                            <textarea asp-for="FundsCorrespondWithComplainantAccount"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="UnusualTransactionPatterns">
+                                Were any unusual transaction patterns identified?
+                            </label>
+
+                            <textarea asp-for="UnusualTransactionPatterns"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="UnaccountedFinancialTrail">
+                                What portion of the financial trail remains unaccounted for?
+                            </label>
+
+                            <textarea asp-for="UnaccountedFinancialTrail"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="MostSignificantUnresolvedLead">
+                                What transaction represents the most significant unresolved financial lead?
+                            </label>
+
+                            <textarea asp-for="MostSignificantUnresolvedLead"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-6 flex items-center justify-between">
+
+                    <button type="button" class="previous-button">
+                        Previous
+                    </button>
+
+                    <button type="button" class="next-button rounded-lg bg-amber-900 px-6 py-3 text-sm font-semibold text-amber-50 transition hover:bg-amber-800">
+                        Next: Wallet Relationships
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- ================================================= -->
+            <!-- SECTION 8 -->
+            <!-- ================================================= -->
+
+            <section class="form-section hidden"
+                     data-section="7"
+                     id="wallet-relationship-section">
+
+                <div class="rounded-2xl border border-amber-200 bg-amber-50 shadow-sm">
+
+                    <div class="border-b border-amber-200 px-6 py-6 sm:px-8">
+
+                        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+                            Section 8
+                        </p>
+
+                        <h2 class="mt-2 text-2xl font-bold text-amber-950">
+                            Wallet Relationship Analysis
+                        </h2>
+
+                    </div>
+
+                    <div class="space-y-6 p-6 sm:p-8">
+
+                        <div>
+                            <label asp-for="WalletAddressIdentificationMethod">
+                                How was each relevant wallet address identified?
+                            </label>
+
+                            <textarea asp-for="WalletAddressIdentificationMethod"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="MultipleAddressesInteracting">
+                                Were multiple addresses observed interacting with the primary wallet?
+                            </label>
+
+                            <textarea asp-for="MultipleAddressesInteracting"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="RepeatedTransactionAddresses">
+                                Which addresses repeatedly appear within the transaction history?
+                            </label>
+
+                            <textarea asp-for="RepeatedTransactionAddresses"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="IncomingOutgoingAnalyzedSeparately">
+                                Were incoming and outgoing transactions analyzed separately?
+                            </label>
+
+                            <textarea asp-for="IncomingOutgoingAnalyzedSeparately"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="CommonActivityPatterns">
+                                Are there identifiable patterns suggesting common activity between addresses?
+                            </label>
+
+                            <textarea asp-for="CommonActivityPatterns"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="AddressesLinkedToExchanges">
+                                Were any addresses associated with known exchanges or service providers?
+                            </label>
+
+                            <textarea asp-for="AddressesLinkedToExchanges"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="NewOrUnknownAddressesEncountered">
+                                Were newly created or previously unidentified addresses encountered during the investigation?
+                            </label>
+
+                            <textarea asp-for="NewOrUnknownAddressesEncountered"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <div>
+                            <label asp-for="WalletRelationshipsRequiringTracing">
+                                What wallet relationships require additional blockchain tracing?
+                            </label>
+
+                            <textarea asp-for="WalletRelationshipsRequiringTracing"
+                                      rows="4"
+                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mt-6 flex items-center justify-between">
+
+                    <button type="button"
+                            class="previous-button rounded-lg border border-amber-300 bg-amber-50 px-6 py-3">
+
+                        Previous
+
+                    </button>
+
+                    <!-- FINAL SUBMIT -->
+
+                    <button type="submit"
+                            class="rounded-lg bg-green-700 px-6 py-3 text-sm font-semibold text-white">
+
+                        Submit Investigation Report
+
+                    </button>
+
+                </div>
+
+            </section>
+
             <div id="formToast"
                  class="pointer-events-none fixed right-5 top-5 z-[9999] hidden max-w-sm rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-sm font-medium text-red-800 shadow-lg transition-all duration-300">
                 <span id="formToastMessage"></span>
@@ -1711,7 +2247,10 @@
                 "Case Information",
                 "Investigation Actions",
                 "Blockchain Investigation",
-                "Findings & Final Submission"
+                "Findings & Final Submission",
+                "Wallet Registration Questions",
+                "Financial & Asset Flow Analysis",
+                "Wallet Relationship Analysis"
             ];
 
             let currentStep = 0;

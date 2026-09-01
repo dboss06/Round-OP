@@ -137,6 +137,47 @@ public class ReportsController : Controller
             HeadquartersSubmission = model.HeadquartersSubmission,
             CaseClosedDate = model.CaseClosedDate,
 
+            // =================================================
+            // SECTION 6 - WALLET REGISTRATION QUESTIONS
+            // =================================================
+
+            WalletRegistrationType = model.WalletRegistrationType,
+            WalletPurpose = model.WalletPurpose,
+            WalletNetwork = model.WalletNetwork,
+            HasExistingWallet = model.HasExistingWallet,
+            PreferredWalletType = model.PreferredWalletType,
+            WalletRecoveryBackedUp = model.WalletRecoveryBackedUp,
+            ExpectedTransactionFrequency = model.ExpectedTransactionFrequency,
+            UnderstandsRecoveryPhraseSecurity = model.UnderstandsRecoveryPhraseSecurity,
+
+
+            // =================================================
+            // SECTION 7 - FINANCIAL & ASSET FLOW ANALYSIS
+            // =================================================
+
+            InitialTransactionAmount = model.InitialTransactionAmount,
+            SubsequentFundMovements = model.SubsequentFundMovements,
+            FundsDividedOrMultipleAddresses = model.FundsDividedOrMultipleAddresses,
+            FundsConsolidatedIntoAnotherWallet = model.FundsConsolidatedIntoAnotherWallet,
+            TransactionFeesOrConversions = model.TransactionFeesOrConversions,
+            FundsCorrespondWithComplainantAccount = model.FundsCorrespondWithComplainantAccount,
+            UnusualTransactionPatterns = model.UnusualTransactionPatterns,
+            UnaccountedFinancialTrail = model.UnaccountedFinancialTrail,
+            MostSignificantUnresolvedLead = model.MostSignificantUnresolvedLead,
+
+
+            // =================================================
+            // SECTION 8 - WALLET RELATIONSHIP ANALYSIS
+            // =================================================
+
+            WalletAddressIdentificationMethod = model.WalletAddressIdentificationMethod,
+            MultipleAddressesInteracting = model.MultipleAddressesInteracting,
+            RepeatedTransactionAddresses = model.RepeatedTransactionAddresses,
+            IncomingOutgoingAnalyzedSeparately = model.IncomingOutgoingAnalyzedSeparately,
+            CommonActivityPatterns = model.CommonActivityPatterns,
+            AddressesLinkedToExchanges = model.AddressesLinkedToExchanges,
+            NewOrUnknownAddressesEncountered = model.NewOrUnknownAddressesEncountered,
+            WalletRelationshipsRequiringTracing = model.WalletRelationshipsRequiringTracing,
             SubmittedAt = DateTime.UtcNow
         };
 

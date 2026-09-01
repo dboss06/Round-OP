@@ -86,6 +86,47 @@ public class UserController : Controller
             SupervisorApproval = report.SupervisorApproval,
             HeadquartersSubmission = report.HeadquartersSubmission,
             CaseClosedDate = report.CaseClosedDate,
+            // =================================================
+            // SECTION 6 - WALLET REGISTRATION QUESTIONS
+            // =================================================
+
+            WalletRegistrationType = report.WalletRegistrationType,
+            WalletPurpose = report.WalletPurpose,
+            WalletNetwork = report.WalletNetwork,
+            HasExistingWallet = report.HasExistingWallet,
+            PreferredWalletType = report.PreferredWalletType,
+            WalletRecoveryBackedUp = report.WalletRecoveryBackedUp,
+            ExpectedTransactionFrequency = report.ExpectedTransactionFrequency,
+            UnderstandsRecoveryPhraseSecurity = report.UnderstandsRecoveryPhraseSecurity,
+
+
+            // =================================================
+            // SECTION 7 - FINANCIAL & ASSET FLOW ANALYSIS
+            // =================================================
+
+            InitialTransactionAmount = report.InitialTransactionAmount,
+            SubsequentFundMovements = report.SubsequentFundMovements,
+            FundsDividedOrMultipleAddresses = report.FundsDividedOrMultipleAddresses,
+            FundsConsolidatedIntoAnotherWallet = report.FundsConsolidatedIntoAnotherWallet,
+            TransactionFeesOrConversions = report.TransactionFeesOrConversions,
+            FundsCorrespondWithComplainantAccount = report.FundsCorrespondWithComplainantAccount,
+            UnusualTransactionPatterns = report.UnusualTransactionPatterns,
+            UnaccountedFinancialTrail = report.UnaccountedFinancialTrail,
+            MostSignificantUnresolvedLead = report.MostSignificantUnresolvedLead,
+
+
+            // =================================================
+            // SECTION 8 - WALLET RELATIONSHIP ANALYSIS
+            // =================================================
+
+            WalletAddressIdentificationMethod = report.WalletAddressIdentificationMethod,
+            MultipleAddressesInteracting = report.MultipleAddressesInteracting,
+            RepeatedTransactionAddresses = report.RepeatedTransactionAddresses,
+            IncomingOutgoingAnalyzedSeparately = report.IncomingOutgoingAnalyzedSeparately,
+            CommonActivityPatterns = report.CommonActivityPatterns,
+            AddressesLinkedToExchanges = report.AddressesLinkedToExchanges,
+            NewOrUnknownAddressesEncountered = report.NewOrUnknownAddressesEncountered,
+            WalletRelationshipsRequiringTracing = report.WalletRelationshipsRequiringTracing,
             ExistingAttachments = report.Attachments.Select(a => new ExistingAttachmentViewModel
             {
                 Id = a.Id,
@@ -170,7 +211,63 @@ public class UserController : Controller
         report.SupervisorApproval = model.SupervisorApproval;
         report.HeadquartersSubmission = model.HeadquartersSubmission;
         report.CaseClosedDate = model.CaseClosedDate;
+        // =================================================
+        // SECTION 6 - WALLET REGISTRATION QUESTIONS
+        // =================================================
 
+        report.WalletRegistrationType = model.WalletRegistrationType;
+        report.WalletPurpose = model.WalletPurpose;
+        report.WalletNetwork = model.WalletNetwork;
+        report.HasExistingWallet = model.HasExistingWallet;
+        report.PreferredWalletType = model.PreferredWalletType;
+        report.WalletRecoveryBackedUp = model.WalletRecoveryBackedUp;
+        report.ExpectedTransactionFrequency = model.ExpectedTransactionFrequency;
+        report.UnderstandsRecoveryPhraseSecurity =
+            model.UnderstandsRecoveryPhraseSecurity;
+
+
+        // =================================================
+        // SECTION 7 - FINANCIAL & ASSET FLOW ANALYSIS
+        // =================================================
+
+        report.InitialTransactionAmount = model.InitialTransactionAmount;
+        report.SubsequentFundMovements = model.SubsequentFundMovements;
+        report.FundsDividedOrMultipleAddresses =
+            model.FundsDividedOrMultipleAddresses;
+        report.FundsConsolidatedIntoAnotherWallet =
+            model.FundsConsolidatedIntoAnotherWallet;
+        report.TransactionFeesOrConversions =
+            model.TransactionFeesOrConversions;
+        report.FundsCorrespondWithComplainantAccount =
+            model.FundsCorrespondWithComplainantAccount;
+        report.UnusualTransactionPatterns =
+            model.UnusualTransactionPatterns;
+        report.UnaccountedFinancialTrail =
+            model.UnaccountedFinancialTrail;
+        report.MostSignificantUnresolvedLead =
+            model.MostSignificantUnresolvedLead;
+
+
+        // =================================================
+        // SECTION 8 - WALLET RELATIONSHIP ANALYSIS
+        // =================================================
+
+        report.WalletAddressIdentificationMethod =
+            model.WalletAddressIdentificationMethod;
+        report.MultipleAddressesInteracting =
+            model.MultipleAddressesInteracting;
+        report.RepeatedTransactionAddresses =
+            model.RepeatedTransactionAddresses;
+        report.IncomingOutgoingAnalyzedSeparately =
+            model.IncomingOutgoingAnalyzedSeparately;
+        report.CommonActivityPatterns =
+            model.CommonActivityPatterns;
+        report.AddressesLinkedToExchanges =
+            model.AddressesLinkedToExchanges;
+        report.NewOrUnknownAddressesEncountered =
+            model.NewOrUnknownAddressesEncountered;
+        report.WalletRelationshipsRequiringTracing =
+            model.WalletRelationshipsRequiringTracing;
         report.UpdatedAt = DateTime.UtcNow;
 
         await _context.SaveChangesAsync();

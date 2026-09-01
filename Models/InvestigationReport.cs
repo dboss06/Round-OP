@@ -71,4 +71,45 @@ public class InvestigationReport
 
     public ICollection<ReportAttachment> Attachments { get; set; }
         = new List<ReportAttachment>();
+    // =================================================
+    // WALLET REGISTRATION QUESTIONS
+    // =================================================
+
+    public string? WalletRegistrationType { get; set; }
+    public string? WalletPurpose { get; set; }
+    public string? WalletNetwork { get; set; }
+    public string? HasExistingWallet { get; set; }
+    public string? PreferredWalletType { get; set; }
+    public string? WalletRecoveryBackedUp { get; set; }
+    public string? ExpectedTransactionFrequency { get; set; }
+    public string? UnderstandsRecoveryPhraseSecurity { get; set; }
+
+
+    // =================================================
+    // FINANCIAL & ASSET FLOW ANALYSIS
+    // =================================================
+
+    public string? InitialTransactionAmount { get; set; }
+    public string? SubsequentFundMovements { get; set; }
+    public string? FundsDividedOrMultipleAddresses { get; set; }
+    public string? FundsConsolidatedIntoAnotherWallet { get; set; }
+    public string? TransactionFeesOrConversions { get; set; }
+    public string? FundsCorrespondWithComplainantAccount { get; set; }
+    public string? UnusualTransactionPatterns { get; set; }
+    public string? UnaccountedFinancialTrail { get; set; }
+    public string? MostSignificantUnresolvedLead { get; set; }
+
+
+    // =================================================
+    // WALLET RELATIONSHIP ANALYSIS
+    // =================================================
+
+    public string? WalletAddressIdentificationMethod { get; set; }
+    public string? MultipleAddressesInteracting { get; set; }
+    public string? RepeatedTransactionAddresses { get; set; }
+    public string? IncomingOutgoingAnalyzedSeparately { get; set; }
+    public string? CommonActivityPatterns { get; set; }
+    public string? AddressesLinkedToExchanges { get; set; }
+    public string? NewOrUnknownAddressesEncountered { get; set; }
+    public string? WalletRelationshipsRequiringTracing { get; set; }
 }
