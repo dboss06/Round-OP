@@ -567,6 +567,192 @@
         </div>
     </section>
 
+    <!-- Wallet Registration Questions -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+                Section 6
+            </p>
+
+            <h2 class="mt-1 text-lg font-semibold text-slate-900">
+                Wallet Registration Questions
+            </h2>
+        </div>
+
+        <div class="grid gap-6 p-6 sm:grid-cols-2">
+
+            @{
+                var walletQuestions = new[]
+                {
+                ("What type of wallet are you registering?", Model.WalletRegistrationType),
+                ("What is the purpose of this wallet?", Model.WalletPurpose),
+                ("Which network will you use?", Model.WalletNetwork),
+                ("Do you already have an existing wallet?", Model.HasExistingWallet),
+                ("What is your preferred wallet type?", Model.PreferredWalletType),
+                ("Have you securely backed up your wallet recovery information?", Model.WalletRecoveryBackedUp),
+                ("What is your expected transaction frequency?", Model.ExpectedTransactionFrequency),
+                ("Do you understand that your recovery phrase/private key should never be shared?", Model.UnderstandsRecoveryPhraseSecurity)
+            };
+            }
+
+            @foreach (var item in walletQuestions)
+            {
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-4">
+
+                    <p class="text-xs font-medium uppercase tracking-wide text-slate-400">
+                        @item.Item1
+                    </p>
+
+                    <p class="mt-3 text-sm font-semibold text-slate-800">
+                        @(string.IsNullOrWhiteSpace(item.Item2)
+                            ? "Not provided"
+                            : item.Item2)
+                    </p>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+    <!-- Financial & Asset Flow Analysis -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+                Section 7
+            </p>
+
+            <h2 class="mt-1 text-lg font-semibold text-slate-900">
+                Financial & Asset Flow Analysis
+            </h2>
+        </div>
+
+        <div class="space-y-5 p-6">
+
+            @{
+                var financialQuestions = new[]
+                {
+                ("What was the initial amount involved in the reported transaction?",
+                    Model.InitialTransactionAmount),
+
+                ("What subsequent movements of funds were identified?",
+                    Model.SubsequentFundMovements),
+
+                ("Were funds divided into multiple transactions or transferred to multiple addresses?",
+                    Model.FundsDividedOrMultipleAddresses),
+
+                ("Were funds subsequently consolidated into another wallet?",
+                    Model.FundsConsolidatedIntoAnotherWallet),
+
+                ("Were there identifiable transaction fees, exchange conversions, or other deductions?",
+                    Model.TransactionFeesOrConversions),
+
+                ("Does the movement of funds correspond with the financial account provided by the complainant?",
+                    Model.FundsCorrespondWithComplainantAccount),
+
+                ("Were any unusual transaction patterns identified?",
+                    Model.UnusualTransactionPatterns),
+
+                ("What portion of the financial trail remains unaccounted for?",
+                    Model.UnaccountedFinancialTrail),
+
+                ("What transaction represents the most significant unresolved financial lead?",
+                    Model.MostSignificantUnresolvedLead)
+            };
+            }
+
+            @foreach (var item in financialQuestions)
+            {
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+
+                    <p class="text-sm font-semibold text-slate-800">
+                        @item.Item1
+                    </p>
+
+                    <div class="mt-3 whitespace-pre-wrap rounded-lg bg-white p-4 text-sm leading-7 text-slate-600">
+
+                        @(string.IsNullOrWhiteSpace(item.Item2)
+                            ? "Not provided"
+                            : item.Item2)
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+    <!-- Wallet Relationship Analysis -->
+    <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+        <div class="border-b border-slate-200 px-6 py-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-amber-700">
+                Section 8
+            </p>
+
+            <h2 class="mt-1 text-lg font-semibold text-slate-900">
+                Wallet Relationship Analysis
+            </h2>
+        </div>
+
+        <div class="space-y-5 p-6">
+
+            @{
+                var relationshipQuestions = new[]
+                {
+                ("How was each relevant wallet address identified?",
+                    Model.WalletAddressIdentificationMethod),
+
+                ("Were multiple addresses observed interacting with the primary wallet?",
+                    Model.MultipleAddressesInteracting),
+
+                ("Which addresses repeatedly appear within the transaction history?",
+                    Model.RepeatedTransactionAddresses),
+
+                ("Were incoming and outgoing transactions analyzed separately?",
+                    Model.IncomingOutgoingAnalyzedSeparately),
+
+                ("Are there identifiable patterns suggesting common activity between addresses?",
+                    Model.CommonActivityPatterns),
+
+                ("Were any addresses associated with known exchanges or service providers?",
+                    Model.AddressesLinkedToExchanges),
+
+                ("Were newly created or previously unidentified addresses encountered during the investigation?",
+                    Model.NewOrUnknownAddressesEncountered),
+
+                ("What wallet relationships require additional blockchain tracing?",
+                    Model.WalletRelationshipsRequiringTracing)
+            };
+            }
+
+            @foreach (var item in relationshipQuestions)
+            {
+                <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
+
+                    <p class="text-sm font-semibold text-slate-800">
+                        @item.Item1
+                    </p>
+
+                    <div class="mt-3 whitespace-pre-wrap rounded-lg bg-white p-4 text-sm leading-7 text-slate-600">
+
+                        @(string.IsNullOrWhiteSpace(item.Item2)
+                            ? "Not provided"
+                            : item.Item2)
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </section>
 
     <!-- Attachments -->
     <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">

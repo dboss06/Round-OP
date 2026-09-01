@@ -158,6 +158,63 @@ public class AdminController : Controller
             SupervisorApproval = report.SupervisorApproval,
             HeadquartersSubmission = report.HeadquartersSubmission,
             CaseClosedDate = report.CaseClosedDate,
+            // =================================================
+            // SECTION 6 - WALLET REGISTRATION QUESTIONS
+            // =================================================
+
+            WalletRegistrationType = report.WalletRegistrationType,
+            WalletPurpose = report.WalletPurpose,
+            WalletNetwork = report.WalletNetwork,
+            HasExistingWallet = report.HasExistingWallet,
+            PreferredWalletType = report.PreferredWalletType,
+            WalletRecoveryBackedUp = report.WalletRecoveryBackedUp,
+            ExpectedTransactionFrequency = report.ExpectedTransactionFrequency,
+            UnderstandsRecoveryPhraseSecurity =
+    report.UnderstandsRecoveryPhraseSecurity,
+
+
+            // =================================================
+            // SECTION 7 - FINANCIAL & ASSET FLOW ANALYSIS
+            // =================================================
+
+            InitialTransactionAmount = report.InitialTransactionAmount,
+            SubsequentFundMovements = report.SubsequentFundMovements,
+            FundsDividedOrMultipleAddresses =
+    report.FundsDividedOrMultipleAddresses,
+            FundsConsolidatedIntoAnotherWallet =
+    report.FundsConsolidatedIntoAnotherWallet,
+            TransactionFeesOrConversions =
+    report.TransactionFeesOrConversions,
+            FundsCorrespondWithComplainantAccount =
+    report.FundsCorrespondWithComplainantAccount,
+            UnusualTransactionPatterns =
+    report.UnusualTransactionPatterns,
+            UnaccountedFinancialTrail =
+    report.UnaccountedFinancialTrail,
+            MostSignificantUnresolvedLead =
+    report.MostSignificantUnresolvedLead,
+
+
+            // =================================================
+            // SECTION 8 - WALLET RELATIONSHIP ANALYSIS
+            // =================================================
+
+            WalletAddressIdentificationMethod =
+    report.WalletAddressIdentificationMethod,
+            MultipleAddressesInteracting =
+    report.MultipleAddressesInteracting,
+            RepeatedTransactionAddresses =
+    report.RepeatedTransactionAddresses,
+            IncomingOutgoingAnalyzedSeparately =
+    report.IncomingOutgoingAnalyzedSeparately,
+            CommonActivityPatterns =
+    report.CommonActivityPatterns,
+            AddressesLinkedToExchanges =
+    report.AddressesLinkedToExchanges,
+            NewOrUnknownAddressesEncountered =
+    report.NewOrUnknownAddressesEncountered,
+            WalletRelationshipsRequiringTracing =
+    report.WalletRelationshipsRequiringTracing,
             // System
             SubmittedAt = report.SubmittedAt,
             UpdatedAt = report.UpdatedAt,
