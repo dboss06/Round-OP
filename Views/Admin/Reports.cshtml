@@ -386,9 +386,16 @@
                                         </svg>
 
                                     </a>
-
+                                    <form asp-controller="Admin" asp-action="DeleteReport" asp-route-id="@report.Id" method="post"
+      onsubmit="return confirm('Delete report ' + '@report.ReportId' + '? This cannot be undone.');">
+    @Html.AntiForgeryToken()
+    <button type="submit"
+            class="rounded-lg border border-red-300 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700 transition hover:bg-red-100">
+        Delete
+    </button>
+</form>
                                 </td>
-
+                                
                             </tr>
                         }
 

@@ -108,18 +108,24 @@ public class UserController : Controller
         {
             return Challenge();
         }
-        var report = await _context.InvestigationReports.FirstOrDefaultAsync(r => r.UserId == userId);
+        var report = await _context.InvestigationReports.Include(r => r.Attachments).FirstOrDefaultAsync(r => r.UserId == userId);
         if (report == null)
         {
             return RedirectToAction("Create", "Reports");
         }
 
         if (!ModelState.IsValid)
-        {
+        { 
+            model.ExistingAttachments = report?.Attachments.Select(a => new ExistingAttachmentViewModel
+            {
+                Id = a.Id,
+                OriginalFileName = a.OriginalFileName,
+                ContentType = a.ContentType
+            }).ToList() ?? new();
+
             ViewData["IsUserEdit"] = true;
             return View("~/Views/Reports/Create.cshtml", model);
         }
-
 
         report.InvestigatorName = model.InvestigatorName;
         report.BadgeIdNumber = model.BadgeIdNumber;
@@ -170,5 +176,23 @@ public class UserController : Controller
         await _context.SaveChangesAsync();
 
         return RedirectToAction(nameof(Index));
+    }
+    [HttpGet]
+    public async Task<IActionResult> ViewAttachment(int attachmentId)
+    {
+        var userId = _userManager.GetUserId(User);
+
+        var attachment = await _context.ReportAttachments
+            .Include(a => a.InvestigationReport)
+            .FirstOrDefaultAsync(a => a.Id == attachmentId);
+
+        if (attachment == null || !System.IO.File.Exists(attachment.FilePath))
+            return NotFound();
+
+        if (attachment.InvestigationReport.UserId != userId)
+            return Forbid();
+
+        var stream = System.IO.File.OpenRead(attachment.FilePath);
+        return File(stream, attachment.ContentType, attachment.OriginalFileName);
     }
 }

@@ -241,4 +241,48 @@ public class AdminController : Controller
             nameof(ReportDetails),
             new { id = report.Id });
     }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteReport(int id)
+    {
+        var report = await _context.InvestigationReports
+            .Include(r => r.Attachments)
+            .FirstOrDefaultAsync(r => r.Id == id);
+
+        if (report == null)
+        {
+            TempData["ToastType"] = "error";
+            TempData["ToastMessage"] = "Report not found.";
+            return RedirectToAction(nameof(Reports));
+        }
+
+        var reportIdForCleanup = report.ReportId;
+
+        _context.InvestigationReports.Remove(report);
+        await _context.SaveChangesAsync();
+
+        var uploadDirectory = Path.Combine(
+            _environment.ContentRootPath,
+            "Uploads",
+            "Reports",
+            reportIdForCleanup);
+
+        if (Directory.Exists(uploadDirectory))
+        {
+            try
+            {
+                Directory.Delete(uploadDirectory, recursive: true);
+            }
+            catch
+            {
+                // DB row is already gone; log this if you have logging wired up,
+                // but don't fail the request over an orphaned folder.
+            }
+        }
+
+        TempData["ToastType"] = "success";
+        TempData["ToastMessage"] = $"Report {reportIdForCleanup} was deleted.";
+
+        return RedirectToAction(nameof(Reports));
+    }
 }
