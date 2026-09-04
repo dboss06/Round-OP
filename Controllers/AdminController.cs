@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Round_OP.Data;
@@ -13,11 +15,13 @@ public class AdminController : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly IWebHostEnvironment _environment;
+    private readonly Cloudinary _cloudinary;
 
-    public AdminController(ApplicationDbContext context, IWebHostEnvironment environment)
+    public AdminController(ApplicationDbContext context, IWebHostEnvironment environment, Cloudinary cloudinary)
     {
         _context = context;
         _environment = environment;
+        _cloudinary = cloudinary;
     }
     [HttpGet]
     public async Task<IActionResult> Index()
@@ -230,35 +234,36 @@ public class AdminController : Controller
 
         return View(model);
     }
+    [HttpGet]
     public async Task<IActionResult> DownloadAttachment(int id)
     {
         var attachment = await _context.ReportAttachments.AsNoTracking().FirstOrDefaultAsync(a => a.Id == id);
-        if (attachment == null)
-        {
+
+        if (attachment == null || string.IsNullOrWhiteSpace(attachment.FilePath))
             return NotFound();
+
+        // FilePath now holds the Cloudinary secure URL for attachments uploaded after the storage migration.
+        if (Uri.TryCreate(attachment.FilePath, UriKind.Absolute, out var uri) &&
+            (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps))
+        {
+            return Redirect(attachment.FilePath);
         }
 
-        if (string.IsNullOrWhiteSpace(attachment.FilePath))
-        {
-            return NotFound();
-        }
+        // Fallback for attachments still pointing at the old local-disk path (pre-migration).
         var uploadsRoot = Path.GetFullPath(Path.Combine(_environment.ContentRootPath, "Uploads", "Reports"));
         var requestedFilePath = Path.GetFullPath(attachment.FilePath);
+
         if (!requestedFilePath.StartsWith(uploadsRoot + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase))
-        {
             return Forbid();
-        }
+
         if (!System.IO.File.Exists(requestedFilePath))
-        {
             return NotFound();
-        }
 
         var contentType = string.IsNullOrWhiteSpace(attachment.ContentType) ? "application/octet-stream" : attachment.ContentType;
         var downloadName = Path.GetFileName(attachment.OriginalFileName);
         if (string.IsNullOrWhiteSpace(downloadName))
-        {
             downloadName = attachment.StoredFileName;
-        }
+
         return PhysicalFile(requestedFilePath, contentType, downloadName);
     }
     [HttpPost]
@@ -315,15 +320,36 @@ public class AdminController : Controller
 
         var reportIdForCleanup = report.ReportId;
 
+        // Delete Cloudinary-hosted attachments first, while we still have their PublicIds.
+        foreach (var attachment in report.Attachments)
+        {
+            if (string.IsNullOrWhiteSpace(attachment.PublicId))
+                continue; // pre-migration attachment, no Cloudinary asset to clean up
+
+            var extension = Path.GetExtension(attachment.OriginalFileName).ToLowerInvariant();
+            var resourceType = new[] { ".jpg", ".jpeg", ".png" }.Contains(extension)
+                ? ResourceType.Image
+                : ResourceType.Raw;
+
+            try
+            {
+                await _cloudinary.DestroyAsync(new DeletionParams(attachment.PublicId)
+                {
+                    ResourceType = resourceType
+                });
+            }
+            catch
+            {
+                // Don't fail the whole delete over a Cloudinary cleanup issue;
+                // log this if you have logging wired up.
+            }
+        }
+
         _context.InvestigationReports.Remove(report);
         await _context.SaveChangesAsync();
 
-        var uploadDirectory = Path.Combine(
-            _environment.ContentRootPath,
-            "Uploads",
-            "Reports",
-            reportIdForCleanup);
-
+        // Fallback cleanup for any pre-migration attachments still sitting on local disk.
+        var uploadDirectory = Path.Combine(_environment.ContentRootPath, "Uploads", "Reports", reportIdForCleanup);
         if (Directory.Exists(uploadDirectory))
         {
             try
