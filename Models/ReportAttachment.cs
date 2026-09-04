@@ -6,6 +6,7 @@ public class ReportAttachment
 {
     [Key]
     public int Id { get; set; }
+    public string? PublicId { get; set; }
     public int InvestigationReportId { get; set; }
     public string OriginalFileName { get; set; } = string.Empty;
     public string StoredFileName { get; set; } = string.Empty;

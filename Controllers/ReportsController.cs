@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +14,15 @@ public class ReportsController : Controller
     private readonly ApplicationDbContext _context;
     private readonly IWebHostEnvironment _environment;
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly Cloudinary _cloudinary;
 
-    public ReportsController(ApplicationDbContext context, IWebHostEnvironment environment, UserManager<ApplicationUser> userManager)
+    public ReportsController(ApplicationDbContext context, IWebHostEnvironment environment,
+    UserManager<ApplicationUser> userManager, Cloudinary cloudinary)
     {
         _context = context;
         _environment = environment;
         _userManager = userManager;
+        _cloudinary = cloudinary;
     }
     private const int MaxAttachments = 10;
     private const long MaxFileSize = 60 * 1024 * 1024;
@@ -310,57 +315,45 @@ public class ReportsController : Controller
     private async Task SaveAttachmentsAsync(InvestigationReport report, IEnumerable<IFormFile> files)
     {
         var validFiles = files.Where(file => file != null && file.Length > 0).ToList();
-
-        if (!validFiles.Any())
-        {
-            return;
-        }
-
-        var uploadDirectory = Path.Combine(_environment.ContentRootPath, "Uploads", "Reports", report.ReportId);
-
-        // Ensure directory exists
-        if (!Directory.Exists(uploadDirectory))
-        {
-            Directory.CreateDirectory(uploadDirectory);
-        }
+        if (!validFiles.Any()) return;
 
         foreach (var file in validFiles)
         {
             var extension = Path.GetExtension(file.FileName);
-            var storedFileName =
-                $"{Guid.NewGuid():N}{extension}";
-
-            var filePath = Path.Combine(
-                uploadDirectory,
-                storedFileName);
             var originalFileName = Path.GetFileName(file.FileName);
+            var isImage = new[] { ".jpg", ".jpeg", ".png" }.Contains(extension.ToLowerInvariant());
 
-            try
-            {
-                await using var stream =
-                    new FileStream(filePath, FileMode.CreateNew);
+            await using var stream = file.OpenReadStream();
 
-                await file.CopyToAsync(stream);
-
-                report.Attachments.Add(new ReportAttachment
+            var uploadParams = isImage
+                ? (RawUploadParams)new ImageUploadParams
                 {
-                    OriginalFileName = Path.GetFileName(file.FileName),
-                    StoredFileName = storedFileName,
-                    FilePath = filePath,
-                    ContentType = file.ContentType ?? "application/octet-stream",
-                    FileSize = file.Length,
-                    UploadedAt = DateTime.UtcNow
-                });
-            }
-            catch (Exception ex)
-            {
-                // Clean up the file if upload failed
-                if (System.IO.File.Exists(filePath))
-                {
-                    System.IO.File.Delete(filePath);
+                    File = new FileDescription(originalFileName, stream),
+                    Folder = $"round-op/{report.ReportId}",
+                    PublicId = Guid.NewGuid().ToString("N")
                 }
-                throw new InvalidOperationException($"Failed to save file {originalFileName}: {ex.Message}", ex);
-            }
+                : new RawUploadParams
+                {
+                    File = new FileDescription(originalFileName, stream),
+                    Folder = $"round-op/{report.ReportId}",
+                    PublicId = Guid.NewGuid().ToString("N")
+                };
+
+            var result = await _cloudinary.UploadAsync(uploadParams);
+
+            if (result.Error != null)
+                throw new InvalidOperationException($"Failed to upload {originalFileName}: {result.Error.Message}");
+
+            report.Attachments.Add(new ReportAttachment
+            {
+                OriginalFileName = originalFileName,
+                StoredFileName = result.PublicId,
+                FilePath = result.SecureUrl.ToString(),   // now a URL, not a local path
+                PublicId = result.PublicId,
+                ContentType = file.ContentType ?? "application/octet-stream",
+                FileSize = file.Length,
+                UploadedAt = DateTime.UtcNow
+            });
         }
 
         await _context.SaveChangesAsync();
@@ -422,17 +415,15 @@ public class ReportsController : Controller
             .Include(a => a.InvestigationReport)
             .FirstOrDefaultAsync(a => a.Id == attachmentId);
 
-        if (attachment == null || !System.IO.File.Exists(attachment.FilePath))
+        if (attachment == null)
             return NotFound();
 
-        // Ownership check — only the report's owner (or an admin) can view it
         var userId = _userManager.GetUserId(User);
         var isAdmin = User.IsInRole("Admin");
         if (!isAdmin && attachment.InvestigationReport.UserId != userId)
             return Forbid();
 
-        var stream = System.IO.File.OpenRead(attachment.FilePath);
-        return File(stream, attachment.ContentType, attachment.OriginalFileName);
+        return Redirect(attachment.FilePath); // FilePath now holds the Cloudinary secure URL
     }
 
 }

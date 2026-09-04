@@ -277,19 +277,18 @@ public class UserController : Controller
     [HttpGet]
     public async Task<IActionResult> ViewAttachment(int attachmentId)
     {
-        var userId = _userManager.GetUserId(User);
-
         var attachment = await _context.ReportAttachments
             .Include(a => a.InvestigationReport)
             .FirstOrDefaultAsync(a => a.Id == attachmentId);
 
-        if (attachment == null || !System.IO.File.Exists(attachment.FilePath))
+        if (attachment == null)
             return NotFound();
 
-        if (attachment.InvestigationReport.UserId != userId)
+        var userId = _userManager.GetUserId(User);
+        var isAdmin = User.IsInRole("Admin");
+        if (!isAdmin && attachment.InvestigationReport.UserId != userId)
             return Forbid();
 
-        var stream = System.IO.File.OpenRead(attachment.FilePath);
-        return File(stream, attachment.ContentType, attachment.OriginalFileName);
+        return Redirect(attachment.FilePath); // FilePath now holds the Cloudinary secure URL
     }
 }
