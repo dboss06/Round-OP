@@ -169,6 +169,7 @@ public class ReportsController : Controller
             UnusualTransactionPatterns = model.UnusualTransactionPatterns,
             UnaccountedFinancialTrail = model.UnaccountedFinancialTrail,
             MostSignificantUnresolvedLead = model.MostSignificantUnresolvedLead,
+            WalletCompanyName = model.WalletCompanyName,
 
 
             // =================================================

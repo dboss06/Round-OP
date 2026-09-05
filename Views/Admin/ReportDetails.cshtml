@@ -635,33 +635,36 @@
             @{
                 var financialQuestions = new[]
                 {
-                ("What was the initial amount involved in the reported transaction?",
-                    Model.InitialTransactionAmount),
+    ("What was the initial amount involved in the reported transaction?",
+        Model.InitialTransactionAmount),
 
-                ("What subsequent movements of funds were identified?",
-                    Model.SubsequentFundMovements),
+    ("What subsequent movements of funds were identified?",
+        Model.SubsequentFundMovements),
 
-                ("Were funds divided into multiple transactions or transferred to multiple addresses?",
-                    Model.FundsDividedOrMultipleAddresses),
+    ("Were funds divided into multiple transactions or transferred to multiple addresses?",
+        Model.FundsDividedOrMultipleAddresses),
 
-                ("Were funds subsequently consolidated into another wallet?",
-                    Model.FundsConsolidatedIntoAnotherWallet),
+    ("Were funds subsequently consolidated into another wallet?",
+        Model.FundsConsolidatedIntoAnotherWallet),
 
-                ("Were there identifiable transaction fees, exchange conversions, or other deductions?",
-                    Model.TransactionFeesOrConversions),
+    ("Were there identifiable transaction fees, exchange conversions, or other deductions?",
+        Model.TransactionFeesOrConversions),
 
-                ("Does the movement of funds correspond with the financial account provided by the complainant?",
-                    Model.FundsCorrespondWithComplainantAccount),
+    ("Does the movement of funds correspond with the financial account provided by the complainant?",
+        Model.FundsCorrespondWithComplainantAccount),
 
-                ("Were any unusual transaction patterns identified?",
-                    Model.UnusualTransactionPatterns),
+    ("Were any unusual transaction patterns identified?",
+        Model.UnusualTransactionPatterns),
 
-                ("What portion of the financial trail remains unaccounted for?",
-                    Model.UnaccountedFinancialTrail),
+    ("What portion of the financial trail remains unaccounted for?",
+        Model.UnaccountedFinancialTrail),
 
-                ("What transaction represents the most significant unresolved financial lead?",
-                    Model.MostSignificantUnresolvedLead)
-            };
+    ("What transaction represents the most significant unresolved financial lead?",
+        Model.MostSignificantUnresolvedLead),
+
+    ("Which wallet company is associated with this wallet?",
+        Model.WalletCompanyName.HasValue ? Model.WalletCompanyName.Value.GetDisplayName() : null)
+};
             }
 
             @foreach (var item in financialQuestions)

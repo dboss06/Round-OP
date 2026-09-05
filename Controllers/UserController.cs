@@ -113,7 +113,7 @@ public class UserController : Controller
             UnusualTransactionPatterns = report.UnusualTransactionPatterns,
             UnaccountedFinancialTrail = report.UnaccountedFinancialTrail,
             MostSignificantUnresolvedLead = report.MostSignificantUnresolvedLead,
-
+            WalletCompanyName = report.WalletCompanyName,
 
             // =================================================
             // SECTION 8 - WALLET RELATIONSHIP ANALYSIS
@@ -246,6 +246,7 @@ public class UserController : Controller
             model.UnaccountedFinancialTrail;
         report.MostSignificantUnresolvedLead =
             model.MostSignificantUnresolvedLead;
+        report.WalletCompanyName = model.WalletCompanyName;
 
 
         // =================================================

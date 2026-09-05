@@ -96,6 +96,7 @@ public class InvestigationReport
     public string? TransactionFeesOrConversions { get; set; }
     public string? FundsCorrespondWithComplainantAccount { get; set; }
     public string? UnusualTransactionPatterns { get; set; }
+    public WalletCompanyName? WalletCompanyName { get; set; }
     public string? UnaccountedFinancialTrail { get; set; }
     public string? MostSignificantUnresolvedLead { get; set; }
 

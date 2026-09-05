@@ -197,6 +197,8 @@ public class AdminController : Controller
     report.UnaccountedFinancialTrail,
             MostSignificantUnresolvedLead =
     report.MostSignificantUnresolvedLead,
+             WalletCompanyName = report.WalletCompanyName,
+
 
 
             // =================================================

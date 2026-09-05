@@ -83,7 +83,7 @@ public class ReportDetailsViewModel
     public string? UnusualTransactionPatterns { get; set; }
     public string? UnaccountedFinancialTrail { get; set; }
     public string? MostSignificantUnresolvedLead { get; set; }
-
+    public WalletCompanyName? WalletCompanyName { get; set; }
 
     // =================================================
     // SECTION 8 - WALLET RELATIONSHIP ANALYSIS
