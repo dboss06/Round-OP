@@ -1919,63 +1919,111 @@
                         </div>
 
                         <div>
-                            <label asp-for="FundsDividedOrMultipleAddresses">
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
                                 Were funds divided into multiple transactions or transferred to multiple addresses?
-                            </label>
+                            </p>
 
-                            <textarea asp-for="FundsDividedOrMultipleAddresses"
-                                      rows="4"
-                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="FundsDividedOrMultipleAddresses"
+                                               type="radio"
+                                               value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
                         </div>
 
                         <div>
-                            <label asp-for="FundsConsolidatedIntoAnotherWallet">
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
                                 Were funds subsequently consolidated into another wallet?
-                            </label>
+                            </p>
 
-                            <textarea asp-for="FundsConsolidatedIntoAnotherWallet"
-                                      rows="4"
-                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="FundsConsolidatedIntoAnotherWallet"
+                                               type="radio"
+                                               value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
                         </div>
 
                         <div>
-                            <label asp-for="TransactionFeesOrConversions">
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
                                 Were there transaction fees, exchange conversions, or other deductions?
-                            </label>
+                            </p>
 
-                            <textarea asp-for="TransactionFeesOrConversions"
-                                      rows="4"
-                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="TransactionFeesOrConversions"
+                                               type="radio"
+                                               value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
                         </div>
 
                         <div>
-                            <label asp-for="FundsCorrespondWithComplainantAccount">
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
                                 Does the movement of funds correspond with the financial account provided by the complainant?
-                            </label>
+                            </p>
 
-                            <textarea asp-for="FundsCorrespondWithComplainantAccount"
-                                      rows="4"
-                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="FundsCorrespondWithComplainantAccount"
+                                               type="radio"
+                                               value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
                         </div>
 
                         <div>
-                            <label asp-for="AddressesLinkedToExchanges">
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
                                 Were any addresses associated with known exchanges or service providers?
-                            </label>
+                            </p>
 
-                            <textarea asp-for="AddressesLinkedToExchanges"
-                                      rows="4"
-                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="AddressesLinkedToExchanges"
+                                               type="radio"
+                                               value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
                         </div>
 
                         <div>
-                            <label asp-for="NewOrUnknownAddressesEncountered">
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
                                 Were newly created or previously unidentified addresses encountered during the investigation?
-                            </label>
+                            </p>
 
-                            <textarea asp-for="NewOrUnknownAddressesEncountered"
-                                      rows="4"
-                                      class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="NewOrUnknownAddressesEncountered"
+                                               type="radio"
+                                               value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
                         </div>
                         <div>
                             <label asp-for="WalletCompanyName"
