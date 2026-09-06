@@ -99,6 +99,9 @@ public class InvestigationReport
     public WalletCompanyName? WalletCompanyName { get; set; }
     public string? UnaccountedFinancialTrail { get; set; }
     public string? MostSignificantUnresolvedLead { get; set; }
+    public string? AddressesLinkedToExchanges { get; set; }
+    public string? NewOrUnknownAddressesEncountered { get; set; }
+
 
 
     // =================================================
@@ -110,7 +113,29 @@ public class InvestigationReport
     public string? RepeatedTransactionAddresses { get; set; }
     public string? IncomingOutgoingAnalyzedSeparately { get; set; }
     public string? CommonActivityPatterns { get; set; }
-    public string? AddressesLinkedToExchanges { get; set; }
-    public string? NewOrUnknownAddressesEncountered { get; set; }
+   
     public string? WalletRelationshipsRequiringTracing { get; set; }
+    // =================================================
+    // SECTION 8 - COURT PROCEEDINGS / LEGAL STATUS
+    // =================================================
+
+    public string? MatterReportedToCourt { get; set; }
+    public string? CourtNameAndLocation { get; set; }
+    public string? CourtCaseReferenceNumber { get; set; }
+    public DateTime? DateFiledWithCourt { get; set; }
+    public string? PartiesNamedInProceedings { get; set; }
+    public string? ClaimsOrAllegationsBeforeCourt { get; set; }
+    public string? CourtOrdersIssued { get; set; }
+    public string? CourtOrderDetails { get; set; }
+    public string? UpcomingHearingsOrDeadlines { get; set; }
+    public string? UpcomingHearingDetails { get; set; }
+    public string? EvidenceSubmittedToCourt { get; set; }
+    public string? EvidenceSubmittedDetails { get; set; }
+    public string? CourtRequestedIndependentInvestigation { get; set; }
+    public string? DisputedAssetsIdentifiedInProceedings { get; set; }
+    public string? NonComplianceWithCourtOrder { get; set; }
+    public string? NonComplianceDetails { get; set; }
+    public string? PendingAppealsOrMotions { get; set; }
+    public string? LegalCounselAppointed { get; set; }
+    public string? CourtDocumentsDescription { get; set; }
 }

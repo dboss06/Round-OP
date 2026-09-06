@@ -690,7 +690,7 @@
 
     </section>
 
-    <!-- Wallet Relationship Analysis -->
+    <!-- Court Proceedings / Legal Status -->
     <section class="rounded-2xl border border-slate-200 bg-white shadow-sm">
 
         <div class="border-b border-slate-200 px-6 py-5">
@@ -699,42 +699,77 @@
             </p>
 
             <h2 class="mt-1 text-lg font-semibold text-slate-900">
-                Wallet Relationship Analysis
+                Court Proceedings / Legal Status
             </h2>
         </div>
 
         <div class="space-y-5 p-6">
 
             @{
-                var relationshipQuestions = new[]
+                var courtQuestions = new[]
                 {
-                ("How was each relevant wallet address identified?",
-                    Model.WalletAddressIdentificationMethod),
+            ("Has this matter already been reported to a court or judicial authority?",
+                Model.MatterReportedToCourt),
 
-                ("Were multiple addresses observed interacting with the primary wallet?",
-                    Model.MultipleAddressesInteracting),
+            ("Name and location of the court handling the matter",
+                Model.CourtNameAndLocation),
 
-                ("Which addresses repeatedly appear within the transaction history?",
-                    Model.RepeatedTransactionAddresses),
+            ("Case/reference number assigned to the proceeding",
+                Model.CourtCaseReferenceNumber),
 
-                ("Were incoming and outgoing transactions analyzed separately?",
-                    Model.IncomingOutgoingAnalyzedSeparately),
+            ("Date the matter was first filed or brought before the court",
+                Model.DateFiledWithCourt.HasValue
+                    ? Model.DateFiledWithCourt.Value.ToString("dd MMM yyyy")
+                    : null),
 
-                ("Are there identifiable patterns suggesting common activity between addresses?",
-                    Model.CommonActivityPatterns),
+            ("Parties officially named in the proceedings",
+                Model.PartiesNamedInProceedings),
 
-                ("Were any addresses associated with known exchanges or service providers?",
-                    Model.AddressesLinkedToExchanges),
+            ("Claims, allegations, or causes of action currently before the court",
+                Model.ClaimsOrAllegationsBeforeCourt),
 
-                ("Were newly created or previously unidentified addresses encountered during the investigation?",
-                    Model.NewOrUnknownAddressesEncountered),
+            ("Has the court issued any orders, directives, injunctions, warrants, judgments, or other rulings?",
+                Model.CourtOrdersIssued),
 
-                ("What wallet relationships require additional blockchain tracing?",
-                    Model.WalletRelationshipsRequiringTracing)
-            };
+            ("Order date and description (if applicable)",
+                Model.CourtOrderDetails),
+
+            ("Are there any upcoming hearings, deadlines, appearances, or filing requirements?",
+                Model.UpcomingHearingsOrDeadlines),
+
+            ("Relevant upcoming dates (if applicable)",
+                Model.UpcomingHearingDetails),
+
+            ("Has either party submitted evidence to the court?",
+                Model.EvidenceSubmittedToCourt),
+
+            ("Evidence submitted (if applicable)",
+                Model.EvidenceSubmittedDetails),
+
+            ("Has the court requested or authorized independent investigation, forensic examination, asset tracing, or production of records?",
+                Model.CourtRequestedIndependentInvestigation),
+
+            ("Are there disputed transactions, assets, accounts, wallet addresses, or financial records identified in the proceedings?",
+                Model.DisputedAssetsIdentifiedInProceedings),
+
+            ("Has any party failed to comply with a court order or other judicial directive?",
+                Model.NonComplianceWithCourtOrder),
+
+            ("Non-compliance details (if applicable)",
+                Model.NonComplianceDetails),
+
+            ("Are there pending appeals, objections, motions, or applications that could affect the investigation or recovery process?",
+                Model.PendingAppealsOrMotions),
+
+            ("Has legal counsel been formally appointed or retained by any of the parties?",
+                Model.LegalCounselAppointed),
+
+            ("Court documents provided",
+                Model.CourtDocumentsDescription)
+        };
             }
 
-            @foreach (var item in relationshipQuestions)
+            @foreach (var item in courtQuestions)
             {
                 <div class="rounded-xl border border-slate-100 bg-slate-50 p-5">
 
