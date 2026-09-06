@@ -97,9 +97,7 @@
         </div>
 
         <!-- Report Form -->
-        <form asp-controller="@(ViewData["IsUserEdit"] is true ? "User" : "Reports")"
-              asp-action="@(ViewData["IsUserEdit"] is true ? "Update" : "Create")" method="post"
-              enctype="multipart/form-data" id="investigationForm">
+        <form asp-controller="@(ViewData["IsUserEdit"] is true ? "User" : "Reports")" asp-action="@(ViewData["IsUserEdit"] is true ? "Update" : "Create")" method="post"  enctype="multipart/form-data" id="investigationForm">
 
             @Html.AntiForgeryToken()
 
@@ -2080,220 +2078,215 @@
 
                     </div>
 
-                    <div class="space-y-6 p-6 sm:p-8">
+                    <div class="space-y-8 p-6 sm:p-8">
 
-                        <<div class="space-y-8 p-6 sm:p-8">
-
-                            <!-- Q1 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Has this matter already been reported to a court or judicial authority?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-3">
-                                    @foreach (var option in new[] { "Yes", "No", "Pending" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="MatterReportedToCourt" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
+                        <!-- Q1 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Has this matter already been reported to a court or judicial authority?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-3">
+                                @foreach (var option in new[] { "Yes", "No", "Pending" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="MatterReportedToCourt" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
                             </div>
-
-                            <!-- Q2 -->
-                            <div>
-                                <label asp-for="CourtNameAndLocation" class="mb-2 block text-sm font-semibold text-amber-950">
-                                    If court proceedings have commenced, what is the name and location of the court handling the matter?
-                                </label>
-                                <textarea asp-for="CourtNameAndLocation" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
-                            </div>
-
-                            <!-- Q3 -->
-                            <div>
-                                <label asp-for="CourtCaseReferenceNumber" class="mb-2 block text-sm font-semibold text-amber-950">
-                                    What is the case/reference number assigned to the proceeding?
-                                </label>
-                                <input asp-for="CourtCaseReferenceNumber" class="w-full rounded-lg border border-amber-200 p-4" />
-                            </div>
-
-                            <!-- Q4 -->
-                            <div>
-                                <label asp-for="DateFiledWithCourt" class="mb-2 block text-sm font-semibold text-amber-950">
-                                    What date was the matter first filed or brought before the court?
-                                </label>
-                                <input asp-for="DateFiledWithCourt" type="date" class="w-full rounded-lg border border-amber-200 p-4" />
-                            </div>
-
-                            <!-- Q5 -->
-                            <div>
-                                <label asp-for="PartiesNamedInProceedings" class="mb-2 block text-sm font-semibold text-amber-950">
-                                    Who are the parties officially named in the proceedings?
-                                </label>
-                                <textarea asp-for="PartiesNamedInProceedings" rows="4" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
-                            </div>
-
-                            <!-- Q6 -->
-                            <div>
-                                <label asp-for="ClaimsOrAllegationsBeforeCourt" class="mb-2 block text-sm font-semibold text-amber-950">
-                                    What specific claims, allegations, or causes of action are currently before the court?
-                                </label>
-                                <textarea asp-for="ClaimsOrAllegationsBeforeCourt" rows="4" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
-                            </div>
-
-                            <!-- Q7 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Has the court issued any orders, directives, injunctions, warrants, judgments, or other rulings relating to the matter?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    @foreach (var option in new[] { "Yes", "No" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="CourtOrdersIssued" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
-                                <label asp-for="CourtOrderDetails" class="mb-2 mt-4 block text-sm font-semibold text-amber-950">
-                                    If yes, provide the date and describe the order.
-                                </label>
-                                <textarea asp-for="CourtOrderDetails" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
-                            </div>
-
-                            <!-- Q8 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Are there any upcoming hearings, deadlines, appearances, or filing requirements?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    @foreach (var option in new[] { "Yes", "No" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="UpcomingHearingsOrDeadlines" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
-                                <label asp-for="UpcomingHearingDetails" class="mb-2 mt-4 block text-sm font-semibold text-amber-950">
-                                    If yes, provide the relevant dates.
-                                </label>
-                                <textarea asp-for="UpcomingHearingDetails" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
-                            </div>
-
-                            <!-- Q9 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Has either party submitted documentary, financial, digital, blockchain, or other evidence to the court?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    @foreach (var option in new[] { "Yes", "No" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="EvidenceSubmittedToCourt" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
-                                <label asp-for="EvidenceSubmittedDetails" class="mb-2 mt-4 block text-sm font-semibold text-amber-950">
-                                    If yes, identify the evidence submitted.
-                                </label>
-                                <textarea asp-for="EvidenceSubmittedDetails" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
-                            </div>
-
-                            <!-- Q10 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Has the court requested or authorized any independent investigation, forensic examination, asset tracing, or production of records?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    @foreach (var option in new[] { "Yes", "No" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="CourtRequestedIndependentInvestigation" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
-                            </div>
-
-                            <!-- Q11 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Are there any disputed transactions, assets, accounts, wallet addresses, or financial records specifically identified in the proceedings?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    @foreach (var option in new[] { "Yes", "No" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="DisputedAssetsIdentifiedInProceedings" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
-                            </div>
-
-                            <!-- Q12 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Has any party failed to comply with a court order or other judicial directive?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    @foreach (var option in new[] { "Yes", "No" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="NonComplianceWithCourtOrder" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
-                                <label asp-for="NonComplianceDetails" class="mb-2 mt-4 block text-sm font-semibold text-amber-950">
-                                    If yes, provide details and supporting documentation.
-                                </label>
-                                <textarea asp-for="NonComplianceDetails" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
-                            </div>
-
-                            <!-- Q13 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Are there any pending appeals, objections, motions, or applications that could affect the investigation or recovery process?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    @foreach (var option in new[] { "Yes", "No" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="PendingAppealsOrMotions" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
-                            </div>
-
-                            <!-- Q14 -->
-                            <div>
-                                <p class="mb-3 text-sm font-semibold text-amber-950">
-                                    Has legal counsel been formally appointed or retained by any of the parties?
-                                </p>
-                                <div class="grid gap-3 sm:grid-cols-2">
-                                    @foreach (var option in new[] { "Yes", "No" })
-                                    {
-                                        <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
-                                            <input asp-for="LegalCounselAppointed" type="radio" value="@option" />
-                                            <span>@option</span>
-                                        </label>
-                                    }
-                                </div>
-                            </div>
-
-                            <!-- Q15 -->
-                            <div>
-                                <label asp-for="CourtDocumentsDescription" class="mb-2 block text-sm font-semibold text-amber-950">
-                                    Describe the court documents provided (originating process, orders, judgments, hearing notices, affidavits, etc.) — upload the actual files using the attachments section.
-                                </label>
-                                <textarea asp-for="CourtDocumentsDescription" rows="4" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
-                            </div>
-
                         </div>
-                    </div>  
+
+                        <!-- Q2 -->
+                        <div>
+                            <label asp-for="CourtNameAndLocation" class="mb-2 block text-sm font-semibold text-amber-950">
+                                If court proceedings have commenced, what is the name and location of the court handling the matter?
+                            </label>
+                            <textarea asp-for="CourtNameAndLocation" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div>
+                            <label asp-for="CourtCaseReferenceNumber" class="mb-2 block text-sm font-semibold text-amber-950">
+                                What is the case/reference number assigned to the proceeding?
+                            </label>
+                            <input asp-for="CourtCaseReferenceNumber" class="w-full rounded-lg border border-amber-200 p-4" />
+                        </div>
+
+                        <!-- Q4 -->
+                        <div>
+                            <label asp-for="DateFiledWithCourt" class="mb-2 block text-sm font-semibold text-amber-950">
+                                What date was the matter first filed or brought before the court?
+                            </label>
+                            <input asp-for="DateFiledWithCourt" type="date" class="w-full rounded-lg border border-amber-200 p-4" />
+                        </div>
+
+                        <!-- Q5 -->
+                        <div>
+                            <label asp-for="PartiesNamedInProceedings" class="mb-2 block text-sm font-semibold text-amber-950">
+                                Who are the parties officially named in the proceedings?
+                            </label>
+                            <textarea asp-for="PartiesNamedInProceedings" rows="4" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <!-- Q6 -->
+                        <div>
+                            <label asp-for="ClaimsOrAllegationsBeforeCourt" class="mb-2 block text-sm font-semibold text-amber-950">
+                                What specific claims, allegations, or causes of action are currently before the court?
+                            </label>
+                            <textarea asp-for="ClaimsOrAllegationsBeforeCourt" rows="4" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <!-- Q7 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Has the court issued any orders, directives, injunctions, warrants, judgments, or other rulings relating to the matter?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="CourtOrdersIssued" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
+                            <label asp-for="CourtOrderDetails" class="mb-2 mt-4 block text-sm font-semibold text-amber-950">
+                                If yes, provide the date and describe the order.
+                            </label>
+                            <textarea asp-for="CourtOrderDetails" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <!-- Q8 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Are there any upcoming hearings, deadlines, appearances, or filing requirements?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="UpcomingHearingsOrDeadlines" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
+                            <label asp-for="UpcomingHearingDetails" class="mb-2 mt-4 block text-sm font-semibold text-amber-950">
+                                If yes, provide the relevant dates.
+                            </label>
+                            <textarea asp-for="UpcomingHearingDetails" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <!-- Q9 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Has either party submitted documentary, financial, digital, blockchain, or other evidence to the court?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="EvidenceSubmittedToCourt" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
+                            <label asp-for="EvidenceSubmittedDetails" class="mb-2 mt-4 block text-sm font-semibold text-amber-950">
+                                If yes, identify the evidence submitted.
+                            </label>
+                            <textarea asp-for="EvidenceSubmittedDetails" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <!-- Q10 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Has the court requested or authorized any independent investigation, forensic examination, asset tracing, or production of records?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="CourtRequestedIndependentInvestigation" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Q11 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Are there any disputed transactions, assets, accounts, wallet addresses, or financial records specifically identified in the proceedings?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="DisputedAssetsIdentifiedInProceedings" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Q12 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Has any party failed to comply with a court order or other judicial directive?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="NonComplianceWithCourtOrder" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
+                            <label asp-for="NonComplianceDetails" class="mb-2 mt-4 block text-sm font-semibold text-amber-950">
+                                If yes, provide details and supporting documentation.
+                            </label>
+                            <textarea asp-for="NonComplianceDetails" rows="3" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
+
+                        <!-- Q13 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Are there any pending appeals, objections, motions, or applications that could affect the investigation or recovery process?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="PendingAppealsOrMotions" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Q14 -->
+                        <div>
+                            <p class="mb-3 text-sm font-semibold text-amber-950">
+                                Has legal counsel been formally appointed or retained by any of the parties?
+                            </p>
+                            <div class="grid gap-3 sm:grid-cols-2">
+                                @foreach (var option in new[] { "Yes", "No" })
+                                {
+                                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-amber-200 bg-white p-4">
+                                        <input asp-for="LegalCounselAppointed" type="radio" value="@option" />
+                                        <span>@option</span>
+                                    </label>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Q15 -->
+                        <div>
+                            <label asp-for="CourtDocumentsDescription" class="mb-2 block text-sm font-semibold text-amber-950">
+                                Describe the court documents provided (originating process, orders, judgments, hearing notices, affidavits, etc.) — upload the actual files using the attachments section.
+                            </label>
+                            <textarea asp-for="CourtDocumentsDescription" rows="4" class="w-full rounded-lg border border-amber-200 p-4"></textarea>
+                        </div>
 
                     </div>
 
