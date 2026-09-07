@@ -2403,7 +2403,12 @@
                 "Financial & Asset Flow Analysis",
                 "Wallet Relationship Analysis"
             ];
+            const toastType = '@ViewData["ToastType"]';
+    const toastMessage = '@Html.Raw(Json.Serialize(ViewData["ToastMessage"] as string ?? ""))';
 
+    if (toastMessage) {
+        showFormToast(toastMessage);
+    }
             let currentStep = 0;
             let highestUnlockedStep = 0;
 
@@ -2755,19 +2760,13 @@
                         fields.every(field => isFieldValid(field));
 
                     if (!sectionIsValid) {
-                        event.preventDefault();
-
-                        highestUnlockedStep = Math.max(
-                            highestUnlockedStep,
-                            i
-                        );
-
-                        showStep(i);
-
-                        validateCurrentSection();
-
-                        return;
-                    }
+    event.preventDefault();
+    highestUnlockedStep = Math.max(highestUnlockedStep, i);
+    showStep(i);
+    validateCurrentSection();
+    showFormToast("Please complete all required fields before submitting.");
+    return;
+}
                 }
 
                 // Server-side validation remains authoritative.
