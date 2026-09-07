@@ -247,7 +247,6 @@ public class InvestigationReportViewModel
     public string? CourtNameAndLocation { get; set; }
     public string? CourtCaseReferenceNumber { get; set; }
     public DateTime? DateFiledWithCourt { get; set; }
-    public string? PartiesNamedInProceedings { get; set; }
     public string? ClaimsOrAllegationsBeforeCourt { get; set; }
     public string? CourtOrdersIssued { get; set; }
     public string? CourtOrderDetails { get; set; }
@@ -261,5 +260,4 @@ public class InvestigationReportViewModel
     public string? NonComplianceDetails { get; set; }
     public string? PendingAppealsOrMotions { get; set; }
     public string? LegalCounselAppointed { get; set; }
-    public string? CourtDocumentsDescription { get; set; }
 }

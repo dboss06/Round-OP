@@ -226,7 +226,6 @@ public class AdminController : Controller
             CourtNameAndLocation = report.CourtNameAndLocation,
             CourtCaseReferenceNumber = report.CourtCaseReferenceNumber,
             DateFiledWithCourt = report.DateFiledWithCourt,
-            PartiesNamedInProceedings = report.PartiesNamedInProceedings,
             ClaimsOrAllegationsBeforeCourt = report.ClaimsOrAllegationsBeforeCourt,
             CourtOrdersIssued = report.CourtOrdersIssued,
             CourtOrderDetails = report.CourtOrderDetails,
@@ -240,7 +239,6 @@ public class AdminController : Controller
             NonComplianceDetails = report.NonComplianceDetails,
             PendingAppealsOrMotions = report.PendingAppealsOrMotions,
             LegalCounselAppointed = report.LegalCounselAppointed,
-            CourtDocumentsDescription = report.CourtDocumentsDescription,
             // System
             SubmittedAt = report.SubmittedAt,
             UpdatedAt = report.UpdatedAt,
